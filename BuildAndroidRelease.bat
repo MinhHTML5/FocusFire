@@ -1,0 +1,1 @@
+cocos compile -p Android -m release --ap android-22

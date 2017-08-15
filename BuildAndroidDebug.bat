@@ -1,0 +1,1 @@
+cocos compile -p Android -m debug --ap android-22

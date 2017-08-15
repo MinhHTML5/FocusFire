@@ -1,0 +1,1 @@
+adb install -r frameworks/runtime-src/proj.android/bin/AIConflict-debug.apk

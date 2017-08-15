@@ -1,0 +1,1 @@
+adb install -r publish/android/AIConflict-release-signed.apk
