@@ -11,8 +11,7 @@ var g_audioList = [];
 
 // =========================================================================================
 // Preload
-//g_preloadList.push ("res/Splash.jpg");
-
+//g_imageList.push ("res/GSAction/Background/Hexagon.png");
 // =========================================================================================
 
 
@@ -22,7 +21,12 @@ var g_audioList = [];
 
 // =========================================================================================
 // State
-//g_imageList.push ("res/GSMenu/Logo.png");
+g_imageList.push ("res/GSAction/Background/Background.png");
+g_imageList.push ("res/GSAction/Background/Hexagon.png");
+g_imageList.push ("res/GSAction/Background/Cloud.png");
+
+g_imageList.push ("res/GSAction/Battle/Orbit.png");
+g_imageList.push ("res/GSAction/Battle/Player.png");
 // =========================================================================================
 
 

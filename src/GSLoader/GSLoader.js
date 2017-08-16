@@ -2,11 +2,13 @@ var g_gsLoaderMainLayer = cc.Layer.create();
 g_gsLoaderMainLayer.retain();
 
 g_gsLoaderMainLayer.Init = function () {
+	/*
 	this.m_bgSprite = cc.Sprite.create("res/Splash.jpg");
 	this.m_bgSprite.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_bgSprite.setPosition(cc.p(CANVAS_W * 0.5, CANVAS_H * 0.5));
 	this.m_bgSprite.setLocalZOrder (LAYER_BACKGROUND);
 	this.addChild(this.m_bgSprite);
+	*/
 	
 	
 	this.m_numberOfAsset = 0;

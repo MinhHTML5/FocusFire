@@ -12,84 +12,16 @@
     "modules" : ["cocos2d"],
 
     "jsList" : [
-		"src/Mission.js",
-		"src/Upgrade.js",
-		"src/Profile.js",
+		"src/GSAction/Background/Background.js",
+		"src/GSAction/Background/BGObject.js",
+		
+		"src/GSAction/Battle/Player.js",
+		"src/GSAction/Battle/Battle.js",
+	
+		"src/GSLoader/GSLoader.js",
+		"src/GSAction/GSAction.js",
+		
 		"src/SpritePool.js",
-		"src/EmitterPool.js",
-		
-		"src/UI/BigButton.js",
-		"src/UI/TurretButton.js",
-		"src/UI/UpgradeButton.js",
-		"src/UI/BigPanel.js",
-		"src/UI/MediumPanel.js",
-		"src/UI/SmallPanel.js",
-		"src/UI/PowerBar.js",
-		
-		"src/Action/Friendly/Base.js",
-		"src/Action/Friendly/Turret/TurretGatling.js",
-		"src/Action/Friendly/Turret/TurretCannon.js",
-		"src/Action/Friendly/Turret/TurretMissile.js",
-		"src/Action/Friendly/Turret/TurretLaser.js",
-		"src/Action/Friendly/Turret/TurretGauss.js",
-		"src/Action/Friendly/Turret/TurretStatic.js",
-		"src/Action/Friendly/Turret/TurretShock.js",
-		
-		"src/Action/Friendly/Projectile/ProjectileBaseLaser.js",
-		"src/Action/Friendly/Projectile/ProjectileGatling.js",
-		"src/Action/Friendly/Projectile/ProjectileCannon.js",
-		"src/Action/Friendly/Projectile/ProjectileMissile.js",
-		"src/Action/Friendly/Projectile/ProjectileLaser.js",
-		"src/Action/Friendly/Projectile/ProjectileGauss.js",
-		"src/Action/Friendly/Projectile/ProjectileStatic.js",
-		"src/Action/Friendly/Projectile/ProjectileShock.js",
-		
-		"src/Action/Enemy/Enemy.js",
-		
-		"src/Action/Enemy/Area-1/Enemy_1_1.js",
-		"src/Action/Enemy/Area-1/Enemy_1_2.js",
-		"src/Action/Enemy/Area-1/Enemy_1_3.js",
-		"src/Action/Enemy/Area-1/Enemy_1_4.js",
-		"src/Action/Enemy/Area-1/Enemy_1_5.js",
-		"src/Action/Enemy/Area-1/Enemy_1_6.js",
-		
-		"src/Action/Enemy/Area-2/Enemy_2_1.js",
-		"src/Action/Enemy/Area-2/Enemy_2_2.js",
-		"src/Action/Enemy/Area-2/Enemy_2_3.js",
-		"src/Action/Enemy/Area-2/Enemy_2_4.js",
-		
-		"src/Action/Enemy/EnemyProjectile.js",
-		"src/Action/Enemy/EnemyLaser.js",
-		
-		"src/Action/Battle.js",
-		"src/Action/Explosion.js",
-		"src/Action/Selector.js",
-		
-		
-		
-		
-		"src/State/GSLoader.js",
-		"src/State/GSMenu.js",
-		
-		"src/State/GSMission/MissionInfo.js",
-		"src/State/GSMission.js",
-		
-		"src/State/GSUpgrade.js",
-		
-		"src/State/GSInfo/TurretWiki.js",
-		"src/State/GSInfo.js",
-		
-		"src/State/GSOption.js",
-		
-		"src/State/GSShop.js",
-		
-		
-		"src/State/GSAction/TurretBuyingList.js",
-		"src/State/GSAction/TurretInfo.js",
-		"src/State/GSAction/InGameMenu.js",
-		"src/State/GSAction/ResultPopup.js",
-		"src/State/GSAction.js",
-		
 		"src/Resource.js"
     ]
 }
