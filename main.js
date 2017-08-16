@@ -1,5 +1,10 @@
-var CANVAS_W = 1680;
-var CANVAS_H = 1050;
+var CANVAS_W = 1600;
+var CANVAS_H = 900;
+
+var LAYER_BACKGROUND = 0;
+var LAYER_BATTLE = 10;
+
+var LAYER_PLAYER = 50;
 
 var g_gsLoader;
 var g_gsMenu;
@@ -11,10 +16,10 @@ function InitLoader() {
 }
 
 function GlobalInit() {
-	g_gsMenu = new GSMenu();
+	//g_gsMenu = new GSMenu();
 	g_gsAction = new GSAction();
 	
-	g_gsMenu.retain();
+	//g_gsMenu.retain();
 	g_gsAction.retain();
 }
 
@@ -37,6 +42,7 @@ function PopState () {
 
 function PushMenu () {
 	//PushState (g_gsMenu);
+	PushState (g_gsAction);
 }
 function PushAction () {
 	//g_gsAction.NewBattle (campaign, mission);
