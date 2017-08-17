@@ -18,6 +18,12 @@ function Battle(layer) {
 		this.m_player.Update (deltaTime);
 	}
 	
+	this.UpdateVisual = function() {
+		this.m_player.UpdateVisual ();
+		
+		this.m_orbitSprite.setColor (g_colorTheme);
+	}
+	
 
 	
 	

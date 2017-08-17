@@ -47,7 +47,11 @@ function Player (layer) {
 		
 		this.m_x = CANVAS_W * 0.5 - PLAYER_DISTANCE_FROM_CENTER * Math.sin(this.m_angle * DEG_TO_RAD);
 		this.m_y = CANVAS_H * 0.5 - PLAYER_DISTANCE_FROM_CENTER * Math.cos(this.m_angle * DEG_TO_RAD);
+		
+	}
+	this.UpdateVisual = function() {
 		this.m_sprite.setRotation (this.m_angle);
 		this.m_sprite.setPosition (cc.p(this.m_x, this.m_y));
+		this.m_sprite.setColor (g_colorTheme);
 	}
 }

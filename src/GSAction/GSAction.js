@@ -9,6 +9,8 @@ var g_gsActionBattleLayer = cc.Layer.create();
 
 var g_gsActionUILayer = cc.Layer.create();
 	g_gsActionUILayer.retain();
+	
+var g_colorTheme = cc.color(40, 255, 120);
 
 g_gsActionUILayer.Init = function () {
 	
@@ -49,6 +51,9 @@ g_gsActionUILayer.Reset = function() {
 g_gsActionUILayer.update = function (deltaTime) {
 	if (g_background) g_background.Update (deltaTime);
 	if (g_battle) g_battle.Update (deltaTime);
+	
+	if (g_background) g_background.UpdateVisual ();
+	if (g_battle) g_battle.UpdateVisual ();
 }
 
 

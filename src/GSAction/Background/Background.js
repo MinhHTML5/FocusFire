@@ -20,4 +20,11 @@ function Background(layer) {
 			m_objects[i].Update(deltaTime);
 		}
 	}
+	
+	this.UpdateVisual = function () {
+		for (var i=0; i<m_objects.length; i++) {
+			m_objects[i].UpdateVisual();
+		}
+		this.m_sprite.setColor (g_colorTheme);
+	}
 }

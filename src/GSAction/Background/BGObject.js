@@ -51,6 +51,10 @@ function BGObject (layer, type) {
 		if (this.m_y < -200) {
 			this.Respawn();
 		}
+	}
+	
+	this.UpdateVisual = function() {
 		this.m_sprite.setPosition (cc.p(this.m_x, this.m_y));
+		this.m_sprite.setColor (g_colorTheme);
 	}
 }
