@@ -11,9 +11,15 @@ function Player (layer) {
 	
 	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/Player.png");
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 0.5));
-	this.m_sprite.setBlendFunc (new cc.BlendFunc(gl.SRC_ALPHA, gl.ONE));
 	this.m_sprite.setLocalZOrder (LAYER_PLAYER);
+	this.m_sprite.setOpacity (170);
 	layer.addChild(this.m_sprite);
+	
+	this.m_spriteGlow = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/PlayerGlow.png");
+	this.m_spriteGlow.setAnchorPoint(cc.p(0.5, 0.5));
+	this.m_spriteGlow.setBlendFunc (new cc.BlendFunc(gl.SRC_ALPHA, gl.ONE));
+	this.m_spriteGlow.setLocalZOrder (LAYER_PLAYER);
+	layer.addChild(this.m_spriteGlow);
 	
 	
 	this.Touch = function (touching, angle) {
@@ -52,6 +58,9 @@ function Player (layer) {
 	this.UpdateVisual = function() {
 		this.m_sprite.setRotation (this.m_angle);
 		this.m_sprite.setPosition (cc.p(this.m_x, this.m_y));
-		this.m_sprite.setColor (g_colorTheme);
+		
+		this.m_spriteGlow.setRotation (this.m_angle);
+		this.m_spriteGlow.setPosition (cc.p(this.m_x, this.m_y));
+		this.m_spriteGlow.setColor (g_colorTheme);
 	}
 }
