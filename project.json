@@ -16,6 +16,7 @@
 		"src/GSAction/Background/BGObject.js",
 		
 		"src/GSAction/Battle/Player.js",
+		"src/GSAction/Battle/PlayerGatling.js",
 		"src/GSAction/Battle/Battle.js",
 	
 		"src/GSLoader/GSLoader.js",

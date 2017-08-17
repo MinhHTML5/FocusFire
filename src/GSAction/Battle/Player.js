@@ -1,8 +1,12 @@
 var PLAYER_DISTANCE_FROM_CENTER = 330;
 var PLAYER_ROTATE_SPEED = 360;
 
+var PLAYER_GATLING_COOLDOWN = 0.05;
+var PLAYER_GATLING_RECOIL = 5;
+var PLAYER_GATLING_SPEED = 1500;
+var PLAYER_GATLING_SIZE = 30;
 
-function Player (layer) {
+function Player (battle, layer) {
 	this.m_x = 0;
 	this.m_y = 0;
 	this.m_angle = 0;
@@ -20,6 +24,8 @@ function Player (layer) {
 	this.m_spriteGlow.setBlendFunc (new cc.BlendFunc(gl.SRC_ALPHA, gl.ONE));
 	this.m_spriteGlow.setLocalZOrder (LAYER_PLAYER);
 	layer.addChild(this.m_spriteGlow);
+	
+	var gatlingCooldown = 0;
 	
 	
 	this.Touch = function (touching, angle) {
@@ -49,11 +55,25 @@ function Player (layer) {
 			
 			if (this.m_angle > 360) this.m_angle -= 360;
 			if (this.m_angle < 0) this.m_angle += 360;
+			
+			if (gatlingCooldown == 0) {
+				var gatling = new PlayerGatling(battle, layer);
+				var angle = this.m_angle + (Math.random() - 0.5) * PLAYER_GATLING_RECOIL * 2;
+				gatling.Start (angle, this.m_x, this.m_y);
+				battle.m_projectiles.push (gatling);
+				gatlingCooldown = PLAYER_GATLING_COOLDOWN;
+			}
 		}
 		
 		this.m_x = CANVAS_W * 0.5 - PLAYER_DISTANCE_FROM_CENTER * Math.sin(this.m_angle * DEG_TO_RAD);
 		this.m_y = CANVAS_H * 0.5 - PLAYER_DISTANCE_FROM_CENTER * Math.cos(this.m_angle * DEG_TO_RAD);
 		
+		if (gatlingCooldown > 0) {
+			gatlingCooldown -= deltaTime;
+			if (gatlingCooldown < 0) {
+				gatlingCooldown = 0;
+			}
+		}
 	}
 	this.UpdateVisual = function() {
 		this.m_sprite.setRotation (this.m_angle);
