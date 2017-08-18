@@ -1,5 +1,5 @@
-var CANVAS_W = 1600;
-var CANVAS_H = 900;
+var CANVAS_W = 900;
+var CANVAS_H = 1600;
 
 var LAYER_BACKGROUND = 0;
 var LAYER_BATTLE = 10;
@@ -69,10 +69,10 @@ cc.game.onStart = function(){
 
     // Setup the resolution policy and design resolution size
 	if (cc.sys.isNative) {
-		cc.view.setDesignResolutionSize(CANVAS_W, CANVAS_H, cc.ResolutionPolicy.FIXED_HEIGHT);
+		cc.view.setDesignResolutionSize(CANVAS_W, CANVAS_H, cc.ResolutionPolicy.FIXED_WIDTH);
 	}
 	else {
-	    cc.view.setDesignResolutionSize(CANVAS_W, CANVAS_H, cc.ResolutionPolicy.FIXED);
+	    cc.view.setDesignResolutionSize(CANVAS_W, CANVAS_H, cc.ResolutionPolicy.FIXED_WIDTH);
 	}
 
     // The game will be resized when browser size change
@@ -87,7 +87,7 @@ cc.game.onStart = function(){
         cc.director.runScene(g_gsLoader);
     }, this);
 	
-	// fix the width
-	CANVAS_W = cc.director.getWinSizeInPixels().width;
+	// fix the height
+	CANVAS_H = cc.director.getWinSizeInPixels().height;
 };
 cc.game.run();

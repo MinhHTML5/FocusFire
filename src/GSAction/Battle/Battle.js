@@ -1,13 +1,4 @@
 function Battle(layer) {
-	this.m_orbitSprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/Orbit.png");
-	this.m_orbitSprite.setAnchorPoint(cc.p(0.5, 0.5));
-	this.m_orbitSprite.setLocalZOrder (LAYER_BATTLE);
-	this.m_orbitSprite.setPosition (cc.p(CANVAS_W * 0.5, CANVAS_H * 0.5));
-	this.m_orbitSprite.setOpacity (128);
-	layer.addChild(this.m_orbitSprite);
-
-
-	
 	this.m_player = new Player(this, layer);
 
 	this.m_projectiles = [];
@@ -28,8 +19,7 @@ function Battle(layer) {
 	
 	this.UpdateVisual = function() {
 		this.m_player.UpdateVisual ();
-		this.m_orbitSprite.setColor (g_colorTheme);
-		
+	
 		for (var i=this.m_projectiles.length-1; i>=0; i--) {
 			this.m_projectiles[i].UpdateVisual();
 		}
@@ -45,16 +35,14 @@ function Battle(layer) {
 	this.TouchDown = function (touches) {
 		var x = touches[0].getLocation().x;
 		var y = touches[0].getLocation().y;
-		var angle = AngleBetweenTwoPoint (x, y, CANVAS_W * 0.5, CANVAS_H * 0.5);
-		this.m_player.Touch (true, angle);
+		this.m_player.Touch (true, x, y);
 	}
 	this.TouchMove = function (touches) {
 		var x = touches[0].getLocation().x;
 		var y = touches[0].getLocation().y;
-		var angle = AngleBetweenTwoPoint (x, y, CANVAS_W * 0.5, CANVAS_H * 0.5);
-		this.m_player.Touch (true, angle);
+		this.m_player.Touch (true, x, y);
 	}
 	this.TouchUp = function (touches) {
-		this.m_player.Touch (false, 0);
+		this.m_player.Touch (false, 0, 0);
 	}
 }

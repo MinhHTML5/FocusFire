@@ -1,5 +1,9 @@
-var PLAYER_DISTANCE_FROM_CENTER = 330;
-var PLAYER_ROTATE_SPEED = 360;
+var PLAYER_MAX_SPEED = 3000;
+var PLAYER_MAX_EMP_SPEED = 1000;
+var PLAYER_SPEED_MULTIPLIER = 7;
+var PLAYER_ACCELERATION = 20000;
+var PLAYER_SNAP_DISTANCE = 10;
+var PLAYER_DISTANCE_FROM_FINGER = 100;
 
 var PLAYER_GATLING_COOLDOWN = 0.05;
 var PLAYER_GATLING_RECOIL = 5;
@@ -9,8 +13,11 @@ var PLAYER_GATLING_SIZE = 30;
 function Player (battle, layer) {
 	this.m_x = 0;
 	this.m_y = 0;
+	this.m_targetX = 0;
+	this.m_targetY = 0;
+	this.m_direction = 0;
 	this.m_angle = 0;
-	this.m_targetAngle = 0;
+	this.m_speed = 0;
 	this.m_touching = false;
 	
 	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/Player.png");
@@ -28,33 +35,51 @@ function Player (battle, layer) {
 	var gatlingCooldown = 0;
 	
 	
-	this.Touch = function (touching, angle) {
+	this.Reset = function () {
+		this.m_x = CANVAS_W * 0.5;
+		this.m_y = PLAYER_DISTANCE_FROM_FINGER;
+		this.m_targetX = 0;
+		this.m_targetY = 0;
+		this.m_direction = 0;
+		this.m_angle = 0;
+		this.m_speed = 0;
+		this.m_touching = false;
+	}
+	
+	this.Touch = function (touching, x, y) {
 		this.m_touching = touching;
-		this.m_targetAngle = angle;
+		this.m_targetX = x;
+		this.m_targetY = y + PLAYER_DISTANCE_FROM_FINGER;
 	}
 	this.Update = function (deltaTime) {
 		if (this.m_touching) {
-			var rotateAmount = 0;
-			rotateAmount = PLAYER_ROTATE_SPEED * deltaTime;
+			var distance = DistanceBetweenTwoPoint(this.m_x, this.m_y, this.m_targetX, this.m_targetY);
+			this.m_direction = AngleBetweenTwoPoint(this.m_x, this.m_y, this.m_targetX, this.m_targetY);
 			
-			if (Math.abs(this.m_targetAngle - this.m_angle) <= 180) {
-				if (this.m_targetAngle > this.m_angle + rotateAmount) {
-					this.m_angle += rotateAmount;
+			if (distance > PLAYER_SNAP_DISTANCE) {
+				var targetSpeed = distance * PLAYER_SPEED_MULTIPLIER;
+				var acceleration = PLAYER_ACCELERATION * deltaTime;
+				if (this.m_speed < targetSpeed + acceleration) {
+					this.m_speed += acceleration;
+					if (this.m_speed > PLAYER_MAX_SPEED) {
+						this.m_speed = PLAYER_MAX_SPEED;
+					}
 				}
-				else if (this.m_targetAngle < this.m_angle - rotateAmount) {
-					this.m_angle -= rotateAmount;
+				else if (this.m_speed > targetSpeed - acceleration) {
+					this.m_speed -= acceleration;
+					if (this.m_speed < 0) {
+						this.m_speed = 0;
+					}
 				}
 				else {
-					this.m_angle = this.m_targetAngle;
+					this.m_speed = targetSpeed;
 				}
 			}
 			else {
-				if (this.m_targetAngle > this.m_angle) this.m_angle -= rotateAmount;
-				else if (this.m_targetAngle < this.m_angle) this.m_angle += rotateAmount;
+				this.m_x = this.m_targetX;
+				this.m_y = this.m_targetY;
+				this.m_speed = 0;
 			}
-			
-			if (this.m_angle > 360) this.m_angle -= 360;
-			if (this.m_angle < 0) this.m_angle += 360;
 			
 			if (gatlingCooldown == 0) {
 				var gatling = new PlayerGatling(battle, layer);
@@ -64,9 +89,15 @@ function Player (battle, layer) {
 				gatlingCooldown = PLAYER_GATLING_COOLDOWN;
 			}
 		}
+		else {
+			this.m_speed -= PLAYER_ACCELERATION * deltaTime;
+			if (this.m_speed < 0) {
+				this.m_speed = 0;
+			}
+		}
 		
-		this.m_x = CANVAS_W * 0.5 - PLAYER_DISTANCE_FROM_CENTER * Math.sin(this.m_angle * DEG_TO_RAD);
-		this.m_y = CANVAS_H * 0.5 - PLAYER_DISTANCE_FROM_CENTER * Math.cos(this.m_angle * DEG_TO_RAD);
+		this.m_x += this.m_speed * deltaTime * Math.sin(this.m_direction * DEG_TO_RAD);
+		this.m_y += this.m_speed * deltaTime * Math.cos(this.m_direction * DEG_TO_RAD);
 		
 		if (gatlingCooldown > 0) {
 			gatlingCooldown -= deltaTime;
@@ -76,11 +107,21 @@ function Player (battle, layer) {
 		}
 	}
 	this.UpdateVisual = function() {
-		this.m_sprite.setRotation (this.m_angle);
 		this.m_sprite.setPosition (cc.p(this.m_x, this.m_y));
 		
-		this.m_spriteGlow.setRotation (this.m_angle);
 		this.m_spriteGlow.setPosition (cc.p(this.m_x, this.m_y));
 		this.m_spriteGlow.setColor (g_colorTheme);
 	}
+	
+	
+	this.GetMaxSpeed = function () {
+		if (this.m_emp > 0) {
+			return PLAYER_MAX_EMP_SPEED;
+		}
+		else {
+			return PLAYER_MAX_SPEED;
+		}
+	}
+	
+	this.Reset();
 }
