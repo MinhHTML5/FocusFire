@@ -1,6 +1,7 @@
 function Battle(layer) {
 	this.m_player = new Player(this, layer);
 
+	this.m_particles = [];
 	this.m_projectiles = [];
 
 
@@ -15,6 +16,13 @@ function Battle(layer) {
 				this.m_projectiles.splice(i, 1);
 			}
 		}
+		
+		for (var i=this.m_particles.length-1; i>=0; i--) {
+			this.m_particles[i].Update(deltaTime);
+			if (this.m_particles[i].m_active == false) {
+				this.m_particles.splice(i, 1);
+			}
+		}
 	}
 	
 	this.UpdateVisual = function() {
@@ -23,13 +31,12 @@ function Battle(layer) {
 		for (var i=this.m_projectiles.length-1; i>=0; i--) {
 			this.m_projectiles[i].UpdateVisual();
 		}
-	}
-	
-
-	
-	this.SpawnProjectile = function() {
 		
+		for (var i=this.m_particles.length-1; i>=0; i--) {
+			this.m_particles[i].UpdateVisual();
+		}
 	}
+	
 	
 	
 	this.TouchDown = function (touches) {

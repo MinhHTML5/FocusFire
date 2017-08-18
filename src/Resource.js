@@ -27,6 +27,7 @@ g_imageList.push ("res/GSAction/Background/Cloud.png");
 
 g_imageList.push ("res/GSAction/Battle/Player.png");
 g_imageList.push ("res/GSAction/Battle/PlayerGlow.png");
+g_imageList.push ("res/GSAction/Battle/PlayerEngineParticle.png");
 g_imageList.push ("res/GSAction/Battle/PlayerGatling.png");
 // =========================================================================================
 

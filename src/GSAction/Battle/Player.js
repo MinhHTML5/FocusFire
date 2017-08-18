@@ -4,11 +4,11 @@ var PLAYER_SPEED_MULTIPLIER = 7;
 var PLAYER_ACCELERATION = 20000;
 var PLAYER_SNAP_DISTANCE = 10;
 var PLAYER_DISTANCE_FROM_FINGER = 100;
+var PLAYER_GATLING_COOLDOWN = 0.008;
 
-var PLAYER_GATLING_COOLDOWN = 0.05;
-var PLAYER_GATLING_RECOIL = 5;
-var PLAYER_GATLING_SPEED = 1500;
-var PLAYER_GATLING_SIZE = 30;
+var PLAYER_MOVEMENT_CHECK_TIMES = 10;
+var PLAYER_ENGINE_PARTICLE_EMIT_LATENCY = 0.002;
+
 
 function Player (battle, layer) {
 	this.m_x = 0;
@@ -32,7 +32,9 @@ function Player (battle, layer) {
 	this.m_spriteGlow.setLocalZOrder (LAYER_PLAYER);
 	layer.addChild(this.m_spriteGlow);
 	
+	var engineParticleCount = 0;
 	var gatlingCooldown = 0;
+	
 	
 	
 	this.Reset = function () {
@@ -81,12 +83,10 @@ function Player (battle, layer) {
 				this.m_speed = 0;
 			}
 			
-			if (gatlingCooldown == 0) {
+			while (gatlingCooldown <= 0) {
 				var gatling = new PlayerGatling(battle, layer);
-				var angle = this.m_angle + (Math.random() - 0.5) * PLAYER_GATLING_RECOIL * 2;
-				gatling.Start (angle, this.m_x, this.m_y);
-				battle.m_projectiles.push (gatling);
-				gatlingCooldown = PLAYER_GATLING_COOLDOWN;
+				gatling.Start (this.m_angle, this.m_x, this.m_y);
+				gatlingCooldown += PLAYER_GATLING_COOLDOWN;
 			}
 		}
 		else {
@@ -96,21 +96,28 @@ function Player (battle, layer) {
 			}
 		}
 		
-		this.m_x += this.m_speed * deltaTime * Math.sin(this.m_direction * DEG_TO_RAD);
-		this.m_y += this.m_speed * deltaTime * Math.cos(this.m_direction * DEG_TO_RAD);
+		for (var i=0; i<PLAYER_MOVEMENT_CHECK_TIMES; i++) {
+			var subDeltaTime = deltaTime / PLAYER_MOVEMENT_CHECK_TIMES;
+			this.m_x += this.m_speed * subDeltaTime * Math.sin(this.m_direction * DEG_TO_RAD);
+			this.m_y += this.m_speed * subDeltaTime * Math.cos(this.m_direction * DEG_TO_RAD);
+			
+			engineParticleCount += subDeltaTime;
+			while (engineParticleCount > PLAYER_ENGINE_PARTICLE_EMIT_LATENCY) {
+				engineParticleCount -= PLAYER_ENGINE_PARTICLE_EMIT_LATENCY;
+				var engineParticle = new PlayerEngineParticle(battle, layer);
+				engineParticle.Start (this.m_x, this.m_y);
+			}
+		}
 		
 		if (gatlingCooldown > 0) {
 			gatlingCooldown -= deltaTime;
-			if (gatlingCooldown < 0) {
-				gatlingCooldown = 0;
-			}
 		}
 	}
 	this.UpdateVisual = function() {
 		this.m_sprite.setPosition (cc.p(this.m_x, this.m_y));
 		
 		this.m_spriteGlow.setPosition (cc.p(this.m_x, this.m_y));
-		this.m_spriteGlow.setColor (g_colorTheme);
+		//this.m_spriteGlow.setColor (g_colorTheme);
 	}
 	
 	
