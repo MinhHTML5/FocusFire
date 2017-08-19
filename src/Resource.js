@@ -29,6 +29,10 @@ g_imageList.push ("res/GSAction/Battle/Player.png");
 g_imageList.push ("res/GSAction/Battle/PlayerGlow.png");
 g_imageList.push ("res/GSAction/Battle/PlayerEngineParticle.png");
 g_imageList.push ("res/GSAction/Battle/PlayerGatling.png");
+
+g_imageList.push ("res/GSAction/Battle/Explosion.png");
+
+g_imageList.push ("res/GSAction/Battle/Enemy1.png");
 // =========================================================================================
 
 

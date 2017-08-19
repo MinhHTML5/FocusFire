@@ -18,10 +18,14 @@
 		"src/GSAction/Battle/Player.js",
 		"src/GSAction/Battle/PlayerEngineParticle.js",
 		"src/GSAction/Battle/PlayerGatling.js",
+		"src/GSAction/Battle/Explosion.js",
+		"src/GSAction/Battle/Enemy1.js",
 		"src/GSAction/Battle/Battle.js",
 	
 		"src/GSLoader/GSLoader.js",
 		"src/GSAction/GSAction.js",
+		"src/GSAction/Difficulty.js",
+		"src/GSAction/SpawnList_0.js",
 		
 		"src/SpritePool.js",
 		"src/Resource.js"

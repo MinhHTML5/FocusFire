@@ -48,11 +48,14 @@ function Player (battle, layer) {
 		this.m_touching = false;
 	}
 	
+	
 	this.Touch = function (touching, x, y) {
 		this.m_touching = touching;
 		this.m_targetX = x;
 		this.m_targetY = y + PLAYER_DISTANCE_FROM_FINGER;
 	}
+	
+	
 	this.Update = function (deltaTime) {
 		if (this.m_touching) {
 			var distance = DistanceBetweenTwoPoint(this.m_x, this.m_y, this.m_targetX, this.m_targetY);
@@ -113,6 +116,8 @@ function Player (battle, layer) {
 			gatlingCooldown -= deltaTime;
 		}
 	}
+	
+	
 	this.UpdateVisual = function() {
 		this.m_sprite.setPosition (cc.p(this.m_x, this.m_y));
 		
