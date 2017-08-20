@@ -19,7 +19,12 @@
 		"src/GSAction/Battle/PlayerEngineParticle.js",
 		"src/GSAction/Battle/PlayerGatling.js",
 		"src/GSAction/Battle/Explosion.js",
+		
 		"src/GSAction/Battle/Enemy1.js",
+		"src/GSAction/Battle/Enemy2.js",
+		
+		"src/GSAction/Battle/EnemyBullet1.js",
+		
 		"src/GSAction/Battle/Battle.js",
 	
 		"src/GSLoader/GSLoader.js",

@@ -1,17 +1,18 @@
-var ENEMY_1_SIZE = 60;
-var ENEMY_1_MOVE_SPEED = 200;
-var ENEMY_1_ROTATE_SPEED = 100;
-var ENEMY_1_HP = 10;
-var ENEMY_1_EXPLOSION_NUMBER = 3;
-var ENEMY_1_EXPLOSION_LATENCY = 0.07;
-
 function Enemy1 (battle, layer) {
+	this.m_size = 40;
+	this.m_moveSpeed = 200;
+	this.m_rotateSpeed = 100;
+	this.m_HP = 10;
+	
+	this.m_explosionNumber = 3;
+	this.m_explosionLatency = 0.07;
+	
 	this.m_active = false;
 	this.m_x = 0;
 	this.m_y = 0;
 	this.m_angle = 0;
-	this.m_size = ENEMY_1_SIZE;
-	this.m_HP = 0;
+	
+	
 	
 	this.m_targetCount = 0;
 	this.m_targetX = [];
@@ -33,7 +34,6 @@ function Enemy1 (battle, layer) {
 		this.m_y = y;
 		this.m_targetX = targetX;
 		this.m_targetY = targetY;
-		this.m_HP = ENEMY_1_HP;
 		
 		dyingSequenceCount = 0;
 		explosionCount = 0;
@@ -46,7 +46,7 @@ function Enemy1 (battle, layer) {
 		if (this.m_active) {
 			if (this.m_HP > 0) {
 				var targetAngle = AngleBetweenTwoPoint(this.m_x, this.m_y, this.m_targetX[this.m_targetCount], this.m_targetY[this.m_targetCount]);
-				var rotateSpeedThisLoop = ENEMY_1_ROTATE_SPEED * deltaTime;
+				var rotateSpeedThisLoop = this.m_rotateSpeed * deltaTime;
 				if (Math.abs(targetAngle - this.m_angle) <= 180) {
 					if (targetAngle > this.m_angle + rotateSpeedThisLoop) {
 						this.m_angle += rotateSpeedThisLoop;
@@ -66,7 +66,7 @@ function Enemy1 (battle, layer) {
 				if (this.m_angle > 360) this.m_angle -= 360;
 				if (this.m_angle < 0) this.m_angle += 360;
 				
-				var moveDistance = ENEMY_1_MOVE_SPEED * deltaTime;
+				var moveDistance = this.m_moveSpeed * deltaTime;
 				this.m_x += moveDistance * Math.sin(this.m_angle * DEG_TO_RAD);
 				this.m_y += moveDistance * Math.cos(this.m_angle * DEG_TO_RAD);
 				
@@ -81,12 +81,12 @@ function Enemy1 (battle, layer) {
 			}
 			else {
 				dyingSequenceCount += deltaTime;
-				if (dyingSequenceCount >= ENEMY_1_EXPLOSION_LATENCY) {
-					dyingSequenceCount -= ENEMY_1_EXPLOSION_LATENCY;
-					battle.SpawnExplosion(this.m_x, this.m_y, 1, ENEMY_1_SIZE);
+				if (dyingSequenceCount >= this.m_explosionLatency) {
+					dyingSequenceCount -= this.m_explosionLatency;
+					battle.SpawnExplosion(this.m_x, this.m_y, 0.7, 0.3, this.m_size);
 					
 					explosionCount ++;
-					if (explosionCount >= ENEMY_1_EXPLOSION_NUMBER) {
+					if (explosionCount >= this.m_explosionNumber) {
 						this.Destroy();
 					}
 				}
@@ -104,7 +104,7 @@ function Enemy1 (battle, layer) {
 	this.Hit = function (damage) {
 		this.m_HP -= damage;
 		if (this.m_HP <= 0) {
-			battle.SpawnExplosion(this.m_x, this.m_y, 1, 0);
+			battle.SpawnExplosion(this.m_x, this.m_y, 0.7, 0.3, 0);
 			this.m_sprite.setVisible(false);
 		}
 	}

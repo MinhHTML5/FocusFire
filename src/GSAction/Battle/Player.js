@@ -1,3 +1,5 @@
+var PLAYER_SIZE = 50;
+var PLAYER_MAX_HP = 100;
 var PLAYER_MAX_SPEED = 3000;
 var PLAYER_MAX_EMP_SPEED = 1000;
 var PLAYER_SPEED_MULTIPLIER = 7;
@@ -11,6 +13,7 @@ var PLAYER_ENGINE_PARTICLE_EMIT_LATENCY = 0.002;
 
 
 function Player (battle, layer) {
+	this.m_size = PLAYER_SIZE;
 	this.m_x = 0;
 	this.m_y = 0;
 	this.m_targetX = 0;
@@ -46,6 +49,7 @@ function Player (battle, layer) {
 		this.m_angle = 0;
 		this.m_speed = 0;
 		this.m_touching = false;
+		this.m_HP = PLAYER_MAX_HP;
 	}
 	
 	
@@ -123,6 +127,10 @@ function Player (battle, layer) {
 		
 		this.m_spriteGlow.setPosition (cc.p(this.m_x, this.m_y));
 		//this.m_spriteGlow.setColor (g_colorTheme);
+	}
+	
+	this.Hit = function (damage) {
+		this.mHP -= damage;
 	}
 	
 	

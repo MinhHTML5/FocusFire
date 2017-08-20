@@ -6,6 +6,7 @@ var PLAYER_GATLING_RECOIL = 4;
 var PLAYER_GATLING_SPEED_MIN = 2400;
 var PLAYER_GATLING_SPEED_MAX = 2600;
 var PLAYER_GATLING_DAMAGE = 1;
+var PLAYER_GATLING_OFFSET = 50;
 
 function PlayerGatling (battle, layer) {
 	this.m_active = false;
@@ -69,7 +70,7 @@ function PlayerGatling (battle, layer) {
 					var distance = DistanceBetweenTwoPoint(this.m_x, this.m_y, battle.m_enemies[i].m_x, battle.m_enemies[i].m_y);
 					if (distance < battle.m_enemies[i].m_size) {
 						battle.m_enemies[i].Hit (PLAYER_GATLING_DAMAGE);
-						battle.SpawnExplosion(this.m_x, this.m_y, 0.5, 0);
+						battle.SpawnExplosion(this.m_x, this.m_y, 0.3, 0.2, 0);
 						this.Destroy();
 						return;
 					}
@@ -81,7 +82,7 @@ function PlayerGatling (battle, layer) {
 	
 	this.UpdateVisual = function() {
 		this.m_sprite.setRotation (this.m_angle);
-		this.m_sprite.setPosition (cc.p(this.m_x, this.m_y));
+		this.m_sprite.setPosition (cc.p(this.m_x, this.m_y + PLAYER_GATLING_OFFSET));
 		this.m_sprite.setScaleY (length /PLAYER_GATLING_H);
 		//this.m_sprite.setContentSize (cc.size(PLAYER_GATLING_W, length));
 	}

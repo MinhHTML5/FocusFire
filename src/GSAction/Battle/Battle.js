@@ -69,11 +69,11 @@ function Battle(layer) {
 		}
 	}
 	
-	this.SpawnExplosion = function(x, y, scale, randomize) {
+	this.SpawnExplosion = function(x, y, scale, time, randomize) {
 		x += Math.random() * 2 * randomize - randomize;
 		y += Math.random() * 2 * randomize - randomize;
 		var explosion = new Explosion(this, layer);
-		explosion.Start(x, y, scale);
+		explosion.Start(x, y, scale, time);
 	}
 	
 	
