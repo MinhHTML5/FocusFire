@@ -37,14 +37,14 @@ function EnemyBullet1 (battle, layer) {
 			this.m_x += moveDistance * Math.sin(this.m_angle * DEG_TO_RAD);
 			this.m_y += moveDistance * Math.cos(this.m_angle * DEG_TO_RAD);
 			
-			if (this.m_x < this.m_size * 0.5 || this.m_x > CANVAS_W - this.m_size * 0.5
-			||  this.m_y < 0 || this.m_y > CANVAS_H + this.m_size) {
+			if (this.m_x < -this.m_size || this.m_x > CANVAS_W + this.m_size
+			||  this.m_y < -this.m_size || this.m_y > CANVAS_H + this.m_size) {
 				this.Destroy();
 				return;
 			}
 			
 			var distance = DistanceBetweenTwoPoint(this.m_x, this.m_y, battle.m_player.m_x, battle.m_player.m_y);
-			if (distance < battle.m_player.m_size) {
+			if (battle.m_player.m_active && distance < battle.m_player.m_size) {
 				battle.m_player.Hit (this.m_damage);
 				battle.SpawnExplosion(this.m_x, this.m_y, 0.4, 0.3, 0);
 				this.Destroy();

@@ -31,11 +31,14 @@ g_imageList.push ("res/GSAction/Battle/PlayerEngineParticle.png");
 g_imageList.push ("res/GSAction/Battle/PlayerGatling.png");
 
 g_imageList.push ("res/GSAction/Battle/Explosion.png");
+g_imageList.push ("res/GSAction/Battle/ExplosionParticle.png");
 
 g_imageList.push ("res/GSAction/Battle/Enemy1.png");
 g_imageList.push ("res/GSAction/Battle/Enemy2.png");
 
 g_imageList.push ("res/GSAction/Battle/EnemyBullet1.png");
+
+g_imageList.push ("res/GSAction/UI/Logo.png");
 // =========================================================================================
 
 
@@ -44,7 +47,7 @@ g_imageList.push ("res/GSAction/Battle/EnemyBullet1.png");
 
 // =========================================================================================
 // Fonts
-//g_fileList.push ("res/Fonts/Nasalization.ttf");
+g_fileList.push ("res/AirCruiser.ttf");
 
 // Particles
 //g_fileList.push ("res/GSAction/Turret/2-Cannon/Particle.plist");

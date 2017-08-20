@@ -12,8 +12,38 @@ var g_gsActionUILayer = cc.Layer.create();
 	
 var g_colorTheme = cc.color(40, 255, 120);
 
+
+var g_menuShowing = true;
+var g_menuAlpha = 1;
+
 g_gsActionUILayer.Init = function () {
+	this.m_logoSprite = g_spritePool.GetSpriteFromPool("res/GSAction/UI/Logo.png");
+	this.m_logoSprite.setAnchorPoint(cc.p(0.5, 0.5));
+	this.m_logoSprite.setLocalZOrder (LAYER_UI);
+	this.m_logoSprite.setPosition (CANVAS_W * 0.5, CANVAS_H * 0.9);
+	this.m_logoSprite.setScale (0.75)
+	this.addChild(this.m_logoSprite);
 	
+	this.m_highScore = new cc.LabelTTF("Highest: 0", GetFont("AirCruiser"), 45);
+	this.m_highScore.setAnchorPoint(cc.p(0.5, 0.5));
+	this.m_highScore.setPosition (cc.p(CANVAS_W * 0.5, CANVAS_H * 0.6));
+	this.m_highScore.setLocalZOrder (LAYER_UI);
+	this.m_highScore.setColor (new cc.Color(230, 230, 230, 1));
+	this.addChild(this.m_highScore);
+	
+	this.m_score = new cc.LabelTTF("Score: 0", GetFont("AirCruiser"), 45);
+	this.m_score.setAnchorPoint(cc.p(0.5, 0.5));
+	this.m_score.setPosition (cc.p(CANVAS_W * 0.5, CANVAS_H * 0.6 - 50));
+	this.m_score.setLocalZOrder (LAYER_UI);
+	this.m_score.setColor (new cc.Color(230, 230, 230, 1));
+	this.addChild(this.m_score);
+	
+	this.m_touch = new cc.LabelTTF("Tap to start", GetFont("AirCruiser"), 45);
+	this.m_touch.setAnchorPoint(cc.p(0.5, 0.5));
+	this.m_touch.setPosition (cc.p(CANVAS_W * 0.5, CANVAS_H * 0.1));
+	this.m_touch.setLocalZOrder (LAYER_UI);
+	this.m_touch.setColor (new cc.Color(230, 230, 230, 1));
+	this.addChild(this.m_touch);
 }
 
 g_gsActionUILayer.AddEventListener = function () {
@@ -22,6 +52,13 @@ g_gsActionUILayer.AddEventListener = function () {
 		event: cc.EventListener.TOUCH_ALL_AT_ONCE,
 		swallowTouches: true,
 		onTouchesBegan: function (touches, event) {
+			if (g_menuShowing == true && g_menuAlpha == 1) {
+				g_menuShowing = false;
+				if (g_battle != null) {
+					g_battle.Destroy();
+				}
+				g_battle = new Battle (g_gsActionBattleLayer);
+			}
 			if (g_battle) g_battle.TouchDown(touches);
 			return true;
 		},
@@ -49,8 +86,28 @@ g_gsActionUILayer.Reset = function() {
 
 
 g_gsActionUILayer.update = function (deltaTime) {
+	if (g_menuShowing == true) {
+		g_menuAlpha += deltaTime * 3;
+		if (g_menuAlpha > 1) g_menuAlpha = 1;
+	}
+	else {
+		g_menuAlpha -= deltaTime * 3;
+		if (g_menuAlpha < 0) g_menuAlpha = 0;
+	}
+	
+	this.m_logoSprite.setOpacity (g_menuAlpha * 255);
+	this.m_highScore.setOpacity (g_menuAlpha * 255);
+	this.m_score.setOpacity (g_menuAlpha * 255);
+	this.m_touch.setOpacity (g_menuAlpha * 255);
+	
+	
 	if (g_background) g_background.Update (deltaTime);
-	if (g_battle) g_battle.Update (deltaTime);
+	if (g_battle) {
+		g_battle.Update (deltaTime);
+		if (g_battle.m_gameEnded) {
+			g_menuShowing = true;
+		}
+	}
 	
 	if (g_background) g_background.UpdateVisual ();
 	if (g_battle) g_battle.UpdateVisual ();
@@ -68,7 +125,6 @@ var GSAction = cc.Scene.extend({
 		this.eventListenerAdded = false;
 		
 		g_background = new Background (g_gsActionBackgroundLayer);
-		g_battle = new Battle (g_gsActionBattleLayer);
 	},
     onEnter:function () {
 		this._super();
@@ -79,16 +135,7 @@ var GSAction = cc.Scene.extend({
 			g_gsActionUILayer.AddEventListener();
 			this.eventListenerAdded = true;
 		}
-    },
-	NewBattle:function () {
-		//g_battle = new Battle();
-	},
-	RestartBattle:function () {
-		
-	},
-	Destroy:function () {
-		//g_battle.Destroy();
-	}
+    }
 });
 
 

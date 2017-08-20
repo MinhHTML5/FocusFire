@@ -3,8 +3,12 @@ var CANVAS_H = 1600;
 
 var LAYER_BACKGROUND = 0;
 var LAYER_BATTLE = 10;
-var LAYER_PLAYER = 50;
-var LAYER_BULLET = 100;
+var LAYER_ENEMY = 20;
+var LAYER_PLAYER = 30;
+var LAYER_EXPLOSION = 40;
+var LAYER_BULLET = 50;
+var LAYER_UI = 100;
+
 
 var g_gsLoader;
 var g_gsMenu;

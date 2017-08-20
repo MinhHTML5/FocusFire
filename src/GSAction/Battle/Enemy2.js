@@ -19,7 +19,7 @@ function Enemy2 (battle, layer) {
 	
 	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/Enemy2.png");
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 0.5));
-	this.m_sprite.setLocalZOrder (LAYER_BULLET);
+	this.m_sprite.setLocalZOrder (LAYER_ENEMY);
 	this.m_sprite.setBlendFunc (new cc.BlendFunc(gl.SRC_ALPHA, gl.ONE));
 	layer.addChild(this.m_sprite);
 	
@@ -118,6 +118,13 @@ function Enemy2 (battle, layer) {
 				
 				if (cooldownCount > 0) {
 					cooldownCount -= deltaTime;
+				}
+				
+				var distance = DistanceBetweenTwoPoint(this.m_x, this.m_y, battle.m_player.m_x, battle.m_player.m_y);
+				if (battle.m_player.m_active && distance < (battle.m_player.m_size + this.m_size) * 0.5) {
+					battle.m_player.Hit (this.m_HP);
+					this.Hit(this.m_HP);
+					return;
 				}
 			}
 			else {

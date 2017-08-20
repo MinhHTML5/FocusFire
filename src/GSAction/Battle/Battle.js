@@ -11,13 +11,17 @@ function Battle(layer) {
 	this.m_score = 0;
 	this.m_level = 0;
 	
+	this.m_gameEnded = false;
+	
 	var spawnCounter = new Array();
 	for (var i=0; i<DIFFICULTY_NUMBER; i++) {
 		spawnCounter[i] = 0;
 	}
 	
 	this.Update = function(deltaTime) {
-		this.m_player.Update (deltaTime);
+		if (this.m_player.m_active) {
+			this.m_player.Update (deltaTime);
+		}
 		
 		for (var i=this.m_particles.length-1; i>=0; i--) {
 			this.m_particles[i].Update(deltaTime);
@@ -40,21 +44,25 @@ function Battle(layer) {
 			}
 		}
 		
-		for (var i=0; i<DIFFICULTY_NUMBER; i++) {
-			if (g_difficulty[this.m_level].m_spawnLatency[i] > 0) {
-				spawnCounter[i] += deltaTime;
-				if (spawnCounter[i] >= g_difficulty[this.m_level].m_spawnLatency[i]) {
-					spawnCounter[i] -= g_difficulty[this.m_level].m_spawnLatency[i];
-					
-					var choose = (Math.random() * g_spawnFunction[i].length) >> 0;
-					g_spawnFunction[i][choose](this, layer);
+		if (!this.m_gameEnded) {
+			for (var i=0; i<DIFFICULTY_NUMBER; i++) {
+				if (g_difficulty[this.m_level].m_spawnLatency[i] > 0) {
+					spawnCounter[i] += deltaTime;
+					if (spawnCounter[i] >= g_difficulty[this.m_level].m_spawnLatency[i]) {
+						spawnCounter[i] -= g_difficulty[this.m_level].m_spawnLatency[i];
+						
+						var choose = (Math.random() * g_spawnFunction[i].length) >> 0;
+						g_spawnFunction[i][choose](this, layer);
+					}
 				}
 			}
 		}
 	}
 	
 	this.UpdateVisual = function() {
-		this.m_player.UpdateVisual ();
+		if (this.m_player.m_active) {
+			this.m_player.UpdateVisual ();
+		}
 	
 		for (var i=this.m_particles.length-1; i>=0; i--) {
 			this.m_particles[i].UpdateVisual();
@@ -76,6 +84,30 @@ function Battle(layer) {
 		explosion.Start(x, y, scale, time);
 	}
 	
+	
+	this.Destroy = function() {
+		if (this.m_player.m_active) {
+			this.m_player.Destroy();
+		}
+	
+		for (var i=this.m_particles.length-1; i>=0; i--) {
+			if (this.m_particles[i].m_active) {
+				this.m_particles[i].Destroy();
+			}
+		}
+		
+		for (var i=this.m_projectiles.length-1; i>=0; i--) {
+			if (this.m_projectiles[i].m_active) {
+				this.m_projectiles[i].Destroy();
+			}
+		}
+		
+		for (var i=this.m_enemies.length-1; i>=0; i--) {
+			if (this.m_enemies[i].m_active) {
+				this.m_enemies[i].Destroy();
+			}
+		}
+	}
 	
 	
 	this.TouchDown = function (touches) {
