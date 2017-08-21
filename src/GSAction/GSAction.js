@@ -57,6 +57,7 @@ g_gsActionUILayer.AddEventListener = function () {
 				if (g_battle != null) {
 					g_battle.Destroy();
 				}
+				g_gsActionBattleLayer.removeAllChildren();
 				g_battle = new Battle (g_gsActionBattleLayer);
 			}
 			if (g_battle) g_battle.TouchDown(touches);
