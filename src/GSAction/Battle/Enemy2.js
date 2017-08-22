@@ -1,3 +1,5 @@
+// Basic enemy, move to middle, shoot 3x3 shot, then fly away to bottom
+
 function Enemy2 (battle, layer) {
 	var MAX_SPEED = 200;
 	var ACCELERATION = 100;
@@ -147,7 +149,7 @@ function Enemy2 (battle, layer) {
 									this.m_targetX = CANVAS_W + this.m_size * 2;
 								}
 								
-								this.m_targetY = 0;
+								this.m_targetY = Math.random() * CANVAS_H * 0.5;
 							}
 						}
 					}

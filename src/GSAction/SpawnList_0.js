@@ -2,7 +2,7 @@ var g_spawnFunction = [];
 for (var i=0; i<DIFFICULTY_NUMBER; i++) {
 	g_spawnFunction[i] = new Array();
 }
-/*
+
 g_spawnFunction[0].push(function (battle, layer) {
 	var SPAWN_DISTANCE = 300;
 	var SPAWN_NUMBER = 10;
@@ -73,7 +73,7 @@ g_spawnFunction[0].push(function (battle, layer) {
 		tempEnemy.Start (angle, x, y, targetX, targetY);
 	}
 });
-*/
+
 g_spawnFunction[0].push(function (battle, layer) {
 	var SPAWN_NUMBER = 4;
 	var ENEMY_SIZE = 70;
@@ -85,8 +85,21 @@ g_spawnFunction[0].push(function (battle, layer) {
 		var angle = 180;
 		var tempEnemy = new Enemy2(battle, layer);
 		var x = Math.random() * (CANVAS_W - ENEMY_SIZE) + ENEMY_SIZE * 0.5;
-		var y = CANVAS_H + (Math.random() * 3 + 1) * ENEMY_SIZE;
+		var y = CANVAS_H;
 		
 		tempEnemy.Start (angle, x, y, targetX, targetY);
+	}
+});
+
+g_spawnFunction[0].push(function (battle, layer) {
+	var SPAWN_NUMBER = 2;
+	var ENEMY_SIZE = 70;
+	
+	for (var i=0; i<SPAWN_NUMBER; i++) {
+		var tempEnemy = new Enemy3(battle, layer);
+		tempEnemy.Start(135, ENEMY_SIZE * 0.5, CANVAS_H + i * ENEMY_SIZE * 2 + ENEMY_SIZE);
+		tempEnemy = new Enemy3(battle, layer);
+		tempEnemy.Start(225, CANVAS_W - ENEMY_SIZE * 0.5, CANVAS_H + i * ENEMY_SIZE * 2);
+		
 	}
 });

@@ -47,6 +47,8 @@ function Explosion (battle, layer) {
 			if (this.m_alpha > 1) {
 				this.m_alpha = 1;
 			}
+			
+			this.m_y -= FORWARD_SPEED * deltaTime;
 		}
 	}
 	

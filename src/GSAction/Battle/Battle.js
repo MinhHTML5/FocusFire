@@ -1,4 +1,5 @@
 var DIFFICULTY_NUMBER = 5;
+var FORWARD_SPEED = 50;
 
 
 function Battle(layer) {
