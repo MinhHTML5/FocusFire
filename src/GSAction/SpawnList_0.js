@@ -2,7 +2,7 @@ var g_spawnFunction = [];
 for (var i=0; i<DIFFICULTY_NUMBER; i++) {
 	g_spawnFunction[i] = new Array();
 }
-
+/*
 g_spawnFunction[0].push(function (battle, layer) {
 	var SPAWN_DISTANCE = 300;
 	var SPAWN_NUMBER = 10;
@@ -73,7 +73,7 @@ g_spawnFunction[0].push(function (battle, layer) {
 		tempEnemy.Start (angle, x, y, targetX, targetY);
 	}
 });
-
+*/
 g_spawnFunction[0].push(function (battle, layer) {
 	var SPAWN_NUMBER = 4;
 	var ENEMY_SIZE = 70;

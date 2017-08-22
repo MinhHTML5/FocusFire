@@ -90,13 +90,13 @@ function Player (battle, layer) {
 					if (distance > PLAYER_SNAP_DISTANCE) {
 						var targetSpeed = distance * PLAYER_SPEED_MULTIPLIER;
 						var acceleration = PLAYER_ACCELERATION * deltaTime;
-						if (this.m_speed < targetSpeed + acceleration) {
+						if (this.m_speed < targetSpeed - acceleration) {
 							this.m_speed += acceleration;
 							if (this.m_speed > PLAYER_MAX_SPEED) {
 								this.m_speed = PLAYER_MAX_SPEED;
 							}
 						}
-						else if (this.m_speed > targetSpeed - acceleration) {
+						else if (this.m_speed > targetSpeed + acceleration) {
 							this.m_speed -= acceleration;
 							if (this.m_speed < 0) {
 								this.m_speed = 0;

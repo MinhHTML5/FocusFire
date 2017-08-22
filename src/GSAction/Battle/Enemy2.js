@@ -1,7 +1,10 @@
 function Enemy2 (battle, layer) {
+	var MAX_SPEED = 200;
+	var ACCELERATION = 100;
+	
 	this.m_size = 50;
-	this.m_moveSpeed = 200;
-	this.m_rotateSpeed = 75;
+	this.m_moveSpeed = MAX_SPEED;
+	this.m_rotateSpeed = 50;
 	this.m_HP = 30;
 	
 	this.m_explosionNumber = 3;
@@ -25,6 +28,7 @@ function Enemy2 (battle, layer) {
 	
 	var stage = 0;
 	var cooldownCount = 0;
+	var shotCount = 0;
 	var dyingSequenceCount = 0;
 	var explosionCount = 0;
 	
@@ -46,7 +50,7 @@ function Enemy2 (battle, layer) {
 	this.Update = function (deltaTime) {
 		if (this.m_active) {
 			if (this.m_HP > 0) {
-				if (stage == 0) {
+				if (stage == 0 || stage == 2) {
 					var targetAngle = AngleBetweenTwoPoint(this.m_x, this.m_y, this.m_targetX, this.m_targetY);
 					var rotateSpeedThisLoop = this.m_rotateSpeed * deltaTime;
 					if (Math.abs(targetAngle - this.m_angle) <= 180) {
@@ -69,20 +73,35 @@ function Enemy2 (battle, layer) {
 					if (this.m_angle < 0) this.m_angle += 360;
 					
 					var distanceToTarget = DistanceBetweenTwoPoint(this.m_x, this.m_y, this.m_targetX, this.m_targetY);
-					var moveSpeed = distanceToTarget;
-					if (moveSpeed > this.m_moveSpeed) {
-						moveSpeed = this.m_moveSpeed;
+					var targetSpeed = distanceToTarget * 3;
+					if (targetSpeed > MAX_SPEED) {
+						targetSpeed = MAX_SPEED;
 					}
 					
-					this.m_x += moveSpeed * deltaTime * Math.sin(this.m_angle * DEG_TO_RAD);
-					this.m_y += moveSpeed * deltaTime * Math.cos(this.m_angle * DEG_TO_RAD);
+					var accelerate = ACCELERATION * deltaTime;
+					if (this.m_moveSpeed < targetSpeed - accelerate) {
+						this.m_moveSpeed += accelerate;
+					}
+					else if (this.m_moveSpeed > targetSpeed + accelerate) {
+						this.m_moveSpeed -= accelerate;
+					}
+					else {
+						this.m_moveSpeed = targetSpeed;
+					}
+					
+					this.m_x += this.m_moveSpeed * deltaTime * Math.sin(this.m_angle * DEG_TO_RAD);
+					this.m_y += this.m_moveSpeed * deltaTime * Math.cos(this.m_angle * DEG_TO_RAD);
 					
 					if (distanceToTarget < this.m_size) {
-						this.m_moveSpeed = moveSpeed;
-						stage = 1;
+						if (stage == 0) {
+							stage = 1;
+						}
+						else {
+							this.Destroy();
+						}
 					}
 				}
-				else {
+				else if (stage == 1) {
 					var targetAngle = 180;
 					var rotateSpeedThisLoop = this.m_rotateSpeed * deltaTime;
 					if (Math.abs(targetAngle - this.m_angle) <= 180) {
@@ -104,14 +123,32 @@ function Enemy2 (battle, layer) {
 					if (this.m_angle > 360) this.m_angle -= 360;
 					if (this.m_angle < 0) this.m_angle += 360;
 					
-					if (this.m_angle != 180) {
-						this.m_x += this.m_moveSpeed * deltaTime * Math.sin(this.m_angle * DEG_TO_RAD);
-						this.m_y += this.m_moveSpeed * deltaTime * Math.cos(this.m_angle * DEG_TO_RAD);
+					var accelerate = ACCELERATION * deltaTime;
+					this.m_moveSpeed -= accelerate;
+					if (this.m_moveSpeed < 0) {
+						this.m_moveSpeed = 0;
 					}
-					else {
+					this.m_x += this.m_moveSpeed * deltaTime * Math.sin(this.m_angle * DEG_TO_RAD);
+					this.m_y += this.m_moveSpeed * deltaTime * Math.cos(this.m_angle * DEG_TO_RAD);
+					
+					if (this.m_angle == 180) {
 						if (cooldownCount <= 0) {
 							cooldownCount += this.m_coolDown;
 							this.Shoot();
+							
+							shotCount ++;
+							if (shotCount == 3) {
+								stage = 2;
+								
+								if (this.m_x < CANVAS_W * 0.5) {
+									this.m_targetX = -this.m_size * 2;
+								}
+								else {
+									this.m_targetX = CANVAS_W + this.m_size * 2;
+								}
+								
+								this.m_targetY = 0;
+							}
 						}
 					}
 				}
