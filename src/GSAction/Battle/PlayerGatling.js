@@ -59,7 +59,7 @@ function PlayerGatling (battle, layer) {
 				length = PLAYER_GATLING_H;
 			}
 			
-			if (this.m_x < PLAYER_GATLING_W * 0.5 || this.m_x > CANVAS_W - PLAYER_GATLING_W * 0.5
+			if (this.m_x < - PLAYER_GATLING_W|| this.m_x > CANVAS_W + PLAYER_GATLING_W
 			||  this.m_y < 0 || this.m_y > CANVAS_H + PLAYER_GATLING_H) {
 				this.Destroy();
 				return;
@@ -70,7 +70,8 @@ function PlayerGatling (battle, layer) {
 					var distance = DistanceBetweenTwoPoint(this.m_x, this.m_y, battle.m_enemies[i].m_x, battle.m_enemies[i].m_y);
 					if (distance < battle.m_enemies[i].m_size) {
 						battle.m_enemies[i].Hit (PLAYER_GATLING_DAMAGE);
-						battle.SpawnExplosion(this.m_x, this.m_y, 0.3, 0.2, 0);
+						battle.SpawnExplosion(this.m_x, this.m_y, 0.2, 0.3, 0);
+						battle.SpawnExplosion(this.m_x, this.m_y, 0.2, 0.3, 0, battle.m_enemies[i].m_color);
 						this.Destroy();
 						return;
 					}

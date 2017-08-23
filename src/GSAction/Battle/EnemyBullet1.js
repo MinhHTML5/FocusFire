@@ -1,4 +1,4 @@
-function EnemyBullet1 (battle, layer) {
+function EnemyBullet1 (battle, layer, color) {
 	this.m_size = 40;
 	this.m_speed = 400;
 	this.m_damage = 5;
@@ -8,11 +8,13 @@ function EnemyBullet1 (battle, layer) {
 	this.m_y = 0;
 	this.m_angle = 0;
 	this.m_alpha = 255;
+	this.m_color = color;
 	
 	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/EnemyBullet1.png");
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_sprite.setLocalZOrder (LAYER_BULLET);
 	this.m_sprite.setBlendFunc (new cc.BlendFunc(gl.SRC_ALPHA, gl.ONE));
+	this.m_sprite.setColor (this.m_color);
 	layer.addChild(this.m_sprite);
 	
 	var length = 0;
@@ -46,7 +48,7 @@ function EnemyBullet1 (battle, layer) {
 			var distance = DistanceBetweenTwoPoint(this.m_x, this.m_y, battle.m_player.m_x, battle.m_player.m_y);
 			if (battle.m_player.m_active && distance < battle.m_player.m_size) {
 				battle.m_player.Hit (this.m_damage);
-				battle.SpawnExplosion(this.m_x, this.m_y, 0.4, 0.3, 0);
+				battle.SpawnExplosion(this.m_x, this.m_y, 0.4, 0.3, 0, this.m_color);
 				this.Destroy();
 				return;
 			}

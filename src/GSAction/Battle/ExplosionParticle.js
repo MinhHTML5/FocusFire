@@ -1,14 +1,17 @@
-function ExplosionParticle (battle, layer) {
+function ExplosionParticle (battle, layer, color) {
 	this.m_active = false;
 	this.m_x = 0;
 	this.m_y = 0;
 	this.m_life = 0;
 	this.m_scaleY = 1;
+	this.m_color = color;
+
 	
 	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/ExplosionParticle.png");
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_sprite.setLocalZOrder (LAYER_BATTLE);
 	this.m_sprite.setBlendFunc (new cc.BlendFunc(gl.SRC_ALPHA, gl.ONE));
+	this.m_sprite.setColor (this.m_color);
 	layer.addChild(this.m_sprite);
 	
 	this.Start = function (x, y, life, speed) {

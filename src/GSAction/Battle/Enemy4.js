@@ -1,23 +1,23 @@
-// Basic turret, just shoot in one direction
+// A bit big enemy, travel from left to right or vice versa, shoot at one direction
 
-function Enemy3 (battle, layer) {
-	this.m_size = 50;
-	this.m_moveSpeed = 50;
-	this.m_HP = 50;
-	this.m_score = 2;
+function Enemy4 (battle, layer) {
+	this.m_size = 60;
+	this.m_moveSpeed = 100;
+	this.m_HP = 60;
+	this.m_score = 3;
 	this.m_color = GetRandomEnemyColor();
 	
-	this.m_explosionNumber = 3;
-	this.m_explosionLatency = 0.07;
+	this.m_explosionNumber = 5;
+	this.m_explosionLatency = 0.09;
 	
-	this.m_coolDown = 2;
+	this.m_coolDown = 1;
 	
 	this.m_active = false;
 	this.m_x = 0;
 	this.m_y = 0;
 	this.m_angle = 0;
 	
-	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/Enemy3.png");
+	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/Enemy4.png");
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_sprite.setLocalZOrder (LAYER_ENEMY);
 	this.m_sprite.setBlendFunc (new cc.BlendFunc(gl.SRC_ALPHA, gl.ONE));
@@ -44,7 +44,8 @@ function Enemy3 (battle, layer) {
 	this.Update = function (deltaTime) {
 		if (this.m_active) {
 			if (this.m_HP > 0) {
-				this.m_y -= this.m_moveSpeed * deltaTime;
+				this.m_x += this.m_moveSpeed * deltaTime * Math.sin(this.m_angle * DEG_TO_RAD);
+				this.m_y += this.m_moveSpeed * deltaTime * Math.cos(this.m_angle * DEG_TO_RAD);
 				
 				if (cooldownCount > 0) {
 					cooldownCount -= deltaTime;
@@ -61,7 +62,10 @@ function Enemy3 (battle, layer) {
 					return;
 				}
 				
-				if (this.m_y < -this.m_size * 2) {
+				if (this.m_x < -this.m_size * 3) {
+					this.Destroy();
+				}
+				else if (this.m_x > CANVAS_W + this.m_size * 3) {
 					this.Destroy();
 				}
 			}
@@ -69,7 +73,7 @@ function Enemy3 (battle, layer) {
 				dyingSequenceCount += deltaTime;
 				if (dyingSequenceCount >= this.m_explosionLatency) {
 					dyingSequenceCount -= this.m_explosionLatency;
-					battle.SpawnExplosion(this.m_x, this.m_y, 0.7, 0.5, this.m_size, this.m_color);
+					battle.SpawnExplosion(this.m_x, this.m_y, 0.9, 0.7, this.m_size, this.m_color);
 					
 					explosionCount ++;
 					if (explosionCount >= this.m_explosionNumber) {
@@ -90,14 +94,14 @@ function Enemy3 (battle, layer) {
 	this.Shoot = function () {
 		var tempBullet;
 		tempBullet = new EnemyBullet1 (battle, layer, this.m_color);
-		tempBullet.Start (this.m_angle, this.m_x, this.m_y);
+		tempBullet.Start (180, this.m_x, this.m_y);
 	}
 	
 	
 	this.Hit = function (damage) {
 		this.m_HP -= damage;
 		if (this.m_HP <= 0) {
-			battle.SpawnExplosion(this.m_x, this.m_y, 0.7, 0.5, 0, this.m_color);
+			battle.SpawnExplosion(this.m_x, this.m_y, 0.9, 0.7, 0, this.m_color);
 			this.m_sprite.setVisible(false);
 			g_battle.AddScore(this.m_score);
 		}

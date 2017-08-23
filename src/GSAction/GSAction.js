@@ -1,5 +1,6 @@
 var g_background;
 var g_battle;
+var g_bottomBar;
 
 var g_gsActionBackgroundLayer = cc.Layer.create();
 	g_gsActionBackgroundLayer.retain();
@@ -59,6 +60,8 @@ g_gsActionUILayer.AddEventListener = function () {
 				}
 				g_gsActionBattleLayer.removeAllChildren();
 				g_battle = new Battle (g_gsActionBattleLayer);
+				g_bottomBar.Show();
+				g_bottomBar.SetValue(1);
 			}
 			if (g_battle) g_battle.TouchDown(touches);
 			return true;
@@ -81,11 +84,6 @@ g_gsActionUILayer.AddEventListener = function () {
 	}, this);
 }
 
-g_gsActionUILayer.Reset = function() {
-
-}
-
-
 g_gsActionUILayer.update = function (deltaTime) {
 	if (g_menuShowing == true) {
 		g_menuAlpha += deltaTime * 3;
@@ -103,10 +101,13 @@ g_gsActionUILayer.update = function (deltaTime) {
 	
 	
 	if (g_background) g_background.Update (deltaTime);
+	if (g_bottomBar) g_bottomBar.Update (deltaTime);
 	if (g_battle) {
 		g_battle.Update (deltaTime);
 		if (g_battle.m_gameEnded) {
 			g_menuShowing = true;
+			g_bottomBar.Hide();
+			this.m_score.setString("Score: " + g_battle.m_score);
 		}
 	}
 	
@@ -126,10 +127,10 @@ var GSAction = cc.Scene.extend({
 		this.eventListenerAdded = false;
 		
 		g_background = new Background (g_gsActionBackgroundLayer);
+		g_bottomBar = new BottomBar (g_gsActionUILayer)
 	},
     onEnter:function () {
 		this._super();
-		g_gsActionUILayer.Reset();
 		g_gsActionUILayer.scheduleUpdate();
 		
 		if (this.eventListenerAdded == false || !cc.sys.isNative) {

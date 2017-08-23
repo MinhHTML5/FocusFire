@@ -3,6 +3,8 @@ function Enemy1 (battle, layer) {
 	this.m_moveSpeed = 200;
 	this.m_rotateSpeed = 100;
 	this.m_HP = 10;
+	this.m_score = 1;
+	this.m_color = GetRandomEnemyColor();
 	
 	this.m_explosionNumber = 3;
 	this.m_explosionLatency = 0.07;
@@ -12,8 +14,6 @@ function Enemy1 (battle, layer) {
 	this.m_y = 0;
 	this.m_angle = 0;
 	
-	
-	
 	this.m_targetCount = 0;
 	this.m_targetX = [];
 	this.m_targetY = [];
@@ -22,6 +22,7 @@ function Enemy1 (battle, layer) {
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_sprite.setLocalZOrder (LAYER_ENEMY);
 	this.m_sprite.setBlendFunc (new cc.BlendFunc(gl.SRC_ALPHA, gl.ONE));
+	this.m_sprite.setColor (this.m_color);
 	layer.addChild(this.m_sprite);
 	
 	var dyingSequenceCount = 0;
@@ -90,7 +91,7 @@ function Enemy1 (battle, layer) {
 				dyingSequenceCount += deltaTime;
 				if (dyingSequenceCount >= this.m_explosionLatency) {
 					dyingSequenceCount -= this.m_explosionLatency;
-					battle.SpawnExplosion(this.m_x, this.m_y, 0.7, 0.3, this.m_size);
+					battle.SpawnExplosion(this.m_x, this.m_y, 0.7, 0.5, this.m_size, this.m_color);
 					
 					explosionCount ++;
 					if (explosionCount >= this.m_explosionNumber) {
@@ -111,8 +112,9 @@ function Enemy1 (battle, layer) {
 	this.Hit = function (damage) {
 		this.m_HP -= damage;
 		if (this.m_HP <= 0) {
-			battle.SpawnExplosion(this.m_x, this.m_y, 0.7, 0.3, 0);
+			battle.SpawnExplosion(this.m_x, this.m_y, 0.7, 0.5, 0, this.m_color);
 			this.m_sprite.setVisible(false);
+			g_battle.AddScore(this.m_score);
 		}
 	}
 	

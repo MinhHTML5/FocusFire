@@ -14,7 +14,8 @@ function SpritePool() {
 				tempSprite.setBlendFunc (new cc.BlendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA));
 				tempSprite.setOpacity (255);
 				tempSprite.setRotation (0);
-				tempSprite.setVisible(true);
+				tempSprite.setVisible (true);
+				tempSprite.setColor (cc.color(255, 255, 255));
 				
 				spritePool.splice (i, 1);
 				break;

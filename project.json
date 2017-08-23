@@ -26,6 +26,7 @@
 		"src/GSAction/Battle/Enemy1.js",
 		"src/GSAction/Battle/Enemy2.js",
 		"src/GSAction/Battle/Enemy3.js",
+		"src/GSAction/Battle/Enemy4.js",
 		
 		"src/GSAction/Battle/EnemyBullet1.js",
 		
@@ -33,6 +34,7 @@
 	
 		"src/GSLoader/GSLoader.js",
 		"src/GSAction/GSAction.js",
+		"src/GSAction/BottomBar.js",
 		"src/GSAction/Difficulty.js",
 		"src/GSAction/SpawnList_0.js",
 		

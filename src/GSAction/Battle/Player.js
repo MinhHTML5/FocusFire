@@ -4,7 +4,7 @@ var PLAYER_MAX_SPEED = 3000;
 var PLAYER_MAX_EMP_SPEED = 1000;
 var PLAYER_SPEED_MULTIPLIER = 7;
 var PLAYER_ACCELERATION = 20000;
-var PLAYER_SNAP_DISTANCE = 10;
+var PLAYER_SNAP_DISTANCE = 1;
 var PLAYER_DISTANCE_FROM_FINGER = 100;
 var PLAYER_GATLING_COOLDOWN = 0.008;
 
@@ -170,6 +170,7 @@ function Player (battle, layer) {
 	
 	this.Hit = function (damage) {
 		this.m_HP -= damage;
+		g_bottomBar.SetValue (this.m_HP / PLAYER_MAX_HP);
 	}
 	
 	

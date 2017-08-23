@@ -19,6 +19,15 @@ function Battle(layer) {
 		spawnCounter[i] = 0;
 	}
 	
+	this.AddScore = function (score) {
+		this.m_score += score;
+		g_bottomBar.SetScore(this.m_score);
+		
+		if (this.m_level < g_difficulty.length - 1 && this.m_score > g_difficulty[this.m_level+1].m_score) {
+			this.m_level ++;
+		}
+	}
+	
 	this.Update = function(deltaTime) {
 		if (this.m_player.m_active) {
 			this.m_player.Update (deltaTime);
@@ -78,10 +87,13 @@ function Battle(layer) {
 		}
 	}
 	
-	this.SpawnExplosion = function(x, y, scale, time, randomize) {
+	this.SpawnExplosion = function(x, y, scale, time, randomize, color) {
+		if (color == null) {
+			color = cc.color(255, 255, 255);
+		}
 		x += Math.random() * 2 * randomize - randomize;
 		y += Math.random() * 2 * randomize - randomize;
-		var explosion = new Explosion(this, layer);
+		var explosion = new Explosion(this, layer, color);
 		explosion.Start(x, y, scale, time);
 	}
 	
@@ -124,4 +136,63 @@ function Battle(layer) {
 	this.TouchUp = function (touches) {
 		this.m_player.Touch (false, 0, 0);
 	}
+}
+
+
+
+
+function GetRandomEnemyColor() {
+	return GetRGBColorFromHSV (Math.random() * 360, 1, 1);
+}
+function GetRGBColorFromHSV(h, s, v) {
+	var i;
+	var f, p, q, t;
+	var r, g, b;
+	if (s == 0) {
+		r = v;
+		b = v;
+		g = v;
+	}
+	else {
+		h = h / 60;
+		i = Math.floor(h);
+		f = h - i;
+		p = v * ( 1 - s );
+		q = v * ( 1 - s * f );
+		t = v * ( 1 - s * ( 1 - f ) );
+		
+		switch( i ) {
+			case 0:
+				r = v;
+				g = t;
+				b = p;
+				break;
+			case 1:
+				r = q;
+				g = v;
+				b = p;
+				break;
+			case 2:
+				r = p;
+				g = v;
+				b = t;
+				break;
+			case 3:
+				r = p;
+				g = q;
+				b = v;
+				break;
+			case 4:
+				r = t;
+				g = p;
+				b = v;
+				break;
+			default:
+				r = v;
+				g = p;
+				b = q;
+				break;
+		}
+	}
+	return cc.color(r * 255, g * 255, b * 255);
 }

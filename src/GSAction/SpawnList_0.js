@@ -103,3 +103,22 @@ g_spawnFunction[0].push(function (battle, layer) {
 		
 	}
 });
+
+g_spawnFunction[0].push(function (battle, layer) {
+	var ENEMY_SIZE = 100;
+	var x = 0;
+	var y = Math.random() * CANVAS_H * 0.25 + CANVAS_H * 0.75;
+	var angle = 0;
+	
+	var side = Math.random();
+	if (side > 0.5) {
+		x = CANVAS_W + ENEMY_SIZE;
+		angle = 250 - Math.random() * 25;
+	}
+	else {
+		x = -ENEMY_SIZE;
+		angle = 110 + Math.random() * 25;
+	}
+	var tempEnemy = new Enemy4(battle, layer);
+	tempEnemy.Start(angle, x, y);
+});
