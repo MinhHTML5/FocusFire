@@ -70,8 +70,8 @@ function PlayerGatling (battle, layer) {
 					var distance = DistanceBetweenTwoPoint(this.m_x, this.m_y, battle.m_enemies[i].m_x, battle.m_enemies[i].m_y);
 					if (distance < battle.m_enemies[i].m_size) {
 						battle.m_enemies[i].Hit (PLAYER_GATLING_DAMAGE);
-						battle.SpawnExplosion(this.m_x, this.m_y, 0.2, 0.3, 0);
-						battle.SpawnExplosion(this.m_x, this.m_y, 0.2, 0.3, 0, battle.m_enemies[i].m_color);
+						battle.SpawnExplosion(this.m_x, this.m_y, 0.4, 0.3, 0);
+						battle.SpawnExplosion(this.m_x, this.m_y, 0.4, 0.3, 0, battle.m_enemies[i].m_color);
 						this.Destroy();
 						return;
 					}

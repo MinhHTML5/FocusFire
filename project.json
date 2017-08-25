@@ -28,6 +28,7 @@
 		"src/GSAction/Battle/Enemy3.js",
 		"src/GSAction/Battle/Enemy4.js",
 		"src/GSAction/Battle/Enemy5.js",
+		"src/GSAction/Battle/Enemy6.js",
 		
 		"src/GSAction/Battle/EnemyBullet1.js",
 		"src/GSAction/Battle/EnemyBullet2.js",
