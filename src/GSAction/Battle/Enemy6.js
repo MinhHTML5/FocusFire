@@ -1,4 +1,4 @@
-// A bit big enemy, travel from left to right or vice versa, shoot at one direction
+// Light enemy, joking around, shoot 3 bullets at the player
 
 function Enemy6 (battle, layer) {
 	var MAX_SPEED = 400;
@@ -9,7 +9,7 @@ function Enemy6 (battle, layer) {
 	this.m_rotateSpeed = 200;
 	this.m_aimSpeed = 50;
 	this.m_HP = 40;
-	this.m_score = 5;
+	this.m_score = 6;
 	this.m_color = GetRandomEnemyColor();
 	
 	this.m_explosionNumber = 5;

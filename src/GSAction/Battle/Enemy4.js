@@ -1,4 +1,4 @@
-// A bit big enemy, travel from left to right or vice versa, shoot at one direction
+// A fairly big enemy, travel from left to right or vice versa, shoot at one direction
 
 function Enemy4 (battle, layer) {
 	this.m_size = 60;
@@ -94,7 +94,11 @@ function Enemy4 (battle, layer) {
 	this.Shoot = function () {
 		var tempBullet;
 		tempBullet = new EnemyBullet1 (battle, layer, this.m_color);
-		tempBullet.Start (180, this.m_x, this.m_y);
+		tempBullet.Start (this.m_angle - 20, this.m_x, this.m_y);
+		tempBullet = new EnemyBullet1 (battle, layer, this.m_color);
+		tempBullet.Start (this.m_angle, this.m_x, this.m_y);
+		tempBullet = new EnemyBullet1 (battle, layer, this.m_color);
+		tempBullet.Start (this.m_angle + 20, this.m_x, this.m_y);
 	}
 	
 	

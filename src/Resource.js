@@ -39,6 +39,7 @@ g_imageList.push ("res/GSAction/Battle/Enemy3.png");
 g_imageList.push ("res/GSAction/Battle/Enemy4.png");
 g_imageList.push ("res/GSAction/Battle/Enemy5.png");
 g_imageList.push ("res/GSAction/Battle/Enemy6.png");
+g_imageList.push ("res/GSAction/Battle/Enemy7.png");
 
 g_imageList.push ("res/GSAction/Battle/EnemyBullet1.png");
 g_imageList.push ("res/GSAction/Battle/EnemyBullet2.png");
