@@ -2,7 +2,7 @@
 
 function Enemy3 (battle, layer) {
 	this.m_size = 50;
-	this.m_moveSpeed = 50;
+	this.m_moveSpeed = FORWARD_SPEED;
 	this.m_HP = 50;
 	this.m_score = 2;
 	this.m_color = GetRandomEnemyColor();
@@ -54,12 +54,15 @@ function Enemy3 (battle, layer) {
 					this.Shoot();
 				}
 				
+				// Do not collide with turret
+				/*
 				var distance = DistanceBetweenTwoPoint(this.m_x, this.m_y, battle.m_player.m_x, battle.m_player.m_y);
 				if (battle.m_player.m_active && distance < (battle.m_player.m_size + this.m_size) * 0.5) {
 					battle.m_player.Hit (this.m_HP);
 					this.Hit(this.m_HP);
 					return;
 				}
+				*/
 				
 				if (this.m_y < -this.m_size * 2) {
 					this.Destroy();

@@ -51,6 +51,7 @@ g_spawnFunction[0].push(function (battle, layer) {
 	}
 });
 
+
 g_spawnFunction[0].push(function (battle, layer) {
 	var SPAWN_NUMBER = 10;
 	var ENEMY_SIZE = 60;
@@ -74,6 +75,7 @@ g_spawnFunction[0].push(function (battle, layer) {
 	}
 });
 
+
 g_spawnFunction[0].push(function (battle, layer) {
 	var SPAWN_NUMBER = 4;
 	var ENEMY_SIZE = 70;
@@ -91,6 +93,7 @@ g_spawnFunction[0].push(function (battle, layer) {
 	}
 });
 
+
 g_spawnFunction[0].push(function (battle, layer) {
 	var SPAWN_NUMBER = 2;
 	var ENEMY_SIZE = 70;
@@ -103,6 +106,7 @@ g_spawnFunction[0].push(function (battle, layer) {
 		
 	}
 });
+
 
 g_spawnFunction[0].push(function (battle, layer) {
 	var ENEMY_SIZE = 100;

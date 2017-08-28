@@ -45,6 +45,8 @@ function ExplosionParticle (battle, layer, color) {
 			if (this.m_alpha > 1) {
 				this.m_alpha = 1;
 			}
+			
+			this.m_y -= FORWARD_SPEED * deltaTime;
 		}
 	}
 	this.UpdateVisual = function() {

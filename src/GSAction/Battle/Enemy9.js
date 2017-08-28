@@ -1,15 +1,12 @@
-// Tough enemy, fly straight down, shoot like crazy
+// Homing enemy, try to ram the player
 
-function Enemy7 (battle, layer) {
-	this.m_size = 90;
-	this.m_moveSpeed = 150;
+function Enemy9 (battle, layer) {
+	this.m_size = 40;
+	this.m_moveSpeed = FORWARD_SPEED;
+	this.m_aimSpeed = 50;
 	this.m_HP = 100;
 	this.m_score = 10;
 	this.m_color = GetRandomEnemyColor();
-	
-	this.m_coolDown = 4;
-	this.m_fireDelay = 0.3;
-	this.m_numberOfShot = 5;
 	
 	this.m_explosionNumber = 5;
 	this.m_explosionLatency = 0.15;
@@ -19,8 +16,11 @@ function Enemy7 (battle, layer) {
 	this.m_y = 0;
 	this.m_angle = 0;
 	
+	this.m_coolDown = 3;
+	this.m_fireDelay = 0.2;
+	this.m_numberOfShot = 4;
 	
-	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/Enemy7.png");
+	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/Enemy9.png");
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_sprite.setLocalZOrder (LAYER_ENEMY);
 	this.m_sprite.setBlendFunc (new cc.BlendFunc(gl.SRC_ALPHA, gl.ONE));
@@ -52,15 +52,37 @@ function Enemy7 (battle, layer) {
 			if (this.m_HP > 0) {
 				this.m_y -= this.m_moveSpeed * deltaTime;
 				
+				var aimAngle = AngleBetweenTwoPoint(this.m_x, this.m_y, battle.m_player.m_x, battle.m_player.m_y);
+				var aimThisLoop = this.m_aimSpeed * deltaTime;
+				if (Math.abs(aimAngle - this.m_angle) <= 180) {
+					if (aimAngle > this.m_angle + aimThisLoop) {
+						this.m_angle += aimThisLoop;
+					}
+					else if (aimAngle < this.m_angle - aimThisLoop) {
+						this.m_angle -= aimThisLoop;
+					}
+					else {
+						this.m_angle = aimAngle;
+						
+						if (cooldownCount <= 0) {
+							cooldownCount += this.m_coolDown;
+							this.m_firing = true;
+							shotFiredNumber = 0;
+							this.Shoot();
+						}
+					}
+				}
+				else {
+					if (aimAngle > this.m_angle) this.m_angle -= aimThisLoop;
+					else if (aimAngle < this.m_angle) this.m_angle += aimThisLoop;
+				}
+				
+				if (this.m_angle > 360) this.m_angle -= 360;
+				if (this.m_angle < 0) this.m_angle += 360;
+				
 				if (cooldownCount > 0) {
 					cooldownCount -= deltaTime;
 				}
-				else {
-					cooldownCount += this.m_coolDown;
-					this.m_firing = true;
-					shotFiredNumber = 0;
-				}
-				
 				if (this.m_firing == true) {
 					fireDelayCount += deltaTime;
 					if (fireDelayCount >= this.m_fireDelay) {
@@ -73,12 +95,15 @@ function Enemy7 (battle, layer) {
 					}
 				}
 				
+				// Do not collide with turret
+				/*
 				var distance = DistanceBetweenTwoPoint(this.m_x, this.m_y, battle.m_player.m_x, battle.m_player.m_y);
 				if (battle.m_player.m_active && distance < (battle.m_player.m_size + this.m_size) * 0.5) {
 					battle.m_player.Hit (this.m_HP);
 					this.Hit(this.m_HP);
 					return;
 				}
+				*/
 				
 				if (this.m_y < -this.m_size * 2) {
 					this.Destroy();
@@ -99,11 +124,17 @@ function Enemy7 (battle, layer) {
 		}
 	}
 	
-	
 	this.UpdateVisual = function() {
 		this.m_sprite.setRotation (this.m_angle);
 		this.m_sprite.setPosition (cc.p(this.m_x, this.m_y));
 	}
+	
+	this.Shoot = function () {
+		var tempBullet;
+		tempBullet = new EnemyBullet1 (battle, layer, this.m_color);
+		tempBullet.Start (this.m_angle, this.m_x, this.m_y);
+	}
+	
 	
 	this.Hit = function (damage) {
 		this.m_HP -= damage;
@@ -111,15 +142,6 @@ function Enemy7 (battle, layer) {
 			battle.SpawnExplosion(this.m_x, this.m_y, 1.3, 1, 0, this.m_color);
 			this.m_sprite.setVisible(false);
 			g_battle.AddScore(this.m_score);
-		}
-	}
-	
-	this.Shoot = function () {
-		var angle = Math.random() * 20;
-		for (var i=0; i<5; i++) {
-			var tempBullet;
-			tempBullet = new EnemyBullet1 (battle, layer, this.m_color);
-			tempBullet.Start (140 + angle + i * 15, this.m_x, this.m_y);
 		}
 	}
 	
