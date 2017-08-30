@@ -32,9 +32,11 @@
 		"src/GSAction/Battle/Enemy7.js",
 		"src/GSAction/Battle/Enemy8.js",
 		"src/GSAction/Battle/Enemy9.js",
+		"src/GSAction/Battle/Enemy10.js",
 		
 		"src/GSAction/Battle/EnemyBullet1.js",
 		"src/GSAction/Battle/EnemyBullet2.js",
+		"src/GSAction/Battle/EnemyBullet3.js",
 		
 		"src/GSAction/Battle/Battle.js",
 	
@@ -44,6 +46,7 @@
 		"src/GSAction/Difficulty.js",
 		"src/GSAction/SpawnList_0.js",
 		"src/GSAction/SpawnList_1.js",
+		"src/GSAction/SpawnList_2.js",
 		
 		"src/SpritePool.js",
 		"src/Resource.js"

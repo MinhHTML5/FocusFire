@@ -1,16 +1,18 @@
-function EnemyBullet2 (battle, layer, color) {
+function EnemyBullet3 (battle, layer, color) {
 	this.m_size = 40;
-	this.m_speed = 550;
-	this.m_damage = 5;
+	this.m_speed = 200;
+	this.m_damage = 9;
+	this.m_rotateSpeed = 100;
 	
 	this.m_active = false;
 	this.m_x = 0;
 	this.m_y = 0;
 	this.m_angle = 0;
+	this.m_rotation = 0;
 	this.m_alpha = 255;
 	this.m_color = color;
 	
-	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/EnemyBullet2.png");
+	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/EnemyBullet3.png");
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_sprite.setLocalZOrder (LAYER_BULLET);
 	this.m_sprite.setBlendFunc (new cc.BlendFunc(gl.SRC_ALPHA, gl.ONE));
@@ -45,10 +47,15 @@ function EnemyBullet2 (battle, layer, color) {
 				return;
 			}
 			
+			this.m_rotation += this.m_rotateSpeed * deltaTime;
+			if (this.m_rotation > 360) {
+				this.m_rotation -= 360;
+			}
+			
 			var distance = DistanceBetweenTwoPoint(this.m_x, this.m_y, battle.m_player.m_x, battle.m_player.m_y);
 			if (battle.m_player.m_active && distance < battle.m_player.m_size) {
 				battle.m_player.Hit (this.m_damage);
-				battle.SpawnExplosion(this.m_x, this.m_y, 0.4, 0.3, 0, this.m_color);
+				battle.SpawnExplosion(this.m_x, this.m_y, 0.4, 0.5, 0, this.m_color);
 				this.Destroy();
 				return;
 			}
@@ -57,7 +64,7 @@ function EnemyBullet2 (battle, layer, color) {
 	
 	
 	this.UpdateVisual = function() {
-		this.m_sprite.setRotation (this.m_angle);
+		this.m_sprite.setRotation (this.m_rotation);
 		this.m_sprite.setPosition (cc.p(this.m_x, this.m_y));
 	}
 	

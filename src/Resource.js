@@ -42,9 +42,11 @@ g_imageList.push ("res/GSAction/Battle/Enemy6.png");
 g_imageList.push ("res/GSAction/Battle/Enemy7.png");
 g_imageList.push ("res/GSAction/Battle/Enemy8.png");
 g_imageList.push ("res/GSAction/Battle/Enemy9.png");
+g_imageList.push ("res/GSAction/Battle/Enemy10.png");
 
 g_imageList.push ("res/GSAction/Battle/EnemyBullet1.png");
 g_imageList.push ("res/GSAction/Battle/EnemyBullet2.png");
+g_imageList.push ("res/GSAction/Battle/EnemyBullet3.png");
 
 g_imageList.push ("res/GSAction/UI/Logo.png");
 g_imageList.push ("res/GSAction/UI/HPBar.png");

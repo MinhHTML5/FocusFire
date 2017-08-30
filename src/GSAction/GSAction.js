@@ -10,8 +10,11 @@ var g_gsActionBattleLayer = cc.Layer.create();
 
 var g_gsActionUILayer = cc.Layer.create();
 	g_gsActionUILayer.retain();
-	
-var g_colorTheme = cc.color(40, 255, 120);
+
+
+var g_colorChangingSpeed = 30;
+var g_colorHue = 140;
+var g_colorTheme = GetRGBColorFromHSV(g_colorHue, 1, 1);
 
 
 var g_menuShowing = true;
@@ -113,6 +116,29 @@ g_gsActionUILayer.update = function (deltaTime) {
 	
 	if (g_background) g_background.UpdateVisual ();
 	if (g_battle) g_battle.UpdateVisual ();
+	
+	
+	var targetHue = 140;
+	if (g_battle) {
+		if (!g_battle.m_gameEnded) {
+			targetHue = (1 - (g_battle.m_score * 0.001)) * 140;
+			if (targetHue < 0) {
+				targetHue = 0;
+			}
+		}
+		
+	}
+	var hueChangingAmount = g_colorChangingSpeed * deltaTime;
+	if (g_colorHue < targetHue - hueChangingAmount) {
+		g_colorHue += hueChangingAmount;
+	}
+	else if (g_colorHue > targetHue + hueChangingAmount) {
+		g_colorHue -= hueChangingAmount;
+	}
+	else {
+		g_colorHue = targetHue;
+	}
+	g_colorTheme = GetRGBColorFromHSV(g_colorHue, 1, 1);
 }
 
 

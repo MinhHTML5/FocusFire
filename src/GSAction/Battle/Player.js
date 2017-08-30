@@ -12,6 +12,8 @@ var PLAYER_MOVEMENT_CHECK_TIMES = 10;
 var PLAYER_ENGINE_PARTICLE_EMIT_LATENCY = 0.002;
 
 
+
+
 function Player (battle, layer) {
 	this.m_active = true;
 	this.m_size = PLAYER_SIZE;
@@ -54,7 +56,13 @@ function Player (battle, layer) {
 		if (showStage == 0) {
 			this.m_touching = touching;
 			this.m_targetX = x;
-			this.m_targetY = y + PLAYER_DISTANCE_FROM_FINGER;
+			
+			if (cc.sys.isNative) {
+				this.m_targetY = y + PLAYER_DISTANCE_FROM_FINGER;
+			}
+			else {
+				this.m_targetY = y;
+			}
 		}
 	}
 	
@@ -72,7 +80,7 @@ function Player (battle, layer) {
 				}
 			}
 			else if (showStage == 1) {
-				var distance = this.m_y - PLAYER_DISTANCE_FROM_FINGER;
+				var distance = this.m_y - PLAYER_DISTANCE_FROM_FINGER * 2;
 				this.m_speed = distance * PLAYER_SPEED_MULTIPLIER;
 				if (this.m_speed > PLAYER_MAX_SPEED * 0.2) {
 					this.m_speed = PLAYER_MAX_SPEED * 0.2;
