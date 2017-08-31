@@ -29,6 +29,10 @@ function Battle(layer) {
 	}
 	
 	this.Update = function(deltaTime) {
+		if (deltaTime > 0.05) {
+			deltaTime = 0.05; // anti spike
+		}
+		
 		if (this.m_player.m_active) {
 			this.m_player.Update (deltaTime);
 		}

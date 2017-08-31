@@ -4,7 +4,7 @@ var BACKGROUND_OBJECT_CLOUD = 1;
 var BACKGROUND_OBJECT_MIN_SCALE = 0.5;
 var BACKGROUND_OBJECT_MAX_SCALE = 1;
 var BACKGROUND_OBJECT_MIN_ALPHA = 0.4;
-var BACKGROUND_OBJECT_MAX_ALPHA = 0.5;
+var BACKGROUND_OBJECT_MAX_ALPHA = 0.6;
 var BACKGROUND_OBJECT_MIN_SPEED = 10;
 var BACKGROUND_OBJECT_MAX_SPEED = 40;
 
@@ -26,14 +26,13 @@ function BGObject (layer, type) {
 		path = "res/GSAction/Background/Cloud.png";
 	}
 	
-	this.m_sprite = g_spritePool.GetSpriteFromPool(path);
+	this.m_sprite = g_spritePool.GetSpriteFromPool(path, layer);
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_sprite.setBlendFunc (new cc.BlendFunc(gl.SRC_ALPHA, gl.ONE));
 	this.m_sprite.setLocalZOrder (LAYER_BACKGROUND);
 	this.m_sprite.setPosition (cc.p(this.m_x, this.m_y));
 	this.m_sprite.setScale (this.m_scale);
 	this.m_sprite.setOpacity (this.m_alpha * 255);
-	layer.addChild(this.m_sprite);
 	
 	this.Respawn = function() {
 		this.m_x = Math.random() * CANVAS_W;

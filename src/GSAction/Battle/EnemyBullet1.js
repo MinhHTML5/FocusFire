@@ -10,12 +10,11 @@ function EnemyBullet1 (battle, layer, color) {
 	this.m_alpha = 255;
 	this.m_color = color;
 	
-	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/EnemyBullet1.png");
+	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/EnemyBullet1.png", layer);
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_sprite.setLocalZOrder (LAYER_BULLET);
 	this.m_sprite.setBlendFunc (new cc.BlendFunc(gl.SRC_ALPHA, gl.ONE));
 	this.m_sprite.setColor (this.m_color);
-	layer.addChild(this.m_sprite);
 	
 	var length = 0;
 	var isFirstLoop = false;
@@ -64,7 +63,6 @@ function EnemyBullet1 (battle, layer, color) {
 	
 	this.Destroy = function () {
 		this.m_active = false;
-		layer.removeChild (this.m_sprite);
 		g_spritePool.PutSpriteIntoPool (this.m_sprite);
 	}
 }

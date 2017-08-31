@@ -15,11 +15,10 @@ function PlayerGatling (battle, layer) {
 	this.m_angle = 0;
 	this.m_alpha = 255;
 	
-	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/PlayerGatling.png");
+	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/PlayerGatling.png", layer);
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 1));
 	this.m_sprite.setLocalZOrder (LAYER_BULLET);
 	this.m_sprite.setBlendFunc (new cc.BlendFunc(gl.SRC_ALPHA, gl.ONE));
-	layer.addChild(this.m_sprite);
 	
 	var length = 0;
 	var isFirstLoop = false;
@@ -85,13 +84,11 @@ function PlayerGatling (battle, layer) {
 		this.m_sprite.setRotation (this.m_angle);
 		this.m_sprite.setPosition (cc.p(this.m_x, this.m_y + PLAYER_GATLING_OFFSET));
 		this.m_sprite.setScaleY (length /PLAYER_GATLING_H);
-		//this.m_sprite.setContentSize (cc.size(PLAYER_GATLING_W, length));
 	}
 	
 	
 	this.Destroy = function () {
 		this.m_active = false;
-		layer.removeChild (this.m_sprite);
 		g_spritePool.PutSpriteIntoPool (this.m_sprite);
 	}
 }

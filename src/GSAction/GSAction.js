@@ -21,12 +21,11 @@ var g_menuShowing = true;
 var g_menuAlpha = 1;
 
 g_gsActionUILayer.Init = function () {
-	this.m_logoSprite = g_spritePool.GetSpriteFromPool("res/GSAction/UI/Logo.png");
+	this.m_logoSprite = g_spritePool.GetSpriteFromPool("res/GSAction/UI/Logo.png", this);
 	this.m_logoSprite.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_logoSprite.setLocalZOrder (LAYER_UI);
 	this.m_logoSprite.setPosition (CANVAS_W * 0.5, CANVAS_H * 0.9);
 	this.m_logoSprite.setScale (0.75)
-	this.addChild(this.m_logoSprite);
 	
 	this.m_highScore = new cc.LabelTTF("Highest: 0", GetFont("AirCruiser"), 45);
 	this.m_highScore.setAnchorPoint(cc.p(0.5, 0.5));
@@ -48,6 +47,14 @@ g_gsActionUILayer.Init = function () {
 	this.m_touch.setLocalZOrder (LAYER_UI);
 	this.m_touch.setColor (new cc.Color(230, 230, 230, 1));
 	this.addChild(this.m_touch);
+	
+	
+	this.m_debug = new cc.LabelTTF("Score: 0", GetFont("AirCruiser"), 30);
+	this.m_debug.setAnchorPoint(cc.p(1, 1));
+	this.m_debug.setPosition (cc.p(CANVAS_W - 10, CANVAS_H - 10));
+	this.m_debug.setLocalZOrder (LAYER_UI);
+	this.m_debug.setColor (new cc.Color(230, 230, 230, 1));
+	this.addChild(this.m_debug);
 }
 
 g_gsActionUILayer.AddEventListener = function () {
@@ -139,6 +146,9 @@ g_gsActionUILayer.update = function (deltaTime) {
 		g_colorHue = targetHue;
 	}
 	g_colorTheme = GetRGBColorFromHSV(g_colorHue, 1, 1);
+	
+	var fps = (1 / deltaTime) >> 0;
+	this.m_debug.setString("FPS: " + fps + " - Sprites: " + g_spritePool.m_spriteNumber);
 }
 
 

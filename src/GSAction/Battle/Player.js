@@ -31,17 +31,15 @@ function Player (battle, layer) {
 	this.m_explosionLatency = 0.15;
 	this.m_lastEplosionNumber = 5;
 	
-	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/Player.png");
+	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/Player.png", layer);
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_sprite.setLocalZOrder (LAYER_PLAYER);
 	this.m_sprite.setOpacity (170);
-	layer.addChild(this.m_sprite);
 	
-	this.m_spriteGlow = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/PlayerGlow.png");
+	this.m_spriteGlow = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/PlayerGlow.png", layer);
 	this.m_spriteGlow.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_spriteGlow.setBlendFunc (new cc.BlendFunc(gl.SRC_ALPHA, gl.ONE));
 	this.m_spriteGlow.setLocalZOrder (LAYER_PLAYER);
-	layer.addChild(this.m_spriteGlow);
 	
 	
 	var showStage = 2;
@@ -194,8 +192,6 @@ function Player (battle, layer) {
 	
 	this.Destroy = function () {
 		this.m_active = false;
-		layer.removeChild (this.m_sprite);
-		layer.removeChild (this.m_spriteGlow);
 		g_spritePool.PutSpriteIntoPool (this.m_sprite);
 		g_spritePool.PutSpriteIntoPool (this.m_spriteGlow);
 		

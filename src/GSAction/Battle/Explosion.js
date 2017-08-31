@@ -8,13 +8,13 @@ function Explosion (battle, layer, color) {
 	this.m_scale = 0;
 	this.m_color = color;
 	
-	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/Explosion.png");
+	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/Explosion.png", layer);
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_sprite.setLocalZOrder (LAYER_EXPLOSION);
 	this.m_sprite.setBlendFunc (new cc.BlendFunc(gl.SRC_ALPHA, gl.ONE));
 	this.m_sprite.setScale (0);
+	this.m_sprite.setOpacity (0);
 	this.m_sprite.setColor (this.m_color);
-	layer.addChild(this.m_sprite);
 	
 	this.Start = function (x, y, scale, life) {
 		this.m_active = true;
@@ -25,12 +25,11 @@ function Explosion (battle, layer, color) {
 		this.m_maxScale = scale;
 		this.m_maxLife = life;
 		
-		var emitNumber = scale * 10;
-		var speed = 50 + scale * 300;
+		var emitNumber = (scale * 5) >> 0;
+		var speed = 400 + scale * 200;
 		for (var i=0; i<emitNumber; i++) {
 			var tempParticle = new ExplosionParticle(battle, layer, this.m_color);
-			tempParticle.Start(x, y, life * 2, speed);
-			battle.m_particles.push (tempParticle);
+			tempParticle.Start(x, y, life * 1.3, speed);
 		}
 		
 		battle.m_particles.push (this);
@@ -64,7 +63,6 @@ function Explosion (battle, layer, color) {
 	
 	this.Destroy = function () {
 		this.m_active = false;
-		layer.removeChild (this.m_sprite);
 		g_spritePool.PutSpriteIntoPool (this.m_sprite);
 	}
 } 

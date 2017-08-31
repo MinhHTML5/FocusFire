@@ -7,23 +7,20 @@ function BottomBar (layer) {
 	this.m_value = 0;
 	this.m_alpha = 0;
 	
-	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/UI/HPBar.png");
+	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/UI/HPBar.png", layer);
 	this.m_sprite.setAnchorPoint(cc.p(0, 0));
 	this.m_sprite.setLocalZOrder (LAYER_UI);
-	layer.addChild(this.m_sprite);
 	
-	this.m_contentSprite = g_spritePool.GetSpriteFromPool("res/GSAction/UI/HPBarContent.png");
+	this.m_contentSprite = g_spritePool.GetSpriteFromPool("res/GSAction/UI/HPBarContent.png", layer);
 	this.m_contentSprite.setAnchorPoint(cc.p(0, 0));
 	this.m_contentSprite.setLocalZOrder (LAYER_UI);
 	this.m_contentSprite.setScale (0, 1);
-	layer.addChild(this.m_contentSprite);
 	
-	this.m_content2Sprite = g_spritePool.GetSpriteFromPool("res/GSAction/UI/HPBarContent.png");
+	this.m_content2Sprite = g_spritePool.GetSpriteFromPool("res/GSAction/UI/HPBarContent.png", layer);
 	this.m_content2Sprite.setAnchorPoint(cc.p(0, 0));
 	this.m_content2Sprite.setLocalZOrder (LAYER_UI);
 	this.m_content2Sprite.setScale (0, 1);
 	this.m_content2Sprite.setOpacity (127);
-	layer.addChild(this.m_content2Sprite);
 	
 	this.m_scoreLabel = new cc.LabelTTF("0", GetFont("AirCruiser"), 45);
 	this.m_scoreLabel.setAnchorPoint(cc.p(1, 0));

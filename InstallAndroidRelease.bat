@@ -1,1 +1,1 @@
-adb install -r publish/android/AIConflict-release-signed.apk
+adb install -r publish/android/FocusFire-release-signed.apk

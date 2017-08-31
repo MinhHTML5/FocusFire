@@ -13,11 +13,10 @@ function PlayerEngineParticle (battle, layer) {
 	this.m_y = 0;
 	this.m_life = 0;
 	
-	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/PlayerEngineParticle.png");
+	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/PlayerEngineParticle.png", layer);
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_sprite.setLocalZOrder (LAYER_PLAYER);
 	this.m_sprite.setBlendFunc (new cc.BlendFunc(gl.SRC_ALPHA, gl.ONE));
-	layer.addChild(this.m_sprite);
 	
 	this.Start = function (x, y) {
 		this.m_active = true;
@@ -51,7 +50,6 @@ function PlayerEngineParticle (battle, layer) {
 	}
 	this.Destroy = function () {
 		this.m_active = false;
-		layer.removeChild (this.m_sprite);
 		g_spritePool.PutSpriteIntoPool (this.m_sprite);
 	}
 }

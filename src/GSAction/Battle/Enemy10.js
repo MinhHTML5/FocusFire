@@ -24,13 +24,12 @@ function Enemy10 (battle, layer) {
 	this.m_targetX = [];
 	this.m_targetY = [];
 	
-	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/Enemy10.png");
+	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/Enemy10.png", layer);
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_sprite.setLocalZOrder (LAYER_ENEMY);
 	this.m_sprite.setBlendFunc (new cc.BlendFunc(gl.SRC_ALPHA, gl.ONE));
 	this.m_sprite.setColor (this.m_color);
 	this.m_sprite.setRotation (this.m_angle);
-	layer.addChild(this.m_sprite);
 	
 	var firing = false;
 	var cooldownCount = 1;
@@ -161,7 +160,6 @@ function Enemy10 (battle, layer) {
 	
 	this.Destroy = function () {
 		this.m_active = false;
-		layer.removeChild (this.m_sprite);
 		g_spritePool.PutSpriteIntoPool (this.m_sprite);
 	}
 }

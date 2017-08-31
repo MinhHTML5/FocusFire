@@ -7,15 +7,17 @@ function ExplosionParticle (battle, layer, color) {
 	this.m_color = color;
 
 	
-	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/ExplosionParticle.png");
+	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/ExplosionParticle.png", layer);
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_sprite.setLocalZOrder (LAYER_BATTLE);
 	this.m_sprite.setBlendFunc (new cc.BlendFunc(gl.SRC_ALPHA, gl.ONE));
 	this.m_sprite.setColor (this.m_color);
-	layer.addChild(this.m_sprite);
+	this.m_sprite.setScale (0);
+	this.m_sprite.setOpacity (0);
 	
 	this.Start = function (x, y, life, speed) {
 		this.m_active = true;
+		this.m_life = 0;
 		this.m_x = x;
 		this.m_y = y;
 		this.m_maxLife = (Math.random() * 0.5 + 0.5) * life;
@@ -23,7 +25,7 @@ function ExplosionParticle (battle, layer, color) {
 		this.m_alpha = 1;
 		this.m_speed = speed;
 		this.m_scale = 0.3;
-		this.m_scaleY = this.m_speed * 0.08;
+		this.m_scaleY = this.m_speed * 0.02;
 		
 		battle.m_particles.push (this);
 	}
@@ -57,7 +59,6 @@ function ExplosionParticle (battle, layer, color) {
 	}
 	this.Destroy = function () {
 		this.m_active = false;
-		layer.removeChild (this.m_sprite);
 		g_spritePool.PutSpriteIntoPool (this.m_sprite);
 	}
 }
