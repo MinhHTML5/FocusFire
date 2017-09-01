@@ -148,7 +148,7 @@ g_gsActionUILayer.update = function (deltaTime) {
 	g_colorTheme = GetRGBColorFromHSV(g_colorHue, 1, 1);
 	
 	var fps = (1 / deltaTime) >> 0;
-	this.m_debug.setString("FPS: " + fps + " - Sprites: " + g_spritePool.m_spriteNumber);
+	this.m_debug.setString("FPS: " + fps + " - Sprites: " + g_spritePool.m_spriteOnScreen + " / " + g_spritePool.m_spriteNumber);
 }
 
 
