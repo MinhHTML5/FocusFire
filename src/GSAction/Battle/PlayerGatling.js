@@ -2,7 +2,6 @@ var PLAYER_GATLING_W = 23;
 var PLAYER_GATLING_H = 170;
 var PLAYER_GATLING_MIN_ALPHA = 200;
 var PLAYER_GATLING_MAX_ALPHA = 255;
-var PLAYER_GATLING_RECOIL = 4;
 var PLAYER_GATLING_SPEED_MIN = 2400;
 var PLAYER_GATLING_SPEED_MAX = 2600;
 var PLAYER_GATLING_DAMAGE = 1;
@@ -18,16 +17,14 @@ function PlayerGatling (battle, layer) {
 	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/PlayerGatling.png", layer);
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 1));
 	this.m_sprite.setLocalZOrder (LAYER_BULLET);
-	this.m_sprite.setBlendFunc (new cc.BlendFunc(gl.SRC_ALPHA, gl.ONE));
+	this.m_sprite.setBlendFunc (new cc.BlendFunc(gl.ONE, gl.ONE));
 	
 	var length = 0;
 	var isFirstLoop = false;
 	
 	this.Start = function (angle, x, y) {
-		var recoilA = Math.random() * PLAYER_GATLING_RECOIL * 2 - PLAYER_GATLING_RECOIL;
-		
 		this.m_active = true;
-		this.m_angle = angle + recoilA;
+		this.m_angle = angle;
 		this.m_x = x;
 		this.m_y = y;
 		this.m_speed = (Math.random() * (PLAYER_GATLING_SPEED_MAX - PLAYER_GATLING_SPEED_MIN) + PLAYER_GATLING_SPEED_MIN) >> 0;

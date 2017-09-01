@@ -6,7 +6,10 @@ var PLAYER_SPEED_MULTIPLIER = 7;
 var PLAYER_ACCELERATION = 20000;
 var PLAYER_SNAP_DISTANCE = 1;
 var PLAYER_DISTANCE_FROM_FINGER = 100;
-var PLAYER_GATLING_COOLDOWN = 0.008;
+
+
+var PLAYER_GATLING_COOLDOWN = [0.03, 0.02, 0.015, 0.012, 0.008];
+var PLAYER_GATLING_RECOIL = [0, 1, 2, 3, 4];
 
 var PLAYER_MOVEMENT_CHECK_TIMES = 10;
 var PLAYER_ENGINE_PARTICLE_EMIT_LATENCY = 0.002;
@@ -26,6 +29,7 @@ function Player (battle, layer) {
 	this.m_speed = 0;
 	this.m_touching = false;
 	this.m_HP = PLAYER_MAX_HP;
+	this.m_power = 4;
 	
 	this.m_explosionNumber = 12;
 	this.m_explosionLatency = 0.15;
@@ -38,7 +42,7 @@ function Player (battle, layer) {
 	
 	this.m_spriteGlow = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/PlayerGlow.png", layer);
 	this.m_spriteGlow.setAnchorPoint(cc.p(0.5, 0.5));
-	this.m_spriteGlow.setBlendFunc (new cc.BlendFunc(gl.SRC_ALPHA, gl.ONE));
+	this.m_spriteGlow.setBlendFunc (new cc.BlendFunc(gl.ONE, gl.ONE));
 	this.m_spriteGlow.setLocalZOrder (LAYER_PLAYER);
 	
 	
@@ -119,9 +123,10 @@ function Player (battle, layer) {
 					}
 					
 					while (gatlingCooldown <= 0) {
+						var recoil = Math.random() * PLAYER_GATLING_RECOIL[this.m_power] * 2 - PLAYER_GATLING_RECOIL[this.m_power];
 						var gatling = new PlayerGatling(battle, layer);
-						gatling.Start (this.m_angle, this.m_x, this.m_y);
-						gatlingCooldown += PLAYER_GATLING_COOLDOWN;
+						gatling.Start (this.m_angle + recoil, this.m_x, this.m_y);
+						gatlingCooldown += PLAYER_GATLING_COOLDOWN[this.m_power];
 					}
 				}
 				else {
