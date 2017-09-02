@@ -7,7 +7,7 @@ function ExplosionParticle (battle, layer, color) {
 	this.m_color = color;
 
 	
-	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/ExplosionParticle.png", layer);
+	this.m_sprite = g_spritePool.GetSpriteFromPool(layer, "ExplosionParticle.png", true);
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_sprite.setLocalZOrder (LAYER_BATTLE);
 	this.m_sprite.setBlendFunc (new cc.BlendFunc(gl.SRC_ALPHA, gl.ONE));

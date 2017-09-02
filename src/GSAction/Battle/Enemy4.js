@@ -17,12 +17,11 @@ function Enemy4 (battle, layer) {
 	this.m_y = 0;
 	this.m_angle = 0;
 	
-	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/Enemies.png", layer);
+	this.m_sprite = g_spritePool.GetSpriteFromPool(layer, "Enemy4.png", true);
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_sprite.setLocalZOrder (LAYER_ENEMY);
 	this.m_sprite.setBlendFunc (new cc.BlendFunc(gl.ONE, gl.ONE));
 	this.m_sprite.setColor (this.m_color);
-	this.m_sprite.setTextureRect (cc.rect(3 * 200, 0 * 200, 200, 200));
 	
 	var cooldownCount = 0;
 	var dyingSequenceCount = 0;

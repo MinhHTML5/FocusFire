@@ -1,6 +1,6 @@
 var NUMBER_OF_OBJECT_PER_TYPE= 50;
 function Background(layer) {
-	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Background/Background.png", layer);
+	this.m_sprite = g_spritePool.GetSpriteFromPool(layer, "res/GSAction/Background/Background.png", false);
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_sprite.setLocalZOrder (LAYER_BACKGROUND);
 	this.m_sprite.setPosition (cc.p(CANVAS_W * 0.5, CANVAS_H * 0.5));

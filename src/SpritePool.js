@@ -10,13 +10,16 @@ function SpritePool() {
 		this.m_spriteOnScreen --;
 	}
 
-	this.GetSpriteFromPool = function (path, layer) {
+	this.GetSpriteFromPool = function (layer, name, spriteFrame) {
 		var tempSprite;
 		for (var i=0; i<spritePool.length; i++) {
 			tempSprite = spritePool[i];
 			if (tempSprite.m_layer == layer) {
-				if (tempSprite.getTexture().url != path) {
-					tempSprite.setTexture(path);
+				if (!spriteFrame) {
+					tempSprite.setTexture(name);
+				}
+				else {
+					tempSprite.setSpriteFrame (cc.spriteFrameCache.getSpriteFrame(name));
 				}
 				tempSprite.setBlendFunc (new cc.BlendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA));
 				tempSprite.setOpacity (255);
@@ -33,7 +36,12 @@ function SpritePool() {
 		}
 		
 		if (tempSprite == null) {
-			tempSprite = cc.Sprite.create(path);
+			if (!spriteFrame) {
+				tempSprite = cc.Sprite.create(name);
+			}
+			else {
+				tempSprite = cc.Sprite.create(cc.spriteFrameCache.getSpriteFrame(name));
+			}
 			tempSprite.retain();
 			tempSprite.m_layer = layer;
 			layer.addChild(tempSprite);

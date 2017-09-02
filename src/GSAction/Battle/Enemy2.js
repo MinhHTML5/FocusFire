@@ -24,12 +24,11 @@ function Enemy2 (battle, layer) {
 	this.m_targetX = 0;
 	this.m_targetY = 0;
 	
-	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/Enemies.png", layer);
+	this.m_sprite = g_spritePool.GetSpriteFromPool(layer, "Enemy2.png", true);
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_sprite.setLocalZOrder (LAYER_ENEMY);
 	this.m_sprite.setBlendFunc (new cc.BlendFunc(gl.ONE, gl.ONE));
 	this.m_sprite.setColor (this.m_color);
-	this.m_sprite.setTextureRect (cc.rect(1 * 200, 0 * 200, 200, 200));
 	
 	var stage = 0;
 	var cooldownCount = 0;

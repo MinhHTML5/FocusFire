@@ -21,7 +21,7 @@ var g_menuShowing = true;
 var g_menuAlpha = 1;
 
 g_gsActionUILayer.Init = function () {
-	this.m_logoSprite = g_spritePool.GetSpriteFromPool("res/GSAction/UI/Logo.png", this);
+	this.m_logoSprite = g_spritePool.GetSpriteFromPool(this, "res/GSAction/UI/Logo.png", false);
 	this.m_logoSprite.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_logoSprite.setLocalZOrder (LAYER_UI);
 	this.m_logoSprite.setPosition (CANVAS_W * 0.5, CANVAS_H * 0.9);

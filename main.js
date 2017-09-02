@@ -20,6 +20,12 @@ function InitLoader() {
 }
 
 function GlobalInit() {
+	// Load all sprite sheet
+	for (var i=0; i<g_spriteSheetList.length; i++) {
+		cc.spriteFrameCache.addSpriteFrames (g_spriteSheetList[i][0], g_spriteSheetList[i][1]);
+	}
+	
+	
 	//g_gsMenu = new GSMenu();
 	g_gsAction = new GSAction();
 	

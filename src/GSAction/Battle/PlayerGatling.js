@@ -14,7 +14,7 @@ function PlayerGatling (battle, layer) {
 	this.m_angle = 0;
 	this.m_alpha = 255;
 	
-	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/PlayerGatling.png", layer);
+	this.m_sprite = g_spritePool.GetSpriteFromPool(layer, "PlayerGatling.png", true);
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 1));
 	this.m_sprite.setLocalZOrder (LAYER_BULLET);
 	this.m_sprite.setBlendFunc (new cc.BlendFunc(gl.ONE, gl.ONE));

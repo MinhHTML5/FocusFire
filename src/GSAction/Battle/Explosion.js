@@ -8,7 +8,7 @@ function Explosion (battle, layer, color) {
 	this.m_scale = 0;
 	this.m_color = color;
 	
-	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/Explosion.png", layer);
+	this.m_sprite = g_spritePool.GetSpriteFromPool(layer, "Explosion.png", true);
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_sprite.setLocalZOrder (LAYER_EXPLOSION);
 	this.m_sprite.setBlendFunc (new cc.BlendFunc(gl.SRC_ALPHA, gl.ONE));

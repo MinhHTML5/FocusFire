@@ -13,7 +13,7 @@ function PlayerEngineParticle (battle, layer) {
 	this.m_y = 0;
 	this.m_life = 0;
 	
-	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/PlayerEngineParticle.png", layer);
+	this.m_sprite = g_spritePool.GetSpriteFromPool(layer, "PlayerEngineParticle.png", true);
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_sprite.setLocalZOrder (LAYER_PLAYER);
 	this.m_sprite.setBlendFunc (new cc.BlendFunc(gl.SRC_ALPHA, gl.ONE));

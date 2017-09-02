@@ -7,16 +7,16 @@ function BottomBar (layer) {
 	this.m_value = 0;
 	this.m_alpha = 0;
 	
-	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/UI/HPBar.png", layer);
+	this.m_sprite = g_spritePool.GetSpriteFromPool(layer, "res/GSAction/UI/HPBar.png", false);
 	this.m_sprite.setAnchorPoint(cc.p(0, 0));
 	this.m_sprite.setLocalZOrder (LAYER_UI);
 	
-	this.m_contentSprite = g_spritePool.GetSpriteFromPool("res/GSAction/UI/HPBarContent.png", layer);
+	this.m_contentSprite = g_spritePool.GetSpriteFromPool(layer, "res/GSAction/UI/HPBarContent.png", false);
 	this.m_contentSprite.setAnchorPoint(cc.p(0, 0));
 	this.m_contentSprite.setLocalZOrder (LAYER_UI);
 	this.m_contentSprite.setScale (0, 1);
 	
-	this.m_content2Sprite = g_spritePool.GetSpriteFromPool("res/GSAction/UI/HPBarContent.png", layer);
+	this.m_content2Sprite = g_spritePool.GetSpriteFromPool(layer, "res/GSAction/UI/HPBarContent.png", false);
 	this.m_content2Sprite.setAnchorPoint(cc.p(0, 0));
 	this.m_content2Sprite.setLocalZOrder (LAYER_UI);
 	this.m_content2Sprite.setScale (0, 1);

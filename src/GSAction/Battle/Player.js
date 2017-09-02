@@ -35,12 +35,12 @@ function Player (battle, layer) {
 	this.m_explosionLatency = 0.15;
 	this.m_lastEplosionNumber = 5;
 	
-	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/Player.png", layer);
+	this.m_sprite = g_spritePool.GetSpriteFromPool(layer, "Player.png", true);
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_sprite.setLocalZOrder (LAYER_PLAYER);
 	this.m_sprite.setOpacity (170);
 	
-	this.m_spriteGlow = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/PlayerGlow.png", layer);
+	this.m_spriteGlow = g_spritePool.GetSpriteFromPool(layer, "PlayerGlow.png", true);
 	this.m_spriteGlow.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_spriteGlow.setBlendFunc (new cc.BlendFunc(gl.ONE, gl.ONE));
 	this.m_spriteGlow.setLocalZOrder (LAYER_PLAYER);

@@ -20,13 +20,13 @@ function BGObject (layer, type) {
 	
 	var path;
 	if (type == BACKGROUND_OBJECT_HEXAGON) {
-		path = "res/GSAction/Background/Hexagon.png";
+		this.m_sprite = g_spritePool.GetSpriteFromPool(layer, "Hexagon.png", true);
 	}
 	else if (type == BACKGROUND_OBJECT_CLOUD) {
-		path = "res/GSAction/Background/Cloud.png";
+		this.m_sprite = g_spritePool.GetSpriteFromPool(layer, "Cloud.png", true);
 	}
 	
-	this.m_sprite = g_spritePool.GetSpriteFromPool(path, layer);
+	
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_sprite.setBlendFunc (new cc.BlendFunc(gl.SRC_ALPHA, gl.ONE));
 	this.m_sprite.setLocalZOrder (LAYER_BACKGROUND);

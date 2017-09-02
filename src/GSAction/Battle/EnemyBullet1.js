@@ -10,7 +10,7 @@ function EnemyBullet1 (battle, layer, color) {
 	this.m_alpha = 255;
 	this.m_color = color;
 	
-	this.m_sprite = g_spritePool.GetSpriteFromPool("res/GSAction/Battle/EnemyBullet1.png", layer);
+	this.m_sprite = g_spritePool.GetSpriteFromPool(layer, "EnemyBullet1.png", true);
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_sprite.setLocalZOrder (LAYER_BULLET);
 	this.m_sprite.setBlendFunc (new cc.BlendFunc(gl.ONE, gl.ONE));
