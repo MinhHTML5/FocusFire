@@ -95,6 +95,11 @@ function Battle(layer) {
 		if (color == null) {
 			color = cc.color(255, 255, 255);
 		}
+		else {
+			if (Math.random() < 0.5) {
+				color = cc.color(255, 255, 255);
+			}
+		}
 		x += Math.random() * 2 * randomize - randomize;
 		y += Math.random() * 2 * randomize - randomize;
 		var explosion = new Explosion(this, layer, color);

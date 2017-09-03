@@ -23,6 +23,7 @@ function Enemy5 (battle, layer) {
 	
 	var dyingSequenceCount = 0;
 	var explosionCount = 0;
+	var hitStatus = 0;
 	
 	this.Start = function (angle, x, y) {
 		this.m_active = true;
@@ -51,6 +52,12 @@ function Enemy5 (battle, layer) {
 				
 				if (this.m_y < -this.m_size * 2) {
 					this.Destroy();
+				}
+				if (hitStatus > 0) {
+					hitStatus -= deltaTime;
+					if (hitStatus <= 0) {
+						this.m_sprite.setColor (this.m_color);
+					}
 				}
 			}
 			else {
@@ -85,6 +92,12 @@ function Enemy5 (battle, layer) {
 				var tempBullet;
 				tempBullet = new EnemyBullet1 (battle, layer, this.m_color);
 				tempBullet.Start (i * 30, this.m_x, this.m_y);
+			}
+		}
+		else {
+			if (hitStatus <= 0) {
+				hitStatus = ENEMY_HIT_WHITE_DURATION;
+				this.m_sprite.setColor (cc.color(255, 255, 255));
 			}
 		}
 	}

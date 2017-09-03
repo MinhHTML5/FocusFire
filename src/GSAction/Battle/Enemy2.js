@@ -35,6 +35,7 @@ function Enemy2 (battle, layer) {
 	var shotCount = 0;
 	var dyingSequenceCount = 0;
 	var explosionCount = 0;
+	var hitStatus = 0;
 	
 	this.Start = function (angle, x, y, targetX, targetY) {
 		this.m_active = true;
@@ -167,6 +168,12 @@ function Enemy2 (battle, layer) {
 					this.Hit(this.m_HP);
 					return;
 				}
+				if (hitStatus > 0) {
+					hitStatus -= deltaTime;
+					if (hitStatus <= 0) {
+						this.m_sprite.setColor (this.m_color);
+					}
+				}
 			}
 			else {
 				dyingSequenceCount += deltaTime;
@@ -207,6 +214,12 @@ function Enemy2 (battle, layer) {
 			battle.SpawnExplosion(this.m_x, this.m_y, 0.7, 0.5, 0, this.m_color);
 			this.m_sprite.setVisible(false);
 			g_battle.AddScore(this.m_score);
+		}
+		else {
+			if (hitStatus <= 0) {
+				hitStatus = ENEMY_HIT_WHITE_DURATION;
+				this.m_sprite.setColor (cc.color(255, 255, 255));
+			}
 		}
 	}
 	
