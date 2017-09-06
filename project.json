@@ -17,8 +17,9 @@
 		
 		"src/GSAction/Battle/Player.js",
 		"src/GSAction/Battle/PlayerEngineParticle.js",
-		
 		"src/GSAction/Battle/PlayerGatling.js",
+		
+		"src/GSAction/Battle/Assistant.js",
 		
 		"src/GSAction/Battle/Explosion.js",
 		"src/GSAction/Battle/ExplosionParticle.js",

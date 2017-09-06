@@ -7,6 +7,8 @@ var PLAYER_ACCELERATION = 25000;
 var PLAYER_SNAP_DISTANCE = 1;
 var PLAYER_DISTANCE_FROM_FINGER = 100;
 
+var PLAYER_ASSISTANT_ROTATE_SPEED = 90;
+
 
 var PLAYER_GATLING_COOLDOWN = [0.03, 0.02, 0.015, 0.012, 0.008];
 var PLAYER_GATLING_RECOIL = [0, 1, 2, 3, 4];
@@ -34,6 +36,12 @@ function Player (battle, layer) {
 	this.m_explosionNumber = 12;
 	this.m_explosionLatency = 0.15;
 	this.m_lastEplosionNumber = 5;
+	
+	this.m_globalAssitantAngle = 0;
+	this.m_assistants = [];
+	this.m_assistants.push (new Assistant(this, layer));
+	this.m_assistants.push (new Assistant(this, layer));
+	this.m_assistants.push (new Assistant(this, layer));
 	
 	this.m_sprite = g_spritePool.GetSpriteFromPool(layer, "Player.png", true);
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 0.5));
@@ -169,6 +177,17 @@ function Player (battle, layer) {
 				}
 			}
 		}
+		
+		this.m_globalAssitantAngle += PLAYER_ASSISTANT_ROTATE_SPEED * deltaTime;
+		if (this.m_globalAssitantAngle > 360) {
+			this.m_globalAssitantAngle -= 360;
+		}
+		
+		var offset = 360 / this.m_assistants.length;
+		for (var i=0; i<this.m_assistants.length; i++) {
+			this.m_assistants[i].m_anglePos = this.m_globalAssitantAngle + offset * i;
+			this.m_assistants[i].Update (deltaTime);
+		}
 	}
 	
 	
@@ -177,6 +196,10 @@ function Player (battle, layer) {
 		
 		this.m_spriteGlow.setPosition (cc.p(this.m_x, this.m_y));
 		//this.m_spriteGlow.setColor (g_colorTheme);
+		
+		for (var i=0; i<this.m_assistants.length; i++) {
+			this.m_assistants[i].UpdateVisual ();
+		}
 	}
 	
 	this.Hit = function (damage) {
