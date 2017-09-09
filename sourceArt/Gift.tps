@@ -6,7 +6,7 @@
         <key>texturePackerVersion</key>
         <string>4.4.0</string>
         <key>fileName</key>
-        <string>F:/Works/FocusFire/trunk/sourceArt/Enemies.tps</string>
+        <string>F:/Works/FocusFire/trunk/sourceArt/Gift.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -90,9 +90,9 @@
         <key>maxTextureSize</key>
         <QSize>
             <key>width</key>
-            <int>1024</int>
+            <int>2048</int>
             <key>height</key>
-            <int>1024</int>
+            <int>2048</int>
         </QSize>
         <key>fixedTextureSize</key>
         <QSize>
@@ -150,7 +150,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>../res/GSAction/Sprites/Enemies.plist</filename>
+                <filename>../res/GSAction/Sprites/Gift.plist</filename>
             </struct>
             <key>header</key>
             <key>source</key>
@@ -205,11 +205,9 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">Enemy0.png</key>
-            <key type="filename">Enemy1.png</key>
-            <key type="filename">Enemy2.png</key>
-            <key type="filename">Enemy5.png</key>
-            <key type="filename">Enemy8.png</key>
+            <key type="filename">GiftA1.png</key>
+            <key type="filename">GiftHeal.png</key>
+            <key type="filename">GiftPow.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -219,53 +217,15 @@
                 <rect>38,38,75,75</rect>
                 <key>scale9Paddings</key>
                 <rect>38,38,75,75</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">Enemy10.png</key>
-            <key type="filename">Enemy3.png</key>
-            <key type="filename">Enemy7.png</key>
-            <key type="filename">Enemy9.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>50,50,100,100</rect>
-                <key>scale9Paddings</key>
-                <rect>50,50,100,100</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">Enemy4.png</key>
-            <key type="filename">Enemy6.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>44,44,88,88</rect>
-                <key>scale9Paddings</key>
-                <rect>44,44,88,88</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
         </map>
         <key>fileList</key>
         <array>
-            <filename>Enemy1.png</filename>
-            <filename>Enemy2.png</filename>
-            <filename>Enemy3.png</filename>
-            <filename>Enemy4.png</filename>
-            <filename>Enemy5.png</filename>
-            <filename>Enemy6.png</filename>
-            <filename>Enemy7.png</filename>
-            <filename>Enemy8.png</filename>
-            <filename>Enemy9.png</filename>
-            <filename>Enemy10.png</filename>
-            <filename>Enemy0.png</filename>
+            <filename>GiftHeal.png</filename>
+            <filename>GiftPow.png</filename>
+            <filename>GiftA1.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

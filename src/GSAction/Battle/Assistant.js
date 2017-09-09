@@ -12,7 +12,7 @@ function Assistant (battle, player, layer, type) {
 	this.m_active = true;
 	this.m_x = 0;
 	this.m_y = 0;
-	this.m_HP = 1;
+	this.m_HP = 10;
 	this.m_speed = 0;
 	this.m_angle = 0;
 	this.m_anglePos = 0;

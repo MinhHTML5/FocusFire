@@ -6,7 +6,7 @@
         <key>texturePackerVersion</key>
         <string>4.4.0</string>
         <key>fileName</key>
-        <string>F:/Works/FocusFire/trunk/sourceArt/Enemies.tps</string>
+        <string>F:/Works/FocusFire/trunk/sourceArt/Misc.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -150,7 +150,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>../res/GSAction/Sprites/Enemies.plist</filename>
+                <filename>../res/GSAction/Sprites/Misc.plist</filename>
             </struct>
             <key>header</key>
             <key>source</key>
@@ -205,11 +205,7 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">Enemy0.png</key>
-            <key type="filename">Enemy1.png</key>
-            <key type="filename">Enemy2.png</key>
-            <key type="filename">Enemy5.png</key>
-            <key type="filename">Enemy8.png</key>
+            <key type="filename">Assistant1.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -222,10 +218,61 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">Enemy10.png</key>
-            <key type="filename">Enemy3.png</key>
-            <key type="filename">Enemy7.png</key>
-            <key type="filename">Enemy9.png</key>
+            <key type="filename">AssistantBullet1.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>25,25,50,50</rect>
+                <key>scale9Paddings</key>
+                <rect>25,25,50,50</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Cloud.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>105,105,210,210</rect>
+                <key>scale9Paddings</key>
+                <rect>105,105,210,210</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Explosion.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>125,125,250,250</rect>
+                <key>scale9Paddings</key>
+                <rect>125,125,250,250</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">ExplosionParticle.png</key>
+            <key type="filename">PlayerEngineParticle.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>13,13,25,25</rect>
+                <key>scale9Paddings</key>
+                <rect>13,13,25,25</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Hexagon.png</key>
+            <key type="filename">PlayerGlow.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -238,34 +285,45 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">Enemy4.png</key>
-            <key type="filename">Enemy6.png</key>
+            <key type="filename">Player.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>44,44,88,88</rect>
+                <rect>15,13,30,26</rect>
                 <key>scale9Paddings</key>
-                <rect>44,44,88,88</rect>
+                <rect>15,13,30,26</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">PlayerGatling.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>25,53,51,105</rect>
+                <key>scale9Paddings</key>
+                <rect>25,53,51,105</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
         </map>
         <key>fileList</key>
         <array>
-            <filename>Enemy1.png</filename>
-            <filename>Enemy2.png</filename>
-            <filename>Enemy3.png</filename>
-            <filename>Enemy4.png</filename>
-            <filename>Enemy5.png</filename>
-            <filename>Enemy6.png</filename>
-            <filename>Enemy7.png</filename>
-            <filename>Enemy8.png</filename>
-            <filename>Enemy9.png</filename>
-            <filename>Enemy10.png</filename>
-            <filename>Enemy0.png</filename>
+            <filename>Explosion.png</filename>
+            <filename>ExplosionParticle.png</filename>
+            <filename>Hexagon.png</filename>
+            <filename>Player.png</filename>
+            <filename>PlayerEngineParticle.png</filename>
+            <filename>PlayerGatling.png</filename>
+            <filename>PlayerGlow.png</filename>
+            <filename>Cloud.png</filename>
+            <filename>Assistant1.png</filename>
+            <filename>AssistantBullet1.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -24,6 +24,7 @@ var g_audioList = [];
 g_spriteSheetList.push (["res/GSAction/Sprites/Enemies.plist", "res/GSAction/Sprites/Enemies.png"]);
 g_spriteSheetList.push (["res/GSAction/Sprites/EnemyBullets.plist", "res/GSAction/Sprites/EnemyBullets.png"]);
 g_spriteSheetList.push (["res/GSAction/Sprites/Misc.plist", "res/GSAction/Sprites/Misc.png"]);
+g_spriteSheetList.push (["res/GSAction/Sprites/Gift.plist", "res/GSAction/Sprites/Gift.png"]);
 
 
 

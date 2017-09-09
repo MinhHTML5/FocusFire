@@ -31,7 +31,7 @@ function Player (battle, layer) {
 	this.m_speed = 0;
 	this.m_touching = false;
 	this.m_HP = PLAYER_MAX_HP;
-	this.m_power = 4;
+	this.m_power = 0;
 	
 	this.m_explosionNumber = 12;
 	this.m_explosionLatency = 0.15;
@@ -39,11 +39,6 @@ function Player (battle, layer) {
 	
 	this.m_globalAssitantAngle = 0;
 	this.m_assistants = [];
-	this.m_assistants.push (new Assistant(battle, this, layer, 1));
-	this.m_assistants.push (new Assistant(battle, this, layer, 1));
-	this.m_assistants.push (new Assistant(battle, this, layer, 1));
-	this.m_assistants.push (new Assistant(battle, this, layer, 1));
-	this.m_assistants.push (new Assistant(battle, this, layer, 1));
 	
 	this.m_sprite = g_spritePool.GetSpriteFromPool(layer, "Player.png", true);
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 0.5));
@@ -214,7 +209,19 @@ function Player (battle, layer) {
 	
 	this.Hit = function (damage) {
 		this.m_HP -= damage;
+		if (this.m_HP > PLAYER_MAX_HP) {
+			this.m_HP = PLAYER_MAX_HP;
+		}
 		g_bottomBar.SetValue (this.m_HP / PLAYER_MAX_HP);
+	}
+	
+	this.AddAssistant = function(type) {
+		if (this.m_assistants.length < 5) {
+			this.m_assistants.push (new Assistant(battle, this, layer, 1));
+		}
+		else {
+			
+		}
 	}
 	
 	

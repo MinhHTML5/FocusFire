@@ -1,6 +1,7 @@
 var DIFFICULTY_NUMBER = 5;
 var FORWARD_SPEED = 50;
-
+var NEXT_GIFT_MIN = 10;
+var NEXT_GIFT_MAX = 20;
 
 function Battle(layer) {
 	this.m_player = new Player(this, layer);
@@ -13,6 +14,10 @@ function Battle(layer) {
 	this.m_level = 0;
 	
 	this.m_gameEnded = false;
+	
+	
+	var giftCounter = 0;
+	var nextGift = Math.random() * (NEXT_GIFT_MAX - NEXT_GIFT_MIN) + NEXT_GIFT_MIN;
 	
 	var spawnCounter = new Array();
 	for (var i=0; i<DIFFICULTY_NUMBER; i++) {
@@ -70,6 +75,13 @@ function Battle(layer) {
 					}
 				}
 			}
+			
+			giftCounter += deltaTime;
+			if (giftCounter >= nextGift) {
+				nextGift = Math.random() * (NEXT_GIFT_MAX - NEXT_GIFT_MIN) + NEXT_GIFT_MIN;
+				this.SpawnGift();
+				giftCounter = 0;
+			}
 		}
 	}
 	
@@ -104,6 +116,13 @@ function Battle(layer) {
 		y += Math.random() * 2 * randomize - randomize;
 		var explosion = new Explosion(this, layer, color);
 		explosion.Start(x, y, scale, time);
+	}
+	
+	this.SpawnGift = function() {
+		var x = Math.random() * (CANVAS_W - 100) + 50;
+		var y = CANVAS_H + 100;
+		var tempEnemy = new Enemy0(this, layer);
+		tempEnemy.Start(0, x, y);
 	}
 	
 	
