@@ -39,9 +39,11 @@ function Player (battle, layer) {
 	
 	this.m_globalAssitantAngle = 0;
 	this.m_assistants = [];
-	this.m_assistants.push (new Assistant(this, layer));
-	this.m_assistants.push (new Assistant(this, layer));
-	this.m_assistants.push (new Assistant(this, layer));
+	this.m_assistants.push (new Assistant(battle, this, layer, 1));
+	this.m_assistants.push (new Assistant(battle, this, layer, 1));
+	this.m_assistants.push (new Assistant(battle, this, layer, 1));
+	this.m_assistants.push (new Assistant(battle, this, layer, 1));
+	this.m_assistants.push (new Assistant(battle, this, layer, 1));
 	
 	this.m_sprite = g_spritePool.GetSpriteFromPool(layer, "Player.png", true);
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 0.5));
@@ -184,9 +186,17 @@ function Player (battle, layer) {
 		}
 		
 		var offset = 360 / this.m_assistants.length;
-		for (var i=0; i<this.m_assistants.length; i++) {
-			this.m_assistants[i].m_anglePos = this.m_globalAssitantAngle + offset * i;
-			this.m_assistants[i].Update (deltaTime);
+		for (var i=this.m_assistants.length-1; i>=0; i--) {
+			if (this.m_assistants[i].m_active) {
+				this.m_assistants[i].m_targetAnglePos = this.m_globalAssitantAngle + offset * i;
+				if (this.m_assistants[i].m_targetAnglePos > 360) {
+					this.m_assistants[i].m_targetAnglePos -= 360;
+				}
+				this.m_assistants[i].Update (deltaTime);
+			}
+			else {
+				this.m_assistants.splice (i, 1);
+			}
 		}
 	}
 	
@@ -222,6 +232,10 @@ function Player (battle, layer) {
 		this.m_active = false;
 		g_spritePool.PutSpriteIntoPool (this.m_sprite);
 		g_spritePool.PutSpriteIntoPool (this.m_spriteGlow);
+		
+		for (var i=0; i<this.m_assistants.length; i++) {
+			this.m_assistants[i].Destroy ();
+		}
 		
 		battle.m_gameEnded = true;
 	}

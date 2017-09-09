@@ -44,6 +44,18 @@ function EnemyBullet1 (battle, layer, color) {
 				return;
 			}
 			
+			for (var i=0; i<battle.m_player.m_assistants.length; i++) {
+				var assistant = battle.m_player.m_assistants[i]
+				var distance = DistanceBetweenTwoPoint(this.m_x, this.m_y, assistant.m_x, assistant.m_y);
+				if (assistant.m_active && distance < assistant.m_size) {
+					assistant.Hit (this.m_damage);
+					battle.SpawnExplosion(this.m_x, this.m_y, 0.4, 0.3, 0, this.m_color);
+					this.Destroy();
+					return;
+				}
+			}
+			
+			
 			var distance = DistanceBetweenTwoPoint(this.m_x, this.m_y, battle.m_player.m_x, battle.m_player.m_y);
 			if (battle.m_player.m_active && distance < battle.m_player.m_size) {
 				battle.m_player.Hit (this.m_damage);
