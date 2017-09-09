@@ -49,6 +49,21 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
+            <key>GiftShield.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{150,150}</string>
+                <key>spriteSourceSize</key>
+                <string>{150,150}</string>
+                <key>textureRect</key>
+                <string>{{450,0},{150,150}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
         </dict>
         <key>metadata</key>
         <dict>
@@ -61,9 +76,9 @@
             <key>realTextureFileName</key>
             <string>Gift.png</string>
             <key>size</key>
-            <string>{450,150}</string>
+            <string>{600,150}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:961704f394d75add0eaa225879105b6d:0b15709672584193fe84f8d2843f382c:3094e0a985b624aadd7c268c99862499$</string>
+            <string>$TexturePacker:SmartUpdate:301ccd6ef5602d4f614609800df32f41:b8ba5fa8e2c78fb1e7961ed2f4b704d7:3094e0a985b624aadd7c268c99862499$</string>
             <key>textureFileName</key>
             <string>Gift.png</string>
         </dict>

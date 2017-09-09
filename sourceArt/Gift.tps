@@ -208,6 +208,7 @@
             <key type="filename">GiftA1.png</key>
             <key type="filename">GiftHeal.png</key>
             <key type="filename">GiftPow.png</key>
+            <key type="filename">GiftShield.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -226,6 +227,7 @@
             <filename>GiftHeal.png</filename>
             <filename>GiftPow.png</filename>
             <filename>GiftA1.png</filename>
+            <filename>GiftShield.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
