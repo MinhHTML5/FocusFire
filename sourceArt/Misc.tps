@@ -273,6 +273,7 @@
             </struct>
             <key type="filename">Hexagon.png</key>
             <key type="filename">PlayerGlow.png</key>
+            <key type="filename">Shield.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -324,6 +325,7 @@
             <filename>Cloud.png</filename>
             <filename>Assistant1.png</filename>
             <filename>AssistantBullet1.png</filename>
+            <filename>Shield.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -6,6 +6,7 @@ var PLAYER_GATLING_SPEED_MIN = 2400;
 var PLAYER_GATLING_SPEED_MAX = 2600;
 var PLAYER_GATLING_DAMAGE = 1;
 var PLAYER_GATLING_OFFSET = 50;
+var PLAYER_GATLING_SPAWN_OFFSET = 5;
 
 function PlayerGatling (battle, layer) {
 	this.m_active = false;
@@ -25,8 +26,8 @@ function PlayerGatling (battle, layer) {
 	this.Start = function (angle, x, y) {
 		this.m_active = true;
 		this.m_angle = angle;
-		this.m_x = x;
-		this.m_y = y;
+		this.m_x = x + Math.random() * PLAYER_GATLING_SPAWN_OFFSET * 2 - PLAYER_GATLING_SPAWN_OFFSET;
+		this.m_y = y + Math.random() * PLAYER_GATLING_SPAWN_OFFSET * 2 - PLAYER_GATLING_SPAWN_OFFSET;
 		this.m_speed = (Math.random() * (PLAYER_GATLING_SPEED_MAX - PLAYER_GATLING_SPEED_MIN) + PLAYER_GATLING_SPEED_MIN) >> 0;
 		
 		this.m_alpha = (Math.random() * (PLAYER_GATLING_MAX_ALPHA - PLAYER_GATLING_MIN_ALPHA) + PLAYER_GATLING_MIN_ALPHA) >> 0;

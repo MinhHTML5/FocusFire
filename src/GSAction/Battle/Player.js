@@ -9,7 +9,9 @@ var PLAYER_DISTANCE_FROM_FINGER = 100;
 
 var PLAYER_ASSISTANT_ROTATE_SPEED = 90;
 
-
+var PLAYER_SHIELD_TIME = 10;
+var PLAYER_SHIELD_FADE_SPEED = 500;
+var PLAYER_SHIELD_ROTATE_SPEED = 30;
 var PLAYER_GATLING_COOLDOWN = [0.03, 0.02, 0.015, 0.012, 0.008];
 var PLAYER_GATLING_RECOIL = [0, 1, 2, 3, 4];
 
@@ -32,6 +34,7 @@ function Player (battle, layer) {
 	this.m_touching = false;
 	this.m_HP = PLAYER_MAX_HP;
 	this.m_power = 0;
+	this.m_shieldTime = 0;
 	
 	this.m_explosionNumber = 12;
 	this.m_explosionLatency = 0.15;
@@ -50,13 +53,20 @@ function Player (battle, layer) {
 	this.m_spriteGlow.setBlendFunc (new cc.BlendFunc(gl.ONE, gl.ONE));
 	this.m_spriteGlow.setLocalZOrder (LAYER_PLAYER);
 	
+	this.m_shieldSprite = g_spritePool.GetSpriteFromPool(layer, "Shield.png", true);
+	this.m_shieldSprite.setAnchorPoint(cc.p(0.5, 0.5));
+	this.m_shieldSprite.setBlendFunc (new cc.BlendFunc(gl.ONE, gl.ONE));
+	this.m_shieldSprite.setLocalZOrder (LAYER_PLAYER);
+	this.m_shieldSprite.setOpacity (0);
+	
 	
 	var showStage = 2;
 	var engineParticleCount = 0;
 	var gatlingCooldown = 0;
 	var dyingSequenceCount = 0;
 	var explosionCount = 0;
-	
+	var shieldAlpha = 0;
+	var shieldRotation = 0;
 	
 	
 	this.Touch = function (touching, x, y) {
@@ -175,6 +185,30 @@ function Player (battle, layer) {
 			}
 		}
 		
+		if (this.m_shieldTime > 0) {
+			this.m_size = PLAYER_SIZE * 2;
+			if (shieldAlpha < 255) {
+				shieldAlpha += deltaTime * PLAYER_SHIELD_FADE_SPEED;
+				if (shieldAlpha > 255) {
+					shieldAlpha = 255;
+				}
+			}
+			
+			shieldRotation += deltaTime * PLAYER_SHIELD_ROTATE_SPEED;
+			if (shieldRotation > 360) shieldRotation -= 360;
+			
+			this.m_shieldTime -= deltaTime;
+		}
+		else {
+			this.m_size = PLAYER_SIZE;
+			if (shieldAlpha > 0) {
+				shieldAlpha -= deltaTime * PLAYER_SHIELD_FADE_SPEED;
+				if (shieldAlpha < 0) {
+					shieldAlpha = 0;
+				}
+			}
+		}
+		
 		this.m_globalAssitantAngle += PLAYER_ASSISTANT_ROTATE_SPEED * deltaTime;
 		if (this.m_globalAssitantAngle > 360) {
 			this.m_globalAssitantAngle -= 360;
@@ -198,9 +232,12 @@ function Player (battle, layer) {
 	
 	this.UpdateVisual = function() {
 		this.m_sprite.setPosition (cc.p(this.m_x, this.m_y));
-		
 		this.m_spriteGlow.setPosition (cc.p(this.m_x, this.m_y));
+		this.m_shieldSprite.setPosition (cc.p(this.m_x, this.m_y));
 		//this.m_spriteGlow.setColor (g_colorTheme);
+		
+		this.m_shieldSprite.setOpacity(shieldAlpha);
+		this.m_shieldSprite.setRotation(shieldRotation);
 		
 		for (var i=0; i<this.m_assistants.length; i++) {
 			this.m_assistants[i].UpdateVisual ();
@@ -208,11 +245,13 @@ function Player (battle, layer) {
 	}
 	
 	this.Hit = function (damage) {
-		this.m_HP -= damage;
-		if (this.m_HP > PLAYER_MAX_HP) {
-			this.m_HP = PLAYER_MAX_HP;
+		if (this.m_shieldTime <= 0 || damage < 0) {
+			this.m_HP -= damage;
+			if (this.m_HP > PLAYER_MAX_HP) {
+				this.m_HP = PLAYER_MAX_HP;
+			}
+			g_bottomBar.SetValue (this.m_HP / PLAYER_MAX_HP);
 		}
-		g_bottomBar.SetValue (this.m_HP / PLAYER_MAX_HP);
 	}
 	
 	this.AddAssistant = function(type) {
@@ -239,6 +278,7 @@ function Player (battle, layer) {
 		this.m_active = false;
 		g_spritePool.PutSpriteIntoPool (this.m_sprite);
 		g_spritePool.PutSpriteIntoPool (this.m_spriteGlow);
+		g_spritePool.PutSpriteIntoPool (this.m_shieldSprite);
 		
 		for (var i=0; i<this.m_assistants.length; i++) {
 			this.m_assistants[i].Destroy ();

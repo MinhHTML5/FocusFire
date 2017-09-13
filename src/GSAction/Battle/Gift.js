@@ -1,7 +1,9 @@
 var GIFT_HEAL = 0;
 var GIFT_POWER = 1;
-var GIFT_ASSISTANT_1 = 2;
-var GIFT_ALL = 3;
+var GIFT_SHIELD = 2;
+var GIFT_ASSISTANT_1 = 3;
+var GIFT_ALL = 4;
+
 
 
 function Gift (battle, layer, type) {
@@ -19,9 +21,13 @@ function Gift (battle, layer, type) {
 	else if (type == GIFT_POWER) {
 		this.m_sprite = g_spritePool.GetSpriteFromPool(layer, "GiftPow.png", true);
 	}
+	else if (type == GIFT_SHIELD) {
+		this.m_sprite = g_spritePool.GetSpriteFromPool(layer, "GiftShield.png", true);
+	}
 	else if (type == GIFT_ASSISTANT_1) {
 		this.m_sprite = g_spritePool.GetSpriteFromPool(layer, "GiftA1.png", true);
 	}
+	
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_sprite.setLocalZOrder (LAYER_PLAYER);
 	this.m_sprite.setBlendFunc (new cc.BlendFunc(gl.ONE, gl.ONE));
@@ -48,6 +54,9 @@ function Gift (battle, layer, type) {
 					if (battle.m_player.m_power < PLAYER_GATLING_COOLDOWN.length - 1) {
 						battle.m_player.m_power ++;
 					}
+				}
+				else if (type == GIFT_SHIELD) {
+					battle.m_player.m_shieldTime = PLAYER_SHIELD_TIME;
 				}
 				else if (type == GIFT_ASSISTANT_1) {
 					battle.m_player.AddAssistant (1);

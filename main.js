@@ -1,5 +1,5 @@
-var CANVAS_W = 900;
-var CANVAS_H = 1600;
+var CANVAS_W = 720;
+var CANVAS_H = 1280;
 
 var LAYER_BACKGROUND = 0;
 var LAYER_BATTLE = 10;
