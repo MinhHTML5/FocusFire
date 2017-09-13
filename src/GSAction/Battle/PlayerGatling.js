@@ -6,7 +6,7 @@ var PLAYER_GATLING_SPEED_MIN = 2400;
 var PLAYER_GATLING_SPEED_MAX = 2600;
 var PLAYER_GATLING_DAMAGE = 1;
 var PLAYER_GATLING_OFFSET = 50;
-var PLAYER_GATLING_SPAWN_OFFSET = 5;
+var PLAYER_GATLING_SPAWN_OFFSET = 10;
 
 function PlayerGatling (battle, layer) {
 	this.m_active = false;

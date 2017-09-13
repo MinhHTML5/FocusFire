@@ -25,7 +25,7 @@ g_gsActionUILayer.Init = function () {
 	this.m_logoSprite.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_logoSprite.setLocalZOrder (LAYER_UI);
 	this.m_logoSprite.setPosition (CANVAS_W * 0.5, CANVAS_H * 0.9);
-	this.m_logoSprite.setScale (0.75)
+	this.m_logoSprite.setScale (0.6)
 	
 	this.m_highScore = new cc.LabelTTF("Highest: 0", GetFont("AirCruiser"), 45);
 	this.m_highScore.setAnchorPoint(cc.p(0.5, 0.5));
