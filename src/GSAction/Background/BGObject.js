@@ -43,6 +43,10 @@ function BGObject (layer, type) {
 		this.m_sprite.setScale (this.m_scale);
 		this.m_sprite.setOpacity (this.m_alpha * 255);
 		this.m_sprite.setPosition (cc.p(this.m_x, this.m_y));
+		
+		if (type == BACKGROUND_OBJECT_CLOUD) {
+			this.m_scale *= 2;
+		}
 	}
 	
 	this.Update = function (deltaTime) {

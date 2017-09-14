@@ -20,8 +20,6 @@ function AssistantBullet1 (battle, layer, color) {
 	var isFirstLoop = false;
 	
 	this.Start = function (angle, x, y) {
-		var recoilA = Math.random() * PLAYER_GATLING_RECOIL * 2 - PLAYER_GATLING_RECOIL;
-		
 		this.m_active = true;
 		this.m_angle = angle;
 		this.m_x = x;

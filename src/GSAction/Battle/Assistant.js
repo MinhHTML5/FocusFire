@@ -18,8 +18,10 @@ function Assistant (battle, player, layer, type) {
 	this.m_anglePos = 0;
 	this.m_targetAnglePos = 0;
 	this.m_size = ASSISTANT_SIZE;
-	this.m_color = GetRandomEnemyColor();
 	
+	
+	this.m_color = GetRGBColorFromHSV(140, 1, 1);
+		
 	this.m_explosionNumber = 3;
 	this.m_explosionLatency = 0.07;
 	
@@ -133,6 +135,7 @@ function Assistant (battle, player, layer, type) {
 				hitStatus = ENEMY_HIT_WHITE_DURATION;
 				this.m_sprite.setColor (cc.color(255, 255, 255));
 			}
+			this.m_color = GetRGBColorFromHSV(this.m_HP * 14, 1, 1);
 		}
 	}
 	

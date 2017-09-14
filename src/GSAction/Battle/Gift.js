@@ -51,7 +51,7 @@ function Gift (battle, layer, type) {
 					battle.m_player.Hit (-30);
 				}
 				else if (type == GIFT_POWER) {
-					if (battle.m_player.m_power < PLAYER_GATLING_COOLDOWN.length - 1) {
+					if (battle.m_player.m_power < PLAYER_POWER_MAX) {
 						battle.m_player.m_power ++;
 					}
 				}

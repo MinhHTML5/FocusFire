@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.4.0</string>
+        <string>4.5.0</string>
         <key>fileName</key>
         <string>F:/Works/FocusFire/trunk/sourceArt/Misc.tps</string>
         <key>autoSDSettings</key>
@@ -322,10 +322,10 @@
             <filename>PlayerEngineParticle.png</filename>
             <filename>PlayerGatling.png</filename>
             <filename>PlayerGlow.png</filename>
-            <filename>Cloud.png</filename>
             <filename>Assistant1.png</filename>
             <filename>AssistantBullet1.png</filename>
             <filename>Shield.png</filename>
+            <filename>Cloud.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

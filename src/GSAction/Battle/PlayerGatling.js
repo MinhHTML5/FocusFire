@@ -4,9 +4,9 @@ var PLAYER_GATLING_MIN_ALPHA = 200;
 var PLAYER_GATLING_MAX_ALPHA = 255;
 var PLAYER_GATLING_SPEED_MIN = 2400;
 var PLAYER_GATLING_SPEED_MAX = 2600;
-var PLAYER_GATLING_DAMAGE = 1;
+var PLAYER_GATLING_DAMAGE = 2;
 var PLAYER_GATLING_OFFSET = 50;
-var PLAYER_GATLING_SPAWN_OFFSET = 10;
+var PLAYER_GATLING_SPAWN_OFFSET = 12;
 
 function PlayerGatling (battle, layer) {
 	this.m_active = false;
@@ -22,6 +22,7 @@ function PlayerGatling (battle, layer) {
 	
 	var length = 0;
 	var isFirstLoop = false;
+	var scaleX = 1;
 	
 	this.Start = function (angle, x, y) {
 		this.m_active = true;
@@ -32,6 +33,13 @@ function PlayerGatling (battle, layer) {
 		
 		this.m_alpha = (Math.random() * (PLAYER_GATLING_MAX_ALPHA - PLAYER_GATLING_MIN_ALPHA) + PLAYER_GATLING_MIN_ALPHA) >> 0;
 		this.m_sprite.setOpacity(this.m_alpha);
+		
+		if (Math.random() > 0.5) {
+			scaleX = 1;
+		}
+		else {
+			scaleX = -1;
+		}
 		
 		length = 0;
 		isFirstLoop = true;
@@ -80,6 +88,7 @@ function PlayerGatling (battle, layer) {
 	this.UpdateVisual = function() {
 		this.m_sprite.setRotation (this.m_angle);
 		this.m_sprite.setPosition (cc.p(this.m_x, this.m_y + PLAYER_GATLING_OFFSET));
+		this.m_sprite.setScaleX (scaleX);
 		this.m_sprite.setScaleY (length /PLAYER_GATLING_H);
 	}
 	

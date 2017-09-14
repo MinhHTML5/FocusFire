@@ -12,8 +12,9 @@ var PLAYER_ASSISTANT_ROTATE_SPEED = 90;
 var PLAYER_SHIELD_TIME = 10;
 var PLAYER_SHIELD_FADE_SPEED = 500;
 var PLAYER_SHIELD_ROTATE_SPEED = 30;
-var PLAYER_GATLING_COOLDOWN = [0.03, 0.02, 0.015, 0.012, 0.008];
-var PLAYER_GATLING_RECOIL = [0, 1, 2, 3, 4];
+var PLAYER_MAIN_GUN_COOLDOWN = [0.06, 0.04, 0.03, 0.024, 0.016, 0.013, 0.011, 0.009, 0.008, 0.007];
+var PLAYER_MAIN_GUN_RECOIL = [0, 0.5, 1, 1.5, 2, 2.4, 2.8, 3.2, 3.6, 4];
+var PLAYER_POWER_MAX = 10;
 
 var PLAYER_MOVEMENT_CHECK_TIMES = 10;
 var PLAYER_ENGINE_PARTICLE_EMIT_LATENCY = 0.002;
@@ -62,7 +63,7 @@ function Player (battle, layer) {
 	
 	var showStage = 2;
 	var engineParticleCount = 0;
-	var gatlingCooldown = 0;
+	var mainGunCooldown = 0;
 	var dyingSequenceCount = 0;
 	var explosionCount = 0;
 	var shieldAlpha = 0;
@@ -137,11 +138,12 @@ function Player (battle, layer) {
 						this.m_speed = 0;
 					}
 					
-					while (gatlingCooldown <= 0) {
-						var recoil = Math.random() * PLAYER_GATLING_RECOIL[this.m_power] * 2 - PLAYER_GATLING_RECOIL[this.m_power];
+					while (mainGunCooldown <= 0) {
+						var mainGunPower = this.m_power;
+						var recoil = Math.random() * PLAYER_MAIN_GUN_RECOIL[mainGunPower] * 2 - PLAYER_MAIN_GUN_RECOIL[mainGunPower];
 						var gatling = new PlayerGatling(battle, layer);
 						gatling.Start (this.m_angle + recoil, this.m_x, this.m_y);
-						gatlingCooldown += PLAYER_GATLING_COOLDOWN[this.m_power];
+						mainGunCooldown += PLAYER_MAIN_GUN_COOLDOWN[mainGunPower];
 					}
 				}
 				else {
@@ -165,8 +167,8 @@ function Player (battle, layer) {
 				}
 			}
 			
-			if (gatlingCooldown > 0) {
-				gatlingCooldown -= deltaTime;
+			if (mainGunCooldown > 0) {
+				mainGunCooldown -= deltaTime;
 			}
 		}
 		else {
