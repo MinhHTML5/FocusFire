@@ -26,7 +26,7 @@ function Battle(layer) {
 	
 	this.AddScore = function (score) {
 		this.m_score += score;
-		g_bottomBar.SetScore(this.m_score);
+		g_topBar.SetScore(this.m_score);
 		
 		if (this.m_level < g_difficulty.length - 1 && this.m_score > g_difficulty[this.m_level+1].m_score) {
 			this.m_level ++;

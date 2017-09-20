@@ -37,6 +37,8 @@ g_imageList.push ("res/GSAction/Background/Background.png");
 g_imageList.push ("res/GSAction/UI/Logo.png");
 g_imageList.push ("res/GSAction/UI/HPBar.png");
 g_imageList.push ("res/GSAction/UI/HPBarContent.png");
+g_imageList.push ("res/GSAction/UI/PowerBar.png");
+g_imageList.push ("res/GSAction/UI/PowerBarContent.png");
 // =========================================================================================
 
 

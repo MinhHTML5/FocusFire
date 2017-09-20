@@ -53,6 +53,7 @@ function Gift (battle, layer, type) {
 				else if (type == GIFT_POWER) {
 					if (battle.m_player.m_power < PLAYER_POWER_MAX) {
 						battle.m_player.m_power ++;
+						g_bottomBar.SetPower(battle.m_player.m_power);
 					}
 				}
 				else if (type == GIFT_SHIELD) {

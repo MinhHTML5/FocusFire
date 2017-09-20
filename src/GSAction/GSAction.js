@@ -1,5 +1,6 @@
 var g_background;
 var g_battle;
+var g_topBar;
 var g_bottomBar;
 
 var g_gsActionBackgroundLayer = cc.Layer.create();
@@ -69,8 +70,11 @@ g_gsActionUILayer.AddEventListener = function () {
 					g_battle.Destroy();
 				}
 				g_battle = new Battle (g_gsActionBattleLayer);
+				g_topBar.Show();
+				g_topBar.SetValue(1);
 				g_bottomBar.Show();
 				g_bottomBar.SetValue(1);
+				g_bottomBar.SetPower(0);
 			}
 			if (g_battle) g_battle.TouchDown(touches);
 			return true;
@@ -110,11 +114,13 @@ g_gsActionUILayer.update = function (deltaTime) {
 	
 	
 	if (g_background) g_background.Update (deltaTime);
+	if (g_topBar) g_topBar.Update (deltaTime);
 	if (g_bottomBar) g_bottomBar.Update (deltaTime);
 	if (g_battle) {
 		g_battle.Update (deltaTime);
 		if (g_battle.m_gameEnded) {
 			g_menuShowing = true;
+			g_topBar.Hide();
 			g_bottomBar.Hide();
 			this.m_score.setString("Score: " + g_battle.m_score);
 		}
@@ -162,6 +168,7 @@ var GSAction = cc.Scene.extend({
 		this.eventListenerAdded = false;
 		
 		g_background = new Background (g_gsActionBackgroundLayer);
+		g_topBar = new TopBar (g_gsActionUILayer)
 		g_bottomBar = new BottomBar (g_gsActionUILayer)
 	},
     onEnter:function () {
