@@ -51,8 +51,8 @@ g_gsActionUILayer.Init = function () {
 	
 	
 	this.m_debug = new cc.LabelTTF("Score: 0", GetFont("AirCruiser"), 30);
-	this.m_debug.setAnchorPoint(cc.p(1, 1));
-	this.m_debug.setPosition (cc.p(CANVAS_W - 10, CANVAS_H - 10));
+	this.m_debug.setAnchorPoint(cc.p(0, 1));
+	this.m_debug.setPosition (cc.p(10, CANVAS_H - 10));
 	this.m_debug.setLocalZOrder (LAYER_UI);
 	this.m_debug.setColor (new cc.Color(230, 230, 230, 1));
 	this.addChild(this.m_debug);

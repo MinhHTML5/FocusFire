@@ -32,7 +32,7 @@ g_spawnFunction[1].push(function (battle, layer) {
 		var distance = 0;
 		var newX = 0;
 		var newY = 0;
-		while (distance < ENEMY_SIZE * 2) {
+		while (distance < ENEMY_SIZE) {
 			newX = Math.random() * (CANVAS_W - ENEMY_SIZE * 2) + ENEMY_SIZE;
 			newY = Math.random() * CANVAS_H * 0.3 + CANVAS_H * 0.7;
 			

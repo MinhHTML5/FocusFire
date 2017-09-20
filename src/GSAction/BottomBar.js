@@ -61,7 +61,7 @@ function BottomBar (layer) {
 		this.m_powerBarSprite.setPosition(CANVAS_W - this.m_x, this.m_y);
 		
 		this.m_powerContentBarSprite.setOpacity (this.m_alpha);
-		this.m_powerContentBarSprite.setPosition(CANVAS_W - this.m_x - 54, this.m_y + 12);
+		this.m_powerContentBarSprite.setPosition(CANVAS_W - this.m_x - 51, this.m_y + 12);
 		
 		if (this.m_state == 1) {
 			if (stateCount < onState.length) {
