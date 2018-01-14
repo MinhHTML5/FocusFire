@@ -1,31 +1,18 @@
 {
     "android": {
         "AdMob": {
-            "test": false, 
+            "test": true, 
             "ads": {
                 "gameover": {
                     "type": "interstitial", 
-                    "id": "ca-app-pub-1329374026572143/1092476511"
+                    "id": "ca-app-pub-0081066185741622/3656667464"
                 }, 
                 "home": {
-                    "width": 320, 
+                    "width": 0, 
                     "type": "banner", 
-                    "id": "ca-app-pub-1329374026572143/2685130917", 
+                    "id": "ca-app-pub-0081066185741622/9489123233", 
                     "alignment": "bottom", 
-                    "height": 50
-                }, 
-                "next_level": {
-                    "type": "interstitial", 
-                    "id": "ca-app-pub-1329374026572143/4564434111"
-                }, 
-                "top_banner": {
-                    "type": "banner", 
-                    "id": "ca-app-pub-1329374026572143/3087700911", 
-                    "alignment": "top"
-                }, 
-                "rewarded": {
-                    "type": "rewarded_video", 
-                    "id": "ca-app-pub-1329374026572143/8251968111"
+                    "height": 0
                 }
             }
         }
