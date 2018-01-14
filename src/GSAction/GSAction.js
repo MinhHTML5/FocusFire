@@ -73,18 +73,18 @@ g_gsActionUILayer.Init = function () {
 	this.m_upgrade.setColor (new cc.Color(230, 230, 230, 1));
 	this.addChild(this.m_upgrade);
 	
-	this.m_credit = new cc.LabelTTF("Credit: 0", GetFont("AirCruiser"), 45);
+	this.m_credit = new cc.LabelTTF("Credit: " + g_credit, GetFont("AirCruiser"), 45);
 	this.m_credit.setAnchorPoint(cc.p(0.5, 0.5));
-	this.m_credit.setPosition (cc.p(CANVAS_W * 0.5, CANVAS_H * 0.35 - 50));
+	this.m_credit.setPosition (cc.p(CANVAS_W * 0.5, CANVAS_H * 0.35 + 50));
 	this.m_credit.setLocalZOrder (LAYER_UI);
 	this.m_credit.setColor (new cc.Color(230, 230, 230, 1));
 	this.addChild(this.m_credit);
 	
 	this.m_upgradeButton = new Array();
-	this.m_upgradeButton[0] = new Button(this, "UpgradePower", CANVAS_W * 0.5 - 165, CANVAS_H * 0.1);
-	this.m_upgradeButton[1] = new Button(this, "UpgradeHP", CANVAS_W * 0.5 - 55, CANVAS_H * 0.1);
-	this.m_upgradeButton[2] = new Button(this, "UpgradeShield", CANVAS_W * 0.5 + 55, CANVAS_H * 0.1);
-	this.m_upgradeButton[3] = new Button(this, "UpgradeBot", CANVAS_W * 0.5 + 165, CANVAS_H * 0.1);
+	this.m_upgradeButton[0] = new Button(this, "UpgradePower", CANVAS_W * 0.5 - 180, CANVAS_H * 0.1);
+	this.m_upgradeButton[1] = new Button(this, "UpgradeHP", CANVAS_W * 0.5 - 60, CANVAS_H * 0.1);
+	this.m_upgradeButton[2] = new Button(this, "UpgradeShield", CANVAS_W * 0.5 + 60, CANVAS_H * 0.1);
+	this.m_upgradeButton[3] = new Button(this, "UpgradeBot", CANVAS_W * 0.5 + 180, CANVAS_H * 0.1);
 	
 	this.m_debug = new cc.LabelTTF("Score: 0", GetFont("AirCruiser"), 30);
 	this.m_debug.setAnchorPoint(cc.p(0, 1));
@@ -152,7 +152,10 @@ g_gsActionUILayer.update = function (deltaTime) {
 	if (g_bottomBar) g_bottomBar.Update (deltaTime);
 	if (g_battle) {
 		g_battle.Update (deltaTime);
-		if (g_battle.m_gameEnded) {
+		if (g_battle.m_gameEnded && g_menuShowing == false) {
+			g_credit += g_battle.m_score;
+			SaveProfile();
+			
 			g_menuShowing = true;
 			g_gsActionUILayer.m_startButton.SetEnable(true);
 			for (var i=0; i<g_gsActionUILayer.m_upgradeButton.length; i++) {
@@ -161,7 +164,7 @@ g_gsActionUILayer.update = function (deltaTime) {
 		
 			g_topBar.Hide();
 			g_bottomBar.Hide();
-			this.m_credit.setString("Credit: " + g_battle.m_credit);
+			this.m_credit.setString("Credit: " + g_credit);
 		}
 	}
 	
