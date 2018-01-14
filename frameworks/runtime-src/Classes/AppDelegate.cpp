@@ -43,6 +43,10 @@
 #include "cocos/scripting/js-bindings/manual/platform/ios/JavaScriptObjCBridge.h"
 #endif
 
+#ifdef SDKBOX_ENABLED
+#include "PluginAdMobJS.hpp"
+#include "PluginAdMobJSHelper.h"
+#endif
 // #define USE_AUDIO_ENGINE 1
 // #define USE_SIMPLE_AUDIO_ENGINE 1
 
@@ -170,6 +174,10 @@ bool AppDelegate::applicationDidFinishLaunching()
     sc->addRegisterCallback(JavascriptJavaBridge::_js_register);
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
     sc->addRegisterCallback(JavaScriptObjCBridge::_js_register);
+#endif
+#ifdef SDKBOX_ENABLED
+    sc->addRegisterCallback(register_all_PluginAdMobJS);
+    sc->addRegisterCallback(register_all_PluginAdMobJS_helper);
 #endif
     sc->start();
     sc->runScript("script/jsb_boot.js");
