@@ -91,13 +91,26 @@ cc.game.onStart = function(){
 	// Show FPS or not
 	cc.director.setDisplayStats(false);
 
-    //load resources
+    // Load resources
 	cc.LoaderScene.preload(g_preloadList, function () {
 		InitLoader();
         cc.director.runScene(g_gsLoader);
     }, this);
 	
-	// fix the height
+	// Fix the height
 	CANVAS_H = cc.director.getWinSizeInPixels().height;
+
+	// Money
+	sdkbox.PluginAdMob.init();
+	sdkbox.PluginAdMob.cache("home");
+	
+	sdkbox.PluginAdMob.setListener({
+		adViewDidReceiveAd : function(name) { sdkbox.PluginAdMob.show("home"); },
+		adViewDidFailToReceiveAdWithError : function(name, msg) { },
+		adViewWillPresentScreen : function(name) { },
+		adViewDidDismissScreen : function(name) { },
+		adViewWillDismissScreen : function(name) { },
+		adViewWillLeaveApplication : function(name) { }
+	});
 };
 cc.game.run();

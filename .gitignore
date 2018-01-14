@@ -7,6 +7,7 @@
 *.so
 frameworks/cocos2d-x/cocos/platform/android/java/bin/
 frameworks/cocos2d-x/cocos/platform/android/java/gen/
+frameworks/cocos2d-x/cocos/platform/android/java/libs/
 frameworks/cocos2d-x/cocos/platform/android/java/local.properties
 frameworks/runtime-src/proj.android/assets/
 frameworks/runtime-src/proj.android/bin/
@@ -16,3 +17,5 @@ simulator/
 frameworks/runtime-src/proj.android/.DS_Store
 frameworks/runtime-src/proj.android/local.properties
 backup-2018-01-14.zip
+frameworks/.DS_Store
+.DS_Store

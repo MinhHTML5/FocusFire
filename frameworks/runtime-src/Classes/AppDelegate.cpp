@@ -223,7 +223,7 @@ void AppDelegate::applicationWillEnterForeground()
 
 
 
-
+/*
 static u_long myNextRandom = 1;
 double atof(const char *nptr)
 {
@@ -239,3 +239,4 @@ void srand(u_int seed)
 {
     myNextRandom = seed;
 }
+*/
