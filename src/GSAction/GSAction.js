@@ -21,6 +21,28 @@ var g_colorTheme = GetRGBColorFromHSV(g_colorHue, 1, 1);
 var g_menuShowing = true;
 var g_menuAlpha = 1;
 
+
+g_gsActionUILayer.Play = function() {
+	if (g_menuShowing == true && g_menuAlpha == 1) {
+		g_menuShowing = false;
+		if (g_battle != null) {
+			g_battle.Destroy();
+		}
+		g_battle = new Battle (g_gsActionBattleLayer);
+		g_topBar.Show();
+		g_topBar.SetValue(1);
+		g_bottomBar.Show();
+		g_bottomBar.SetValue(1);
+		g_bottomBar.SetPower(0);
+		
+		g_gsActionUILayer.m_startButton.SetEnable(false);
+		for (var i=0; i<g_gsActionUILayer.m_upgradeButton.length; i++) {
+			g_gsActionUILayer.m_upgradeButton[i].SetEnable(false);
+		}
+		
+	}
+}
+			
 g_gsActionUILayer.Init = function () {
 	this.m_logoSprite = g_spritePool.GetSpriteFromPool(this, "res/GSAction/UI/Logo.png", false);
 	this.m_logoSprite.setAnchorPoint(cc.p(0.5, 0.5));
@@ -28,27 +50,41 @@ g_gsActionUILayer.Init = function () {
 	this.m_logoSprite.setPosition (CANVAS_W * 0.5, CANVAS_H * 0.9);
 	this.m_logoSprite.setScale (0.6)
 	
+	/*
 	this.m_highScore = new cc.LabelTTF("Highest: 0", GetFont("AirCruiser"), 45);
 	this.m_highScore.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_highScore.setPosition (cc.p(CANVAS_W * 0.5, CANVAS_H * 0.6));
 	this.m_highScore.setLocalZOrder (LAYER_UI);
 	this.m_highScore.setColor (new cc.Color(230, 230, 230, 1));
 	this.addChild(this.m_highScore);
+	*/
 	
-	this.m_score = new cc.LabelTTF("Score: 0", GetFont("AirCruiser"), 45);
-	this.m_score.setAnchorPoint(cc.p(0.5, 0.5));
-	this.m_score.setPosition (cc.p(CANVAS_W * 0.5, CANVAS_H * 0.6 - 50));
-	this.m_score.setLocalZOrder (LAYER_UI);
-	this.m_score.setColor (new cc.Color(230, 230, 230, 1));
-	this.addChild(this.m_score);
 	
-	this.m_touch = new cc.LabelTTF("Tap to start", GetFont("AirCruiser"), 45);
-	this.m_touch.setAnchorPoint(cc.p(0.5, 0.5));
-	this.m_touch.setPosition (cc.p(CANVAS_W * 0.5, CANVAS_H * 0.1));
-	this.m_touch.setLocalZOrder (LAYER_UI);
-	this.m_touch.setColor (new cc.Color(230, 230, 230, 1));
-	this.addChild(this.m_touch);
 	
+	this.m_startButton = new Button(this, "PlayButton", CANVAS_W * 0.5, CANVAS_H * 0.6, g_gsActionUILayer.Play);
+	
+	
+	
+	
+	this.m_upgrade = new cc.LabelTTF("Upgrade", GetFont("AirCruiser"), 45);
+	this.m_upgrade.setAnchorPoint(cc.p(0.5, 0.5));
+	this.m_upgrade.setPosition (cc.p(CANVAS_W * 0.5, CANVAS_H * 0.35));
+	this.m_upgrade.setLocalZOrder (LAYER_UI);
+	this.m_upgrade.setColor (new cc.Color(230, 230, 230, 1));
+	this.addChild(this.m_upgrade);
+	
+	this.m_credit = new cc.LabelTTF("Credit: 0", GetFont("AirCruiser"), 45);
+	this.m_credit.setAnchorPoint(cc.p(0.5, 0.5));
+	this.m_credit.setPosition (cc.p(CANVAS_W * 0.5, CANVAS_H * 0.35 - 50));
+	this.m_credit.setLocalZOrder (LAYER_UI);
+	this.m_credit.setColor (new cc.Color(230, 230, 230, 1));
+	this.addChild(this.m_credit);
+	
+	this.m_upgradeButton = new Array();
+	this.m_upgradeButton[0] = new Button(this, "UpgradePower", CANVAS_W * 0.5 - 165, CANVAS_H * 0.1);
+	this.m_upgradeButton[1] = new Button(this, "UpgradeHP", CANVAS_W * 0.5 - 55, CANVAS_H * 0.1);
+	this.m_upgradeButton[2] = new Button(this, "UpgradeShield", CANVAS_W * 0.5 + 55, CANVAS_H * 0.1);
+	this.m_upgradeButton[3] = new Button(this, "UpgradeBot", CANVAS_W * 0.5 + 165, CANVAS_H * 0.1);
 	
 	this.m_debug = new cc.LabelTTF("Score: 0", GetFont("AirCruiser"), 30);
 	this.m_debug.setAnchorPoint(cc.p(0, 1));
@@ -64,18 +100,6 @@ g_gsActionUILayer.AddEventListener = function () {
 		event: cc.EventListener.TOUCH_ALL_AT_ONCE,
 		swallowTouches: true,
 		onTouchesBegan: function (touches, event) {
-			if (g_menuShowing == true && g_menuAlpha == 1) {
-				g_menuShowing = false;
-				if (g_battle != null) {
-					g_battle.Destroy();
-				}
-				g_battle = new Battle (g_gsActionBattleLayer);
-				g_topBar.Show();
-				g_topBar.SetValue(1);
-				g_bottomBar.Show();
-				g_bottomBar.SetValue(1);
-				g_bottomBar.SetPower(0);
-			}
 			if (g_battle) g_battle.TouchDown(touches);
 			return true;
 		},
@@ -95,6 +119,11 @@ g_gsActionUILayer.AddEventListener = function () {
 			return true;
 		}
 	}, this);
+	
+	g_gsActionUILayer.m_startButton.AddEventListener();
+	for (var i=0; i<g_gsActionUILayer.m_upgradeButton.length; i++) {
+		g_gsActionUILayer.m_upgradeButton[i].AddEventListener();
+	}
 }
 
 g_gsActionUILayer.update = function (deltaTime) {
@@ -108,9 +137,14 @@ g_gsActionUILayer.update = function (deltaTime) {
 	}
 	
 	this.m_logoSprite.setOpacity (g_menuAlpha * 255);
-	this.m_highScore.setOpacity (g_menuAlpha * 255);
-	this.m_score.setOpacity (g_menuAlpha * 255);
-	this.m_touch.setOpacity (g_menuAlpha * 255);
+	//this.m_highScore.setOpacity (g_menuAlpha * 255);
+	this.m_credit.setOpacity (g_menuAlpha * 255);
+	this.m_upgrade.setOpacity (g_menuAlpha * 255);
+	
+	this.m_startButton.SetOpacity(g_menuAlpha * 255);
+	for (var i=0; i<this.m_upgradeButton.length; i++) {
+		this.m_upgradeButton[i].SetOpacity(g_menuAlpha * 255);
+	}
 	
 	
 	if (g_background) g_background.Update (deltaTime);
@@ -120,9 +154,14 @@ g_gsActionUILayer.update = function (deltaTime) {
 		g_battle.Update (deltaTime);
 		if (g_battle.m_gameEnded) {
 			g_menuShowing = true;
+			g_gsActionUILayer.m_startButton.SetEnable(true);
+			for (var i=0; i<g_gsActionUILayer.m_upgradeButton.length; i++) {
+				g_gsActionUILayer.m_upgradeButton[i].SetEnable(true);
+			}
+		
 			g_topBar.Hide();
 			g_bottomBar.Hide();
-			this.m_score.setString("Score: " + g_battle.m_score);
+			this.m_credit.setString("Credit: " + g_battle.m_credit);
 		}
 	}
 	

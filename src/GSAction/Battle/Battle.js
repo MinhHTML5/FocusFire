@@ -76,12 +76,14 @@ function Battle(layer) {
 				}
 			}
 			
+			/*
 			giftCounter += deltaTime;
 			if (giftCounter >= nextGift) {
 				nextGift = Math.random() * (NEXT_GIFT_MAX - NEXT_GIFT_MIN) + NEXT_GIFT_MIN;
 				this.SpawnGift();
 				giftCounter = 0;
 			}
+			*/
 		}
 	}
 	
