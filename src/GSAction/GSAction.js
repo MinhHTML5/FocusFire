@@ -70,9 +70,42 @@ g_gsActionUILayer.Init = function () {
 	this.m_upgradeButton[2] = new Button(this, "UpgradeShield", CANVAS_W * 0.5 + 155, CANVAS_H * 0.1 + 110);
 	this.m_upgradeButton[3] = new Button(this, "UpgradeBot", CANVAS_W * 0.5 + 155, CANVAS_H * 0.1);
 	
+	this.m_upgradeText = new Array();
+	this.m_upgradeText[0] = new cc.LabelTTF("Power", GetFont("AirCruiser"), 25);
+	this.m_upgradeText[0].setPosition (cc.p(CANVAS_W * 0.5 - 110, CANVAS_H * 0.1 + 120));
+	this.m_upgradeText[1] = new cc.LabelTTF("Health", GetFont("AirCruiser"), 25);
+	this.m_upgradeText[1].setPosition (cc.p(CANVAS_W * 0.5 - 110, CANVAS_H * 0.1 + 10));
+	this.m_upgradeText[2] = new cc.LabelTTF("Shield", GetFont("AirCruiser"), 25);
+	this.m_upgradeText[2].setPosition (cc.p(CANVAS_W * 0.5 + 200, CANVAS_H * 0.1 + 120));
+	this.m_upgradeText[3] = new cc.LabelTTF("Robot", GetFont("AirCruiser"), 25);
+	this.m_upgradeText[3].setPosition (cc.p(CANVAS_W * 0.5 + 200, CANVAS_H * 0.1 + 10));
+	
+	this.m_upgradePrice = new Array();
+	this.m_upgradePrice[0] = new cc.LabelTTF("$100", GetFont("AirCruiser"), 25);
+	this.m_upgradePrice[0].setPosition (cc.p(CANVAS_W * 0.5 - 110, CANVAS_H * 0.1 + 80));
+	this.m_upgradePrice[1] = new cc.LabelTTF("$100", GetFont("AirCruiser"), 25);
+	this.m_upgradePrice[1].setPosition (cc.p(CANVAS_W * 0.5 - 110, CANVAS_H * 0.1 - 30));
+	this.m_upgradePrice[2] = new cc.LabelTTF("$100", GetFont("AirCruiser"), 25);
+	this.m_upgradePrice[2].setPosition (cc.p(CANVAS_W * 0.5 + 200, CANVAS_H * 0.1 + 80));
+	this.m_upgradePrice[3] = new cc.LabelTTF("$100", GetFont("AirCruiser"), 25);
+	this.m_upgradePrice[3].setPosition (cc.p(CANVAS_W * 0.5 + 200, CANVAS_H * 0.1 - 30));
+	
+	
+	for (var i=0; i<4; i++) {
+		this.m_upgradeText[i].setAnchorPoint(cc.p(0.5, 0));
+		this.m_upgradeText[i].setLocalZOrder (LAYER_UI);
+		this.m_upgradeText[i].setColor (new cc.Color(230, 230, 230, 1));
+		this.addChild(this.m_upgradeText[i]);
+		
+		this.m_upgradePrice[i].setAnchorPoint(cc.p(0.5, 0));
+		this.m_upgradePrice[i].setLocalZOrder (LAYER_UI);
+		this.m_upgradePrice[i].setColor (new cc.Color(230, 230, 230, 1));
+		this.addChild(this.m_upgradePrice[i]);
+	}
+	
 	this.m_debug = new cc.LabelTTF("Score: 0", GetFont("AirCruiser"), 30);
-	this.m_debug.setAnchorPoint(cc.p(0, 1));
-	this.m_debug.setPosition (cc.p(10, 40));
+	this.m_debug.setAnchorPoint(cc.p(0.5, 0));
+	this.m_debug.setPosition (cc.p(CANVAS_W * 0.5, 20));
 	this.m_debug.setLocalZOrder (LAYER_UI);
 	this.m_debug.setColor (new cc.Color(230, 230, 230, 1));
 	this.addChild(this.m_debug);
