@@ -101,16 +101,18 @@ cc.game.onStart = function(){
 	CANVAS_H = cc.director.getWinSizeInPixels().height;
 
 	// Money
-	sdkbox.PluginAdMob.init();
-	sdkbox.PluginAdMob.cache("home");
-	
-	sdkbox.PluginAdMob.setListener({
-		adViewDidReceiveAd : function(name) { sdkbox.PluginAdMob.show("home"); },
-		adViewDidFailToReceiveAdWithError : function(name, msg) { },
-		adViewWillPresentScreen : function(name) { },
-		adViewDidDismissScreen : function(name) { },
-		adViewWillDismissScreen : function(name) { },
-		adViewWillLeaveApplication : function(name) { }
-	});
+	if (cc.sys.isNative) {
+		sdkbox.PluginAdMob.init();
+		sdkbox.PluginAdMob.cache("home");
+		
+		sdkbox.PluginAdMob.setListener({
+			adViewDidReceiveAd : function(name) { sdkbox.PluginAdMob.show("home"); },
+			adViewDidFailToReceiveAdWithError : function(name, msg) { },
+			adViewWillPresentScreen : function(name) { },
+			adViewDidDismissScreen : function(name) { },
+			adViewWillDismissScreen : function(name) { },
+			adViewWillLeaveApplication : function(name) { }
+		});
+	}
 };
 cc.game.run();
