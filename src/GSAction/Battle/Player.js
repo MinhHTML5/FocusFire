@@ -252,7 +252,7 @@ function Player (battle, layer) {
 			if (this.m_HP > PLAYER_MAX_HP) {
 				this.m_HP = PLAYER_MAX_HP;
 			}
-			g_bottomBar.SetValue (this.m_HP / PLAYER_MAX_HP);
+			g_topBar.SetHP (this.m_HP / PLAYER_MAX_HP);
 		}
 	}
 	

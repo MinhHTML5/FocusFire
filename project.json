@@ -51,7 +51,6 @@
 		"src/GSLoader/GSLoader.js",
 		"src/GSAction/GSAction.js",
 		"src/GSAction/TopBar.js",
-		"src/GSAction/BottomBar.js",
 		"src/GSAction/Difficulty.js",
 		"src/GSAction/SpawnList_0.js",
 		"src/GSAction/SpawnList_1.js",
