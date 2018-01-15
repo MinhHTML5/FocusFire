@@ -16,8 +16,8 @@ function Battle(layer) {
 	this.m_gameEnded = false;
 	
 	
-	var giftCounter = 0;
-	var nextGift = Math.random() * (NEXT_GIFT_MAX - NEXT_GIFT_MIN) + NEXT_GIFT_MIN;
+	//var giftCounter = 0;
+	//var nextGift = Math.random() * (NEXT_GIFT_MAX - NEXT_GIFT_MIN) + NEXT_GIFT_MIN;
 	
 	var spawnCounter = new Array();
 	for (var i=0; i<DIFFICULTY_NUMBER; i++) {

@@ -1,5 +1,5 @@
 function Button(layer, buttonName, x, y, callback) {
-	var BUTTON_W = 100;
+	var BUTTON_W = 300;
 	var BUTTON_H = 100;
 	
 	var instance = this;
