@@ -104,9 +104,15 @@ cc.game.onStart = function(){
 	if (cc.sys.isNative) {
 		sdkbox.PluginAdMob.init();
 		sdkbox.PluginAdMob.cache("home");
+		sdkbox.PluginAdMob.cache("gameover");
 		
 		sdkbox.PluginAdMob.setListener({
-			adViewDidReceiveAd : function(name) { sdkbox.PluginAdMob.show("home"); },
+			adViewDidReceiveAd : function(name) {
+				if (name == "home") {
+					sdkbox.PluginAdMob.show(name);
+				}
+			},
+
 			adViewDidFailToReceiveAdWithError : function(name, msg) { },
 			adViewWillPresentScreen : function(name) { },
 			adViewDidDismissScreen : function(name) { },

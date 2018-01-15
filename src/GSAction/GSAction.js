@@ -146,6 +146,11 @@ g_gsActionUILayer.update = function (deltaTime) {
 		
 			g_topBar.Hide();
 			this.m_credit.setString("$" + g_credit);
+
+			// Money
+			if (cc.sys.isNative) {
+				sdkbox.PluginAdMob.show("gameover");
+			}
 		}
 	}
 	
