@@ -4,7 +4,7 @@ var PLAYER_GATLING_MIN_ALPHA = 200;
 var PLAYER_GATLING_MAX_ALPHA = 255;
 var PLAYER_GATLING_SPEED_MIN = 2400;
 var PLAYER_GATLING_SPEED_MAX = 2600;
-var PLAYER_GATLING_DAMAGE = 2;
+var PLAYER_GATLING_DAMAGE = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 6];
 var PLAYER_GATLING_OFFSET = 50;
 var PLAYER_GATLING_SPAWN_OFFSET = 12;
 
@@ -74,7 +74,7 @@ function PlayerGatling (battle, layer) {
 				if (battle.m_enemies[i].m_active && battle.m_enemies[i].m_HP > 0) {
 					var distance = DistanceBetweenTwoPoint(this.m_x, this.m_y, battle.m_enemies[i].m_x, battle.m_enemies[i].m_y);
 					if (distance < battle.m_enemies[i].m_size) {
-						battle.m_enemies[i].Hit (PLAYER_GATLING_DAMAGE);
+						battle.m_enemies[i].Hit (PLAYER_GATLING_DAMAGE[g_powerLevel]);
 						battle.SpawnExplosion(this.m_x, this.m_y, 0.4, 0.3, 0, battle.m_enemies[i].m_color);
 						this.Destroy();
 						return;

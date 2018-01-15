@@ -1,5 +1,5 @@
 var PLAYER_SIZE = 50;
-var PLAYER_MAX_HP = 100;
+var PLAYER_MAX_HP = [10, 20, 35, 50, 75, 100, 140, 180, 240, 300];
 var PLAYER_MAX_SPEED = 3500;
 var PLAYER_MAX_EMP_SPEED = 1000;
 var PLAYER_SPEED_MULTIPLIER = 9;
@@ -33,8 +33,8 @@ function Player (battle, layer) {
 	this.m_angle = 0;
 	this.m_speed = 0;
 	this.m_touching = false;
-	this.m_HP = PLAYER_MAX_HP;
-	this.m_power = 0;
+	this.m_HP = PLAYER_MAX_HP[g_hpLevel];
+	this.m_maxHP = PLAYER_MAX_HP[g_hpLevel];
 	this.m_shieldTime = 0;
 	
 	this.m_explosionNumber = 12;
@@ -139,11 +139,10 @@ function Player (battle, layer) {
 					}
 					
 					while (mainGunCooldown <= 0) {
-						var mainGunPower = this.m_power;
-						var recoil = Math.random() * PLAYER_MAIN_GUN_RECOIL[mainGunPower] * 2 - PLAYER_MAIN_GUN_RECOIL[mainGunPower];
+						var recoil = Math.random() * PLAYER_MAIN_GUN_RECOIL[g_powerLevel] * 2 - PLAYER_MAIN_GUN_RECOIL[g_powerLevel];
 						var gatling = new PlayerGatling(battle, layer);
 						gatling.Start (this.m_angle + recoil, this.m_x, this.m_y);
-						mainGunCooldown += PLAYER_MAIN_GUN_COOLDOWN[mainGunPower];
+						mainGunCooldown += PLAYER_MAIN_GUN_COOLDOWN[g_powerLevel];
 					}
 				}
 				else {
@@ -249,10 +248,10 @@ function Player (battle, layer) {
 	this.Hit = function (damage) {
 		if (this.m_shieldTime <= 0 || damage < 0) {
 			this.m_HP -= damage;
-			if (this.m_HP > PLAYER_MAX_HP) {
-				this.m_HP = PLAYER_MAX_HP;
+			if (this.m_HP > this.m_maxHP) {
+				this.m_HP = this.m_maxHP;
 			}
-			g_topBar.SetHP (this.m_HP / PLAYER_MAX_HP);
+			g_topBar.SetHP (this.m_HP / this.m_maxHP);
 		}
 	}
 	

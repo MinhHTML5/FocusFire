@@ -1,49 +1,63 @@
 g_spawnFunction[2].push(function (battle, layer) {
+	var ANCHOR_NUMBER = 3;
 	var ENEMY_SIZE = 100;
-	var NUMBER_OF_STOP = 7;
-	
-	var x = 0;
-	var y = CANVAS_H - ENEMY_SIZE;
 	var targetX = [];
 	var targetY = [];
+	var x = 0;
+	var y = 0;
 	
-	
+	// Start point
 	var side = Math.random();
-	if (side > 0.5) {
-		x = CANVAS_W + ENEMY_SIZE;
-		
-		for (var i=0; i<NUMBER_OF_STOP; i++) {
-			if (i % 2 == 0) {
-				targetX[i] = ENEMY_SIZE * 0.5;
-			}
-			else {
-				targetX[i] = CANVAS_W - ENEMY_SIZE * 0.5;
-			}
-			targetY[i] = y;
-		}
+	if (side < 0.5) {
+		x = -ENEMY_SIZE;
 	}
 	else {
-		x = -ENEMY_SIZE;
-		
-		for (var i=0; i<NUMBER_OF_STOP; i++) {
-			if (i % 2 == 1) {
-				targetX[i] = ENEMY_SIZE * 0.5;
+		x = CANVAS_W + ENEMY_SIZE;
+	}
+	y = CANVAS_H * 0.8;
+	
+	// Patrol waypoint
+	for (var i=0; i<ANCHOR_NUMBER; i++) {
+		var distance = 0;
+		var newX = 0;
+		var newY = 0;
+		while (distance < ENEMY_SIZE) {
+			newX = Math.random() * (CANVAS_W - ENEMY_SIZE * 2) + ENEMY_SIZE;
+			newY = Math.random() * CANVAS_H * 0.3 + CANVAS_H * 0.7;
+			
+			if (i == 0) {
+				distance = DistanceBetweenTwoPoint(x, y, newX, newY);
 			}
 			else {
-				targetX[i] = CANVAS_W - ENEMY_SIZE * 0.5;
+				distance = DistanceBetweenTwoPoint(targetX[i-1], targetY[i-1], newX, newY);
 			}
-			targetY[i] = y;
 		}
+		targetX.push(newX);
+		targetY.push(newY);
 	}
 	
-	if (targetX[targetX.length] == ENEMY_SIZE * 0.5) {
+	// End point
+	if (side < 0.5) {
 		targetX.push(CANVAS_W + ENEMY_SIZE);
 	}
 	else {
 		targetX.push(-ENEMY_SIZE);
 	}
-	targetY.push(y);
+	targetY.push(Math.random() * CANVAS_H * 0.3 + CANVAS_H * 0.7);
 	
-	var tempEnemy = new Enemy10(battle, layer);
-	tempEnemy.Start (180, x, y, targetX, targetY);
+	// Spawn
+	var angle = AngleBetweenTwoPoint (x, y, targetX[0], targetY[0]);
+	var tempEnemy = new Enemy6(battle, layer);
+	tempEnemy.Start (angle, x, y, targetX, targetY);
+});
+
+
+g_spawnFunction[2].push(function (battle, layer) {
+	var ENEMY_SIZE = 100;
+	var x = Math.random() * (CANVAS_W - ENEMY_SIZE * 2) + ENEMY_SIZE;
+	var y = CANVAS_H + ENEMY_SIZE;
+	var angle = 180;
+
+	var tempEnemy = new Enemy7(battle, layer);
+	tempEnemy.Start(angle, x, y);
 });

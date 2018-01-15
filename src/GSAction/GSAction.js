@@ -160,6 +160,8 @@ g_gsActionUILayer.update = function (deltaTime) {
 	this.m_startButton.SetOpacity(g_menuAlpha * 255);
 	for (var i=0; i<this.m_upgradeButton.length; i++) {
 		this.m_upgradeButton[i].SetOpacity(g_menuAlpha * 255);
+		this.m_upgradeText[i].setOpacity(g_menuAlpha * 255);
+		this.m_upgradePrice[i].setOpacity(g_menuAlpha * 255);
 	}
 	
 	

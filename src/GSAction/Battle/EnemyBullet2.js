@@ -1,7 +1,7 @@
 function EnemyBullet2 (battle, layer, color) {
 	this.m_size = 40;
 	this.m_speed = 550;
-	this.m_damage = 5;
+	this.m_damage = 5 * (1 + battle.m_score / 100);
 	
 	this.m_active = false;
 	this.m_x = 0;

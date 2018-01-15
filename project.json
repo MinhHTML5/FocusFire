@@ -55,6 +55,8 @@
 		"src/GSAction/SpawnList_0.js",
 		"src/GSAction/SpawnList_1.js",
 		"src/GSAction/SpawnList_2.js",
+		"src/GSAction/SpawnList_3.js",
+		"src/GSAction/SpawnList_4.js",
 		
 		"src/SpritePool.js",
 		"src/Resource.js"

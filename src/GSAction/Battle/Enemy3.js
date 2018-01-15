@@ -3,7 +3,7 @@
 function Enemy3 (battle, layer) {
 	this.m_size = 50;
 	this.m_moveSpeed = FORWARD_SPEED;
-	this.m_HP = 50;
+	this.m_HP = 15 * (1 + battle.m_score / 50);
 	this.m_score = 2;
 	this.m_color = GetRandomEnemyColor();
 	

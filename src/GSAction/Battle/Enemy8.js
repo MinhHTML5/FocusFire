@@ -4,7 +4,7 @@ function Enemy8 (battle, layer) {
 	this.m_size = 40;
 	this.m_moveSpeed = 500;
 	this.m_rotateSpeed = 50;
-	this.m_HP = 20;
+	this.m_HP = 10 * (1 + battle.m_score / 50);
 	this.m_score = 2;
 	this.m_color = GetRandomEnemyColor();
 	
