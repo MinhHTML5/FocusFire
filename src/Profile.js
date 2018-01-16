@@ -2,7 +2,7 @@ var g_credit = 0;
 var g_powerLevel = 0;
 var g_hpLevel = 0;
 var g_shieldLevel = 0;
-var g_botLevel = 100;
+var g_botLevel = 0;
 
 function GetNextPowerUpgradePrice() {
 	return 10 + g_powerLevel * 13;
