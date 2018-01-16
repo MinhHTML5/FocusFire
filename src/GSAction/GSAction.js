@@ -65,10 +65,10 @@ g_gsActionUILayer.Init = function () {
 	this.addChild(this.m_credit);
 	
 	this.m_upgradeButton = new Array();
-	this.m_upgradeButton[0] = new Button(this, "UpgradePower", CANVAS_W * 0.5 - 155, CANVAS_H * 0.1 + 110);
-	this.m_upgradeButton[1] = new Button(this, "UpgradeHP", CANVAS_W * 0.5 - 155, CANVAS_H * 0.1);
-	this.m_upgradeButton[2] = new Button(this, "UpgradeShield", CANVAS_W * 0.5 + 155, CANVAS_H * 0.1 + 110);
-	this.m_upgradeButton[3] = new Button(this, "UpgradeBot", CANVAS_W * 0.5 + 155, CANVAS_H * 0.1);
+	this.m_upgradeButton[0] = new Button(this, "UpgradePower", CANVAS_W * 0.5 - 155, CANVAS_H * 0.1 + 110, g_gsActionUILayer.UpgradePower);
+	this.m_upgradeButton[1] = new Button(this, "UpgradeHP", CANVAS_W * 0.5 - 155, CANVAS_H * 0.1, g_gsActionUILayer.UpgradeHP);
+	this.m_upgradeButton[2] = new Button(this, "UpgradeShield", CANVAS_W * 0.5 + 155, CANVAS_H * 0.1 + 110, g_gsActionUILayer.UpgradeShield);
+	this.m_upgradeButton[3] = new Button(this, "UpgradeBot", CANVAS_W * 0.5 + 155, CANVAS_H * 0.1, g_gsActionUILayer.UpgradeBot);
 	
 	this.m_upgradeText = new Array();
 	this.m_upgradeText[0] = new cc.LabelTTF("Power", GetFont("AirCruiser"), 25);
@@ -80,14 +80,19 @@ g_gsActionUILayer.Init = function () {
 	this.m_upgradeText[3] = new cc.LabelTTF("Robot", GetFont("AirCruiser"), 25);
 	this.m_upgradeText[3].setPosition (cc.p(CANVAS_W * 0.5 + 200, CANVAS_H * 0.1 + 10));
 	
+	this.m_powerPrice = GetNextPowerUpgradePrice();
+	this.m_hpPrice = GetNextHPUpgradePrice();
+	this.m_shieldPrice = GetNextShieldUpgradePrice();
+	this.m_botPrice = GetNextRobotUpgradePrice();
+
 	this.m_upgradePrice = new Array();
-	this.m_upgradePrice[0] = new cc.LabelTTF("$100", GetFont("AirCruiser"), 25);
+	this.m_upgradePrice[0] = new cc.LabelTTF("$" + this.m_powerPrice, GetFont("AirCruiser"), 25);
 	this.m_upgradePrice[0].setPosition (cc.p(CANVAS_W * 0.5 - 110, CANVAS_H * 0.1 + 80));
-	this.m_upgradePrice[1] = new cc.LabelTTF("$100", GetFont("AirCruiser"), 25);
+	this.m_upgradePrice[1] = new cc.LabelTTF("$" + this.m_hpPrice, GetFont("AirCruiser"), 25);
 	this.m_upgradePrice[1].setPosition (cc.p(CANVAS_W * 0.5 - 110, CANVAS_H * 0.1 - 30));
-	this.m_upgradePrice[2] = new cc.LabelTTF("$100", GetFont("AirCruiser"), 25);
+	this.m_upgradePrice[2] = new cc.LabelTTF("$" + this.m_shieldPrice, GetFont("AirCruiser"), 25);
 	this.m_upgradePrice[2].setPosition (cc.p(CANVAS_W * 0.5 + 200, CANVAS_H * 0.1 + 80));
-	this.m_upgradePrice[3] = new cc.LabelTTF("$100", GetFont("AirCruiser"), 25);
+	this.m_upgradePrice[3] = new cc.LabelTTF("$" + this.m_botPrice, GetFont("AirCruiser"), 25);
 	this.m_upgradePrice[3].setPosition (cc.p(CANVAS_W * 0.5 + 200, CANVAS_H * 0.1 - 30));
 	
 	
@@ -109,6 +114,46 @@ g_gsActionUILayer.Init = function () {
 	this.m_debug.setLocalZOrder (LAYER_UI);
 	this.m_debug.setColor (new cc.Color(230, 230, 230, 1));
 	this.addChild(this.m_debug);
+}
+
+g_gsActionUILayer.UpgradePower = function () {
+	if (g_credit >= g_gsActionUILayer.m_powerPrice) {
+		g_credit -= g_gsActionUILayer.m_powerPrice;
+		g_powerLevel += 1;
+		g_gsActionUILayer.m_powerPrice = GetNextPowerUpgradePrice();
+		g_gsActionUILayer.m_upgradePrice[0].setString("$" + g_gsActionUILayer.m_powerPrice);
+		g_gsActionUILayer.m_credit.setString("$" + g_credit);
+	}
+}
+
+g_gsActionUILayer.UpgradeHP = function () {
+	if (g_credit >= g_gsActionUILayer.m_hpPrice) {
+		g_credit -= g_gsActionUILayer.m_hpPrice;
+		g_hpLevel += 1;
+		g_gsActionUILayer.m_hpPrice = GetNextHPUpgradePrice();
+		g_gsActionUILayer.m_upgradePrice[1].setString("$" + g_gsActionUILayer.m_hpPrice);
+		g_gsActionUILayer.m_credit.setString("$" + g_credit);
+	}
+}
+
+g_gsActionUILayer.UpgradeShield = function () {
+	if (g_credit >= g_gsActionUILayer.m_shieldPrice) {
+		g_credit -= g_gsActionUILayer.m_shieldPrice;
+		g_shieldLevel += 1;
+		g_gsActionUILayer.m_shieldPrice = GetNextShieldUpgradePrice();
+		g_gsActionUILayer.m_upgradePrice[2].setString("$" + g_gsActionUILayer.m_shieldPrice);
+		g_gsActionUILayer.m_credit.setString("$" + g_credit);
+	}
+}
+
+g_gsActionUILayer.UpgradeBot = function () {
+	if (g_credit >= g_gsActionUILayer.m_botPrice) {
+		g_credit -= g_gsActionUILayer.m_botPrice;
+		g_botLevel += 1;
+		g_gsActionUILayer.m_botPrice = GetNextRobotUpgradePrice();
+		g_gsActionUILayer.m_upgradePrice[3].setString("$" + g_gsActionUILayer.m_botPrice);
+		g_gsActionUILayer.m_credit.setString("$" + g_credit);
+	}
 }
 
 g_gsActionUILayer.AddEventListener = function () {
