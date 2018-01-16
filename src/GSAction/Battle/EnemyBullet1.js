@@ -41,7 +41,8 @@ function EnemyBullet1 (battle, layer, color) {
 				this.Destroy();
 				return;
 			}
-			
+	
+			/*	
 			for (var i=0; i<battle.m_player.m_assistants.length; i++) {
 				var assistant = battle.m_player.m_assistants[i]
 				var distance = DistanceBetweenTwoPoint(this.m_x, this.m_y, assistant.m_x, assistant.m_y);
@@ -52,6 +53,7 @@ function EnemyBullet1 (battle, layer, color) {
 					return;
 				}
 			}
+			*/
 			
 			
 			var distance = DistanceBetweenTwoPoint(this.m_x, this.m_y, battle.m_player.m_x, battle.m_player.m_y);

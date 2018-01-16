@@ -1,7 +1,7 @@
 function AssistantBullet1 (battle, layer, color) {
 	this.m_size = 40;
 	this.m_speed = ASSISTANT_SPEED[0];
-	this.m_damage = ASSISTANT_DAMAGE[0];
+	this.m_damage = GetPlayerRobotDamage();
 	
 	this.m_active = false;
 	this.m_x = 0;
@@ -14,7 +14,7 @@ function AssistantBullet1 (battle, layer, color) {
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_sprite.setLocalZOrder (LAYER_BULLET);
 	this.m_sprite.setBlendFunc (new cc.BlendFunc(gl.ONE, gl.ONE));
-	this.m_sprite.setColor (this.m_color);
+	//this.m_sprite.setColor (this.m_color);
 	
 	var length = 0;
 	var isFirstLoop = false;

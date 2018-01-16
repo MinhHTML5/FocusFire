@@ -1,5 +1,5 @@
 var PLAYER_SIZE = 50;
-var PLAYER_MAX_HP = [10, 20, 35, 50, 75, 100, 140, 180, 240, 300];
+
 var PLAYER_MAX_SPEED = 3500;
 var PLAYER_MAX_EMP_SPEED = 1000;
 var PLAYER_SPEED_MULTIPLIER = 9;
@@ -12,9 +12,8 @@ var PLAYER_ASSISTANT_ROTATE_SPEED = 90;
 var PLAYER_SHIELD_TIME = 10;
 var PLAYER_SHIELD_FADE_SPEED = 500;
 var PLAYER_SHIELD_ROTATE_SPEED = 30;
-var PLAYER_MAIN_GUN_COOLDOWN = [0.06, 0.04, 0.03, 0.024, 0.016, 0.013, 0.011, 0.009, 0.008, 0.007, 0.0064];
-var PLAYER_MAIN_GUN_RECOIL = [0, 0.5, 1, 1.5, 2, 3, 4, 5, 6, 7, 8];
-var PLAYER_POWER_MAX = 10;
+
+
 
 var PLAYER_MOVEMENT_CHECK_TIMES = 10;
 var PLAYER_ENGINE_PARTICLE_EMIT_LATENCY = 0.002;
@@ -33,9 +32,10 @@ function Player (battle, layer) {
 	this.m_angle = 0;
 	this.m_speed = 0;
 	this.m_touching = false;
-	this.m_HP = PLAYER_MAX_HP[g_hpLevel];
-	this.m_maxHP = PLAYER_MAX_HP[g_hpLevel];
+	this.m_HP = GetPlayerMaxHP();
+	this.m_maxHP = GetPlayerMaxHP();
 	this.m_shieldTime = 0;
+	this.m_shieldUsed = false;
 	
 	this.m_explosionNumber = 12;
 	this.m_explosionLatency = 0.15;
@@ -139,10 +139,10 @@ function Player (battle, layer) {
 					}
 					
 					while (mainGunCooldown <= 0) {
-						var recoil = Math.random() * PLAYER_MAIN_GUN_RECOIL[g_powerLevel] * 2 - PLAYER_MAIN_GUN_RECOIL[g_powerLevel];
+						var recoil = Math.random() * GetPlayerRecoil() * 2 - GetPlayerRecoil();
 						var gatling = new PlayerGatling(battle, layer);
 						gatling.Start (this.m_angle + recoil, this.m_x, this.m_y);
-						mainGunCooldown += PLAYER_MAIN_GUN_COOLDOWN[g_powerLevel];
+						mainGunCooldown += GetPlayerCoolDown();
 					}
 				}
 				else {
@@ -251,6 +251,12 @@ function Player (battle, layer) {
 			if (this.m_HP > this.m_maxHP) {
 				this.m_HP = this.m_maxHP;
 			}
+			if (!this.m_shieldUsed) {
+				if (this.m_HP < this.m_maxHP * 0.5) {
+					this.m_shieldTime = GetPlayerShieldDuration();
+					this.m_shieldUsed = true;
+				}
+			}
 			g_topBar.SetHP (this.m_HP / this.m_maxHP);
 		}
 	}
@@ -258,9 +264,6 @@ function Player (battle, layer) {
 	this.AddAssistant = function(type) {
 		if (this.m_assistants.length < 5) {
 			this.m_assistants.push (new Assistant(battle, this, layer, 1));
-		}
-		else {
-			
 		}
 	}
 	
@@ -286,5 +289,11 @@ function Player (battle, layer) {
 		}
 		
 		battle.m_gameEnded = true;
+	}
+	
+	
+	
+	for (var i=0; i<GetPlayerRobotNumber();i++) {
+		this.AddAssistant();
 	}
 }

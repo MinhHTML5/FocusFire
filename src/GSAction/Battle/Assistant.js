@@ -29,7 +29,7 @@ function Assistant (battle, player, layer, type) {
 	this.m_sprite.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_sprite.setLocalZOrder (LAYER_PLAYER);
 	this.m_sprite.setBlendFunc (new cc.BlendFunc(gl.ONE, gl.ONE));
-	this.m_sprite.setColor (this.m_color);
+	//this.m_sprite.setColor (this.m_color);
 	
 	var cooldownCount = 1;
 	var dyingSequenceCount = 0;
@@ -92,7 +92,7 @@ function Assistant (battle, player, layer, type) {
 				if (hitStatus > 0) {
 					hitStatus -= deltaTime;
 					if (hitStatus <= 0) {
-						this.m_sprite.setColor (this.m_color);
+						//this.m_sprite.setColor (this.m_color);
 					}
 				}
 			}
@@ -133,7 +133,7 @@ function Assistant (battle, player, layer, type) {
 		else {
 			if (hitStatus <= 0) {
 				hitStatus = ENEMY_HIT_WHITE_DURATION;
-				this.m_sprite.setColor (cc.color(255, 255, 255));
+				//this.m_sprite.setColor (cc.color(255, 255, 255));
 			}
 			this.m_color = GetRGBColorFromHSV(this.m_HP * 14, 1, 1);
 		}
