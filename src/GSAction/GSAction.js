@@ -41,6 +41,8 @@ g_gsActionUILayer.Play = function() {
 }
 			
 g_gsActionUILayer.Init = function () {
+	LoadProfile();
+
 	this.m_logoSprite = g_spritePool.GetSpriteFromPool(this, "res/GSAction/UI/Logo.png", false);
 	this.m_logoSprite.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_logoSprite.setLocalZOrder (LAYER_UI);
@@ -71,13 +73,13 @@ g_gsActionUILayer.Init = function () {
 	this.m_upgradeButton[3] = new Button(this, "UpgradeBot", CANVAS_W * 0.5 + 155, CANVAS_H * 0.1, g_gsActionUILayer.UpgradeBot);
 	
 	this.m_upgradeText = new Array();
-	this.m_upgradeText[0] = new cc.LabelTTF("Power", GetFont("AirCruiser"), 25);
+	this.m_upgradeText[0] = new cc.LabelTTF("Power: " + (g_powerLevel + 1), GetFont("AirCruiser"), 25);
 	this.m_upgradeText[0].setPosition (cc.p(CANVAS_W * 0.5 - 110, CANVAS_H * 0.1 + 120));
-	this.m_upgradeText[1] = new cc.LabelTTF("Health", GetFont("AirCruiser"), 25);
+	this.m_upgradeText[1] = new cc.LabelTTF("Health: " + (g_hpLevel + 1), GetFont("AirCruiser"), 25);
 	this.m_upgradeText[1].setPosition (cc.p(CANVAS_W * 0.5 - 110, CANVAS_H * 0.1 + 10));
-	this.m_upgradeText[2] = new cc.LabelTTF("Shield", GetFont("AirCruiser"), 25);
+	this.m_upgradeText[2] = new cc.LabelTTF("Shield: " + (g_shieldLevel + 1), GetFont("AirCruiser"), 25);
 	this.m_upgradeText[2].setPosition (cc.p(CANVAS_W * 0.5 + 200, CANVAS_H * 0.1 + 120));
-	this.m_upgradeText[3] = new cc.LabelTTF("Robot", GetFont("AirCruiser"), 25);
+	this.m_upgradeText[3] = new cc.LabelTTF("Robot: " + (g_botLevel + 1), GetFont("AirCruiser"), 25);
 	this.m_upgradeText[3].setPosition (cc.p(CANVAS_W * 0.5 + 200, CANVAS_H * 0.1 + 10));
 	
 	this.m_powerPrice = GetNextPowerUpgradePrice();
@@ -121,8 +123,11 @@ g_gsActionUILayer.UpgradePower = function () {
 		g_credit -= g_gsActionUILayer.m_powerPrice;
 		g_powerLevel += 1;
 		g_gsActionUILayer.m_powerPrice = GetNextPowerUpgradePrice();
+		g_gsActionUILayer.m_upgradeText[0].setString("Power: " + (g_powerLevel + 1));
 		g_gsActionUILayer.m_upgradePrice[0].setString("$" + g_gsActionUILayer.m_powerPrice);
 		g_gsActionUILayer.m_credit.setString("$" + g_credit);
+
+		SaveProfile();
 	}
 }
 
@@ -131,8 +136,11 @@ g_gsActionUILayer.UpgradeHP = function () {
 		g_credit -= g_gsActionUILayer.m_hpPrice;
 		g_hpLevel += 1;
 		g_gsActionUILayer.m_hpPrice = GetNextHPUpgradePrice();
+		g_gsActionUILayer.m_upgradeText[1].setString("Health: " + (g_hpLevel + 1));
 		g_gsActionUILayer.m_upgradePrice[1].setString("$" + g_gsActionUILayer.m_hpPrice);
 		g_gsActionUILayer.m_credit.setString("$" + g_credit);
+
+		SaveProfile();
 	}
 }
 
@@ -141,8 +149,11 @@ g_gsActionUILayer.UpgradeShield = function () {
 		g_credit -= g_gsActionUILayer.m_shieldPrice;
 		g_shieldLevel += 1;
 		g_gsActionUILayer.m_shieldPrice = GetNextShieldUpgradePrice();
+		g_gsActionUILayer.m_upgradeText[2].setString("Shield: " + (g_shieldLevel + 1));
 		g_gsActionUILayer.m_upgradePrice[2].setString("$" + g_gsActionUILayer.m_shieldPrice);
 		g_gsActionUILayer.m_credit.setString("$" + g_credit);
+
+		SaveProfile();
 	}
 }
 
@@ -151,8 +162,11 @@ g_gsActionUILayer.UpgradeBot = function () {
 		g_credit -= g_gsActionUILayer.m_botPrice;
 		g_botLevel += 1;
 		g_gsActionUILayer.m_botPrice = GetNextRobotUpgradePrice();
+		g_gsActionUILayer.m_upgradeText[3].setString("Robot: " + (g_botLevel + 1));
 		g_gsActionUILayer.m_upgradePrice[3].setString("$" + g_gsActionUILayer.m_botPrice);
 		g_gsActionUILayer.m_credit.setString("$" + g_credit);
+
+		SaveProfile();
 	}
 }
 

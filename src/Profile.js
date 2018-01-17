@@ -64,9 +64,33 @@ function GetPlayerRobotDamage() {
 
 
 function SaveProfile() {
-	
+	cc.sys.localStorage.setItem("credit", g_credit);
+	cc.sys.localStorage.setItem("power", g_powerLevel);
+	cc.sys.localStorage.setItem("hp", g_hpLevel);
+	cc.sys.localStorage.setItem("shield", g_shieldLevel);
+	cc.sys.localStorage.setItem("bot", g_botLevel);
 }
 
 function LoadProfile() {
-	
+	g_credit = cc.sys.localStorage.getItem("credit");
+	g_powerLevel = cc.sys.localStorage.getItem("power");
+	g_hpLevel = cc.sys.localStorage.getItem("hp");
+	g_shieldLevel = cc.sys.localStorage.getItem("shield");
+	g_botLevel = cc.sys.localStorage.getItem("bot");
+
+	if (g_credit == null) {
+		g_credit = 0;
+		g_powerLevel = 0;
+		g_hpLevel = 0;
+		g_shieldLevel = 0;
+		g_botLevel = 0;
+		SaveProfile();
+	}
+	else {
+		g_credit = parseInt(g_credit);
+		g_powerLevel = parseInt(g_powerLevel);
+		g_hpLevel = parseInt(g_hpLevel);
+		g_shieldLevel = parseInt(g_shieldLevel);
+		g_botLevel = parseInt(g_botLevel);
+	}
 }
