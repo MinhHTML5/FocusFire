@@ -59,6 +59,7 @@
 		"src/GSAction/SpawnList_4.js",
 		
 		"src/SpritePool.js",
+		"src/Audio.js",
 		"src/Resource.js"
     ]
 }

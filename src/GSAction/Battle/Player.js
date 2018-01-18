@@ -183,6 +183,9 @@ function Player (battle, layer) {
 					}
 					this.Destroy();
 				}
+				
+				var i = 1 + (Math.random() * 4) >> 0;
+				myAudio.PlaySound("res/Sound/Explosion " + i + ".mp3");
 			}
 		}
 		
@@ -255,6 +258,7 @@ function Player (battle, layer) {
 				if (this.m_HP < this.m_maxHP * 0.5) {
 					this.m_shieldTime = GetPlayerShieldDuration();
 					this.m_shieldUsed = true;
+					myAudio.PlaySound("res/Sound/Shield.mp3");
 				}
 			}
 			g_topBar.SetHP (this.m_HP / this.m_maxHP);

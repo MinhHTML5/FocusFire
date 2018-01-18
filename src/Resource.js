@@ -56,8 +56,18 @@ g_fileList.push ("res/AirCruiser.ttf");
 
 
 
-
-
+var g_audioList = [];
+g_audioList.push ("res/Sound/Music.mp3");
+g_audioList.push ("res/Sound/Shoot.mp3");
+g_audioList.push ("res/Sound/ImpactN.mp3");
+g_audioList.push ("res/Sound/Explosion 1.mp3");
+g_audioList.push ("res/Sound/Explosion 2.mp3");
+g_audioList.push ("res/Sound/Explosion 3.mp3");
+g_audioList.push ("res/Sound/Explosion 4.mp3");
+g_audioList.push ("res/Sound/Laser.mp3");
+g_audioList.push ("res/Sound/Shield.mp3");
+g_audioList.push ("res/Sound/Upgrade.mp3");
+g_audioList.push ("res/Sound/Start.mp3");
 
 
 

@@ -37,6 +37,7 @@ g_gsActionUILayer.Play = function() {
 			g_gsActionUILayer.m_upgradeButton[i].SetEnable(false);
 		}
 		
+		myAudio.PlaySound("res/Sound/Start.mp3");
 	}
 }
 			
@@ -116,6 +117,8 @@ g_gsActionUILayer.Init = function () {
 	this.m_debug.setLocalZOrder (LAYER_UI);
 	this.m_debug.setColor (new cc.Color(230, 230, 230, 1));
 	this.addChild(this.m_debug);
+	
+	cc.audioEngine.playMusic("res/Sound/Music.mp3", true);
 }
 
 g_gsActionUILayer.UpgradePower = function () {
@@ -127,6 +130,7 @@ g_gsActionUILayer.UpgradePower = function () {
 		g_gsActionUILayer.m_upgradePrice[0].setString("$" + g_gsActionUILayer.m_powerPrice);
 		g_gsActionUILayer.m_credit.setString("$" + g_credit);
 
+		myAudio.PlaySound("res/Sound/Upgrade.mp3");
 		SaveProfile();
 	}
 }
@@ -140,6 +144,7 @@ g_gsActionUILayer.UpgradeHP = function () {
 		g_gsActionUILayer.m_upgradePrice[1].setString("$" + g_gsActionUILayer.m_hpPrice);
 		g_gsActionUILayer.m_credit.setString("$" + g_credit);
 
+		myAudio.PlaySound("res/Sound/Upgrade.mp3");
 		SaveProfile();
 	}
 }
@@ -153,6 +158,7 @@ g_gsActionUILayer.UpgradeShield = function () {
 		g_gsActionUILayer.m_upgradePrice[2].setString("$" + g_gsActionUILayer.m_shieldPrice);
 		g_gsActionUILayer.m_credit.setString("$" + g_credit);
 
+		myAudio.PlaySound("res/Sound/Upgrade.mp3");
 		SaveProfile();
 	}
 }
@@ -166,6 +172,7 @@ g_gsActionUILayer.UpgradeBot = function () {
 		g_gsActionUILayer.m_upgradePrice[3].setString("$" + g_gsActionUILayer.m_botPrice);
 		g_gsActionUILayer.m_credit.setString("$" + g_credit);
 
+		myAudio.PlaySound("res/Sound/Upgrade.mp3");
 		SaveProfile();
 	}
 }
@@ -273,6 +280,8 @@ g_gsActionUILayer.update = function (deltaTime) {
 		g_colorHue = targetHue;
 	}
 	g_colorTheme = GetRGBColorFromHSV(g_colorHue, 1, 1);
+	
+	myAudio.Update(deltaTime);
 	
 	var fps = (1 / deltaTime) >> 0;
 	this.m_debug.setString("FPS: " + fps + " - Sprites: " + g_spritePool.m_spriteOnScreen + " / " + g_spritePool.m_spriteNumber);

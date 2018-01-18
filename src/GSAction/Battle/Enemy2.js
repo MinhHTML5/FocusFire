@@ -205,6 +205,8 @@ function Enemy2 (battle, layer) {
 		tempBullet.Start (this.m_angle, this.m_x, this.m_y);
 		tempBullet = new EnemyBullet1 (battle, layer, this.m_color);
 		tempBullet.Start (this.m_angle + 30, this.m_x, this.m_y);
+		
+		myAudio.PlaySound("res/Sound/Laser.mp3");
 	}
 	
 	
@@ -214,6 +216,9 @@ function Enemy2 (battle, layer) {
 			battle.SpawnExplosion(this.m_x, this.m_y, 0.7, 0.5, 0, this.m_color);
 			this.m_sprite.setVisible(false);
 			g_battle.AddScore(this.m_score);
+			
+			var i = 1 + (Math.random() * 4) >> 0;
+			myAudio.PlaySound("res/Sound/Explosion " + i + ".mp3");
 		}
 		else {
 			if (hitStatus <= 0) {

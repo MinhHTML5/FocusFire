@@ -26,6 +26,7 @@ function AssistantBullet1 (battle, layer, color) {
 		this.m_y = y;
 		
 		battle.m_projectiles.push (this);
+		myAudio.PlaySound("res/Sound/Shoot.mp3");
 	}
 	
 	

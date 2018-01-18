@@ -44,6 +44,7 @@ function PlayerGatling (battle, layer) {
 		isFirstLoop = true;
 		
 		battle.m_projectiles.push (this);
+		myAudio.PlaySound("res/Sound/Shoot.mp3");
 	}
 	
 	
@@ -76,6 +77,7 @@ function PlayerGatling (battle, layer) {
 						battle.m_enemies[i].Hit (GetPlayerDamage());
 						battle.SpawnExplosion(this.m_x, this.m_y, 0.4, 0.3, 0, battle.m_enemies[i].m_color);
 						this.Destroy();
+						myAudio.PlaySound("res/Sound/ImpactN.mp3");
 						return;
 					}
 				}

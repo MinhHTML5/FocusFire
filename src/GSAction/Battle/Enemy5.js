@@ -93,6 +93,9 @@ function Enemy5 (battle, layer) {
 				tempBullet = new EnemyBullet1 (battle, layer, this.m_color);
 				tempBullet.Start (i * 30, this.m_x, this.m_y);
 			}
+			
+			var i = 1 + (Math.random() * 4) >> 0;
+			myAudio.PlaySound("res/Sound/Explosion " + i + ".mp3");
 		}
 		else {
 			if (hitStatus <= 0) {
