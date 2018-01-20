@@ -1422,6 +1422,7 @@ bool FileUtils::createDirectory(const std::string& path)
 
 bool FileUtils::removeDirectory(const std::string& path)
 {
+/*
 #if !defined(CC_TARGET_OS_TVOS)
     std::string command = "rm -r ";
     // Path may include space.
@@ -1433,6 +1434,8 @@ bool FileUtils::removeDirectory(const std::string& path)
 #else
     return false;
 #endif
+*/
+    return false;
 }
 
 bool FileUtils::removeFile(const std::string &path)

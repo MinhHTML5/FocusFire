@@ -19,3 +19,6 @@ frameworks/runtime-src/proj.android/local.properties
 backup-2018-01-14.zip
 frameworks/.DS_Store
 .DS_Store
+frameworks/cocos2d-x/build/
+frameworks/cocos2d-x/cocos/scripting/js-bindings/proj.ios_mac/
+frameworks/runtime-src/proj.ios_mac/

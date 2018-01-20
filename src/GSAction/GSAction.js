@@ -44,6 +44,11 @@ g_gsActionUILayer.Play = function() {
 g_gsActionUILayer.Init = function () {
 	LoadProfile();
 
+	var bannerHeight = 0;
+	if (cc.sys.isNative) {
+		bannerHeight = sdkbox.PluginAdMob.getCurrBannerHeight();
+	}
+
 	this.m_logoSprite = g_spritePool.GetSpriteFromPool(this, "res/GSAction/UI/Logo.png", false);
 	this.m_logoSprite.setAnchorPoint(cc.p(0.5, 0.5));
 	this.m_logoSprite.setLocalZOrder (LAYER_UI);
@@ -55,33 +60,33 @@ g_gsActionUILayer.Init = function () {
 	
 	this.m_upgrade = new cc.LabelTTF("Upgrade", GetFont("AirCruiser"), 45);
 	this.m_upgrade.setAnchorPoint(cc.p(0.5, 0.5));
-	this.m_upgrade.setPosition (cc.p(CANVAS_W * 0.5, CANVAS_H * 0.1 + 270));
+	this.m_upgrade.setPosition (cc.p(CANVAS_W * 0.5, CANVAS_H * 0.1 + 270 + bannerHeight));
 	this.m_upgrade.setLocalZOrder (LAYER_UI);
 	this.m_upgrade.setColor (new cc.Color(230, 230, 230, 1));
 	this.addChild(this.m_upgrade);
 	
 	this.m_credit = new cc.LabelTTF("$" + g_credit, GetFont("AirCruiser"), 45);
 	this.m_credit.setAnchorPoint(cc.p(0.5, 0.5));
-	this.m_credit.setPosition (cc.p(CANVAS_W * 0.5, CANVAS_H * 0.1 + 220));
+	this.m_credit.setPosition (cc.p(CANVAS_W * 0.5, CANVAS_H * 0.1 + 220 + bannerHeight));
 	this.m_credit.setLocalZOrder (LAYER_UI);
 	this.m_credit.setColor (new cc.Color(230, 230, 230, 1));
 	this.addChild(this.m_credit);
 	
 	this.m_upgradeButton = new Array();
-	this.m_upgradeButton[0] = new Button(this, "UpgradePower", CANVAS_W * 0.5 - 155, CANVAS_H * 0.1 + 110, g_gsActionUILayer.UpgradePower);
-	this.m_upgradeButton[1] = new Button(this, "UpgradeHP", CANVAS_W * 0.5 - 155, CANVAS_H * 0.1, g_gsActionUILayer.UpgradeHP);
-	this.m_upgradeButton[2] = new Button(this, "UpgradeShield", CANVAS_W * 0.5 + 155, CANVAS_H * 0.1 + 110, g_gsActionUILayer.UpgradeShield);
-	this.m_upgradeButton[3] = new Button(this, "UpgradeBot", CANVAS_W * 0.5 + 155, CANVAS_H * 0.1, g_gsActionUILayer.UpgradeBot);
+	this.m_upgradeButton[0] = new Button(this, "UpgradePower", CANVAS_W * 0.5 - 155, CANVAS_H * 0.1 + 110 + bannerHeight, g_gsActionUILayer.UpgradePower);
+	this.m_upgradeButton[1] = new Button(this, "UpgradeHP", CANVAS_W * 0.5 - 155, CANVAS_H * 0.1 + bannerHeight, g_gsActionUILayer.UpgradeHP);
+	this.m_upgradeButton[2] = new Button(this, "UpgradeShield", CANVAS_W * 0.5 + 155, CANVAS_H * 0.1 + 110 + bannerHeight, g_gsActionUILayer.UpgradeShield);
+	this.m_upgradeButton[3] = new Button(this, "UpgradeBot", CANVAS_W * 0.5 + 155, CANVAS_H * 0.1 + bannerHeight, g_gsActionUILayer.UpgradeBot);
 	
 	this.m_upgradeText = new Array();
 	this.m_upgradeText[0] = new cc.LabelTTF("Power: " + (g_powerLevel + 1), GetFont("AirCruiser"), 25);
-	this.m_upgradeText[0].setPosition (cc.p(CANVAS_W * 0.5 - 110, CANVAS_H * 0.1 + 120));
+	this.m_upgradeText[0].setPosition (cc.p(CANVAS_W * 0.5 - 110, CANVAS_H * 0.1 + 120 + bannerHeight));
 	this.m_upgradeText[1] = new cc.LabelTTF("Health: " + (g_hpLevel + 1), GetFont("AirCruiser"), 25);
-	this.m_upgradeText[1].setPosition (cc.p(CANVAS_W * 0.5 - 110, CANVAS_H * 0.1 + 10));
+	this.m_upgradeText[1].setPosition (cc.p(CANVAS_W * 0.5 - 110, CANVAS_H * 0.1 + 10 + bannerHeight));
 	this.m_upgradeText[2] = new cc.LabelTTF("Shield: " + (g_shieldLevel + 1), GetFont("AirCruiser"), 25);
-	this.m_upgradeText[2].setPosition (cc.p(CANVAS_W * 0.5 + 200, CANVAS_H * 0.1 + 120));
+	this.m_upgradeText[2].setPosition (cc.p(CANVAS_W * 0.5 + 200, CANVAS_H * 0.1 + 120 + bannerHeight));
 	this.m_upgradeText[3] = new cc.LabelTTF("Robot: " + (g_botLevel + 1), GetFont("AirCruiser"), 25);
-	this.m_upgradeText[3].setPosition (cc.p(CANVAS_W * 0.5 + 200, CANVAS_H * 0.1 + 10));
+	this.m_upgradeText[3].setPosition (cc.p(CANVAS_W * 0.5 + 200, CANVAS_H * 0.1 + 10 + bannerHeight));
 	
 	this.m_powerPrice = GetNextPowerUpgradePrice();
 	this.m_hpPrice = GetNextHPUpgradePrice();
@@ -90,34 +95,36 @@ g_gsActionUILayer.Init = function () {
 
 	this.m_upgradePrice = new Array();
 	this.m_upgradePrice[0] = new cc.LabelTTF("$" + this.m_powerPrice, GetFont("AirCruiser"), 25);
-	this.m_upgradePrice[0].setPosition (cc.p(CANVAS_W * 0.5 - 110, CANVAS_H * 0.1 + 80));
+	this.m_upgradePrice[0].setPosition (cc.p(CANVAS_W * 0.5 - 110, CANVAS_H * 0.1 + 80 + bannerHeight));
 	this.m_upgradePrice[1] = new cc.LabelTTF("$" + this.m_hpPrice, GetFont("AirCruiser"), 25);
-	this.m_upgradePrice[1].setPosition (cc.p(CANVAS_W * 0.5 - 110, CANVAS_H * 0.1 - 30));
+	this.m_upgradePrice[1].setPosition (cc.p(CANVAS_W * 0.5 - 110, CANVAS_H * 0.1 - 30 + bannerHeight));
 	this.m_upgradePrice[2] = new cc.LabelTTF("$" + this.m_shieldPrice, GetFont("AirCruiser"), 25);
-	this.m_upgradePrice[2].setPosition (cc.p(CANVAS_W * 0.5 + 200, CANVAS_H * 0.1 + 80));
+	this.m_upgradePrice[2].setPosition (cc.p(CANVAS_W * 0.5 + 200, CANVAS_H * 0.1 + 80 + bannerHeight));
 	this.m_upgradePrice[3] = new cc.LabelTTF("$" + this.m_botPrice, GetFont("AirCruiser"), 25);
-	this.m_upgradePrice[3].setPosition (cc.p(CANVAS_W * 0.5 + 200, CANVAS_H * 0.1 - 30));
+	this.m_upgradePrice[3].setPosition (cc.p(CANVAS_W * 0.5 + 200, CANVAS_H * 0.1 - 30 + bannerHeight));
 	
 	
-	for (var i=0; i<4; i++) {
+	for (var i = 0; i < 4; i++) {
 		this.m_upgradeText[i].setAnchorPoint(cc.p(0.5, 0));
-		this.m_upgradeText[i].setLocalZOrder (LAYER_UI);
-		this.m_upgradeText[i].setColor (new cc.Color(230, 230, 230, 1));
+		this.m_upgradeText[i].setLocalZOrder(LAYER_UI);
+		this.m_upgradeText[i].setColor(new cc.Color(230, 230, 230, 1));
 		this.addChild(this.m_upgradeText[i]);
 		
 		this.m_upgradePrice[i].setAnchorPoint(cc.p(0.5, 0));
-		this.m_upgradePrice[i].setLocalZOrder (LAYER_UI);
-		this.m_upgradePrice[i].setColor (new cc.Color(230, 230, 230, 1));
+		this.m_upgradePrice[i].setLocalZOrder(LAYER_UI);
+		this.m_upgradePrice[i].setColor(new cc.Color(230, 230, 230, 1));
 		this.addChild(this.m_upgradePrice[i]);
 	}
 	
+	/*
 	this.m_debug = new cc.LabelTTF("Score: 0", GetFont("AirCruiser"), 30);
 	this.m_debug.setAnchorPoint(cc.p(0.5, 0));
 	this.m_debug.setPosition (cc.p(CANVAS_W * 0.5, 20));
 	this.m_debug.setLocalZOrder (LAYER_UI);
 	this.m_debug.setColor (new cc.Color(230, 230, 230, 1));
 	this.addChild(this.m_debug);
-	
+	*/
+
 	cc.audioEngine.playMusic("res/Sound/Music.mp3", true);
 }
 
@@ -284,7 +291,7 @@ g_gsActionUILayer.update = function (deltaTime) {
 	myAudio.Update(deltaTime);
 	
 	var fps = (1 / deltaTime) >> 0;
-	this.m_debug.setString("FPS: " + fps + " - Sprites: " + g_spritePool.m_spriteOnScreen + " / " + g_spritePool.m_spriteNumber);
+	// this.m_debug.setString("FPS: " + fps + " - Sprites: " + g_spritePool.m_spriteOnScreen + " / " + g_spritePool.m_spriteNumber);
 }
 
 
