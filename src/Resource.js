@@ -81,11 +81,11 @@ for (var i=0; i<g_spriteSheetList.length; i++) {
 }
 
 var GetFont = function (font) {
-	if (cc.sys.isNative) {
-        //return "res/Fonts/" + font + ".ttf";
-        return font;
-    } else {
-        return font;
-    }
+	if (cc.sys.os == cc.sys.OS_ANDROID) {
+		return "res/" + font + ".ttf";
+	}
+	else {
+		return font;
+	}
 }
 // =========================================================================================
