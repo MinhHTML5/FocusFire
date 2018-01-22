@@ -3,6 +3,7 @@ var g_powerLevel = 0;
 var g_hpLevel = 0;
 var g_shieldLevel = 0;
 var g_botLevel = 0;
+var g_bestScore = 0;
 
 function GetNextPowerUpgradePrice() {
 	return 10 + g_powerLevel * 13;
@@ -69,6 +70,7 @@ function SaveProfile() {
 	cc.sys.localStorage.setItem("hp", g_hpLevel);
 	cc.sys.localStorage.setItem("shield", g_shieldLevel);
 	cc.sys.localStorage.setItem("bot", g_botLevel);
+	cc.sys.localStorage.setItem("best", g_bestScore);
 }
 
 function LoadProfile() {
@@ -77,20 +79,14 @@ function LoadProfile() {
 	g_hpLevel = cc.sys.localStorage.getItem("hp");
 	g_shieldLevel = cc.sys.localStorage.getItem("shield");
 	g_botLevel = cc.sys.localStorage.getItem("bot");
+	g_bestScore = cc.sys.localStorage.getItem("best");
 
-	if (g_credit == null) {
-		g_credit = 0;
-		g_powerLevel = 0;
-		g_hpLevel = 0;
-		g_shieldLevel = 0;
-		g_botLevel = 0;
-		SaveProfile();
-	}
-	else {
-		g_credit = parseInt(g_credit);
-		g_powerLevel = parseInt(g_powerLevel);
-		g_hpLevel = parseInt(g_hpLevel);
-		g_shieldLevel = parseInt(g_shieldLevel);
-		g_botLevel = parseInt(g_botLevel);
-	}
+	g_credit = (g_credit == null) ? 0 : parseInt(g_credit);
+	g_powerLevel = (g_powerLevel == null) ? 0 : parseInt(g_powerLevel);
+	g_hpLevel = (g_hpLevel == null) ? 0 : parseInt(g_hpLevel);
+	g_shieldLevel = (g_shieldLevel == null) ? 0 : parseInt(g_shieldLevel);
+	g_botLevel = (g_botLevel == null) ? 0 : parseInt(g_botLevel);
+	g_bestScore = (g_bestScore == null) ? 0 : parseInt(g_bestScore);
+
+	SaveProfile();
 }

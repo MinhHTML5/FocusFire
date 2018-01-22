@@ -55,8 +55,23 @@ g_gsActionUILayer.Init = function () {
 	this.m_logoSprite.setPosition (CANVAS_W * 0.5, CANVAS_H * 0.9);
 	this.m_logoSprite.setScale (0.6);
 	
+
+	this.m_score = new cc.LabelTTF("Score: 0", GetFont("AirCruiser"), 45);
+	this.m_score.setAnchorPoint(cc.p(0.5, 0.5));
+	this.m_score.setPosition(cc.p(CANVAS_W * 0.5, CANVAS_H * 0.9 - 120 + bannerHeight));
+	this.m_score.setLocalZOrder(LAYER_UI);
+	this.m_score.setColor(new cc.Color(230, 230, 230, 1));
+	this.addChild(this.m_score);
+
+	this.m_best = new cc.LabelTTF("Best: " + g_bestScore, GetFont("AirCruiser"), 45);
+	this.m_best.setAnchorPoint(cc.p(0.5, 0.5));
+	this.m_best.setPosition(cc.p(CANVAS_W * 0.5, CANVAS_H * 0.9 - 170 + bannerHeight));
+	this.m_best.setLocalZOrder(LAYER_UI);
+	this.m_best.setColor(new cc.Color(230, 230, 230, 1));
+	this.addChild(this.m_best);
 	
-	this.m_startButton = new Button(this, "PlayButton", CANVAS_W * 0.5, CANVAS_H * 0.6, g_gsActionUILayer.Play);
+
+	this.m_startButton = new Button(this, "PlayButton", CANVAS_W * 0.5, CANVAS_H * 0.5 + 50, g_gsActionUILayer.Play);
 	
 	this.m_upgrade = new cc.LabelTTF("Upgrade", GetFont("AirCruiser"), 45);
 	this.m_upgrade.setAnchorPoint(cc.p(0.5, 0.5));
@@ -229,6 +244,8 @@ g_gsActionUILayer.update = function (deltaTime) {
 	this.m_logoSprite.setOpacity (g_menuAlpha * 255);
 	this.m_credit.setOpacity (g_menuAlpha * 255);
 	this.m_upgrade.setOpacity (g_menuAlpha * 255);
+	this.m_score.setOpacity (g_menuAlpha * 255);
+	this.m_best.setOpacity (g_menuAlpha * 255);
 	
 	this.m_startButton.SetOpacity(g_menuAlpha * 255);
 	for (var i=0; i<this.m_upgradeButton.length; i++) {
@@ -244,6 +261,11 @@ g_gsActionUILayer.update = function (deltaTime) {
 		g_battle.Update (deltaTime);
 		if (g_battle.m_gameEnded && g_menuShowing == false) {
 			g_credit += g_battle.m_score;
+
+			if (g_battle.m_score > g_bestScore) {
+				g_bestScore = g_battle.m_score;
+			}
+
 			SaveProfile();
 			
 			g_menuShowing = true;
@@ -254,6 +276,9 @@ g_gsActionUILayer.update = function (deltaTime) {
 		
 			g_topBar.Hide();
 			this.m_credit.setString("$" + g_credit);
+
+			this.m_score.setString("Score: " + g_battle.m_score);
+			this.m_best.setString("Best: " + g_bestScore)
 
 			// Money
 			if (cc.sys.isNative) {
